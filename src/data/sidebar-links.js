@@ -10,10 +10,6 @@ export const NAV_LINKS = [
 		link: PUB_PAGES.CAMERAS()
 	},
 	{
-		label: 'Search',
-		link: PUB_PAGES.SEARCH()
-	},
-	{
 		label: 'About',
 		link: PUB_PAGES.ABOUT
 	}
