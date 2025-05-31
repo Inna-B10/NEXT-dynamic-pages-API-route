@@ -1,5 +1,10 @@
+import { LazyMotion, domAnimation } from 'framer-motion'
 import { SidebarProvider } from './SidebarProvider'
 
 export function Providers({ children }) {
-	return <SidebarProvider>{children}</SidebarProvider>
+	return (
+		<LazyMotion features={domAnimation}>
+			<SidebarProvider>{children}</SidebarProvider>
+		</LazyMotion>
+	)
 }
