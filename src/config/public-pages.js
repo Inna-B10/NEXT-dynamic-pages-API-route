@@ -6,7 +6,7 @@ class PublicPages {
 	SEARCH(searchTerms) {
 		return `/search?term=${searchTerms}`
 	}
-	ABOUT = '/about'
+	CONTACT = '/contact'
 }
 
 export const PUB_PAGES = new PublicPages()
