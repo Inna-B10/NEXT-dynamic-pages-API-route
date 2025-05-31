@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getAllData } from '@/services/server/cameraDataService'
+import { getFullData } from '@/services/server/cameraDataService'
 
 export async function GET(request) {
 	try {
@@ -7,7 +7,7 @@ export async function GET(request) {
 		const limit = parseInt(searchParams.get('limit') || '30')
 		const offset = parseInt(searchParams.get('offset') || '0')
 
-		const data = await getAllData()
+		const data = await getFullData()
 		const items = data.slice(offset, offset + limit)
 
 		return NextResponse.json({ total: data.length, limit, offset, items })

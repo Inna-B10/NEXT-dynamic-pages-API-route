@@ -12,11 +12,13 @@ export default function CamerasPage() {
 			const limit = 30
 			const offset = page * limit
 
-			const response = await cameraService.getAllItems({ limit, offset }).catch(console.error)
+			const response = await cameraService.getPreviewItems({ limit, offset }).catch(console.error)
 			if (response) setData(response.items)
 		}
 		fetchData()
 	}, [page])
+
 	console.log(data)
+
 	return <div>Cameras</div>
 }
