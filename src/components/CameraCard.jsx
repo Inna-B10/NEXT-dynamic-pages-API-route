@@ -18,8 +18,8 @@ export function CameraCard({ item, index }) {
 						<Image
 							src={item.image}
 							alt={item.modelName}
-							width={324}
-							height={217}
+							width={268}
+							height={180}
 							className='w-full h-auto max-h-[218px] rounded-t-md transition'
 							priority
 						/>
