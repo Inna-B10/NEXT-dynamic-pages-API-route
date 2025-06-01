@@ -6,7 +6,8 @@ export function CameraCard({ item, index }) {
 	return (
 		<>
 			<Link
-				href={`/cameras/${index}-${item.modelName}`}
+				// href={`/cameras/${index}-${item.modelName}`}
+				href=''
 				title={item.modelName}
 			>
 				<motion.div

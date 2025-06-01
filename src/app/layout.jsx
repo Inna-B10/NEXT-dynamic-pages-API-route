@@ -46,11 +46,11 @@ export const metadata = {
 		],
 		title: `${SITE_NAME}`,
 		description:
-			'A modern Next.js application featuring dynamic routing, API integration, and a scalable architecture.'
-		// url: '',
+			'A modern Next.js application featuring dynamic routing, API integration, and a scalable architecture.',
+		url: 'https://next-intro-sandy.vercel.app/'
 	}
 	// manifest: '/manifest.json',
-	// metadataBase: new URL(SITE_URL),
+	// metadataBase: new URL('https://next-intro-sandy.vercel.app/'),
 	// applicationName: `${SITE_NAME}`,
 	// formatDetection: {
 	// 	telephone: false
