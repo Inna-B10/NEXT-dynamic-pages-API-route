@@ -15,7 +15,7 @@ export function SidebarHeader({ isCollapsed, toggleSidebar }) {
 				<Link
 					href='/'
 					title={`${SITE_NAME} - homepage`}
-					aria-label={`${SITE_NAME}` - homepage}
+					aria-label={`${SITE_NAME} - homepage`}
 				>
 					<h2 className='text-2xl'>SiteLogo</h2>
 				</Link>
