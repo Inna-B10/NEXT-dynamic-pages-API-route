@@ -48,13 +48,13 @@ export const metadata = {
 		description:
 			'A modern Next.js application featuring dynamic routing, API integration, and a scalable architecture.'
 		// url: '',
-	},
-	// manifest: '/manifest.json',
-	metadataBase: new URL(SITE_URL),
-	applicationName: `${SITE_NAME}`,
-	formatDetection: {
-		telephone: false
 	}
+	// manifest: '/manifest.json',
+	// metadataBase: new URL(SITE_URL),
+	// applicationName: `${SITE_NAME}`,
+	// formatDetection: {
+	// 	telephone: false
+	// }
 }
 
 export default function RootLayout({ children }) {
