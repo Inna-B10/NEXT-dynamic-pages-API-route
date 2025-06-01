@@ -1,3 +1,3 @@
 export function Content({ children }) {
-	return <div>{children}</div>
+	return <section className='p-8'>{children}</section>
 }
