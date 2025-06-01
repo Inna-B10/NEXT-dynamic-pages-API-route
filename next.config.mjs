@@ -5,10 +5,8 @@ const nextConfig = {
 
 	images: {
 		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: '**.gadgets360cdn.com'
-			}
+			{ protocol: 'https', hostname: '**.gadgets360cdn.com' },
+			{ protocol: 'https', hostname: 'gadgets.ndtv.com' }
 		]
 	}
 }

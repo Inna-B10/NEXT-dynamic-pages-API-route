@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { CameraCard } from '@/components/CameraCard'
 import { cameraService } from '@/services/client/camera.service'
 
 export default function CamerasPage() {
@@ -18,7 +19,19 @@ export default function CamerasPage() {
 		fetchData()
 	}, [page])
 
-	console.log(data)
-
-	return <div>Cameras</div>
+	return (
+		<>
+			{data && (
+				<div className='grid grid-cols-4 gap-y-14 gap-x-8'>
+					{data.map((item, index) => (
+						<CameraCard
+							key={index}
+							item={item}
+							index={index}
+						/>
+					))}
+				</div>
+			)}
+		</>
+	)
 }
