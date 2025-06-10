@@ -1,5 +1,5 @@
 import path from 'path'
-import { readJsonFile } from '@/utils/fileUtils'
+import { readJsonFile } from '@/lib/readJsonFile'
 
 // const FILE_PATH = './src/data/cameras.json'
 const FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cameras.json')

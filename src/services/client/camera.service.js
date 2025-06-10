@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants/constants'
-import { axiosClient } from '@/utils/axios'
+import { axiosClient } from '@/lib/axios'
 
 class CameraService {
 	_CAMERAS = `${API_URL}/cameras`
