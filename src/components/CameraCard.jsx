@@ -21,10 +21,10 @@ export function CameraCard({ item, index }) {
 							alt={item.modelName}
 							width={268}
 							height={180}
-							className='w-full h-auto max-h-[218px] rounded-t-md transition'
+							className='w-full h-auto max-h-[218px] rounded-t-md transition aspect-67/45'
 							priority
 						/>
-						<div className='absolute inset-0 pointer-events-none rounded-t-md shadow-[inset_0_0_60px_#161A1D] group-hover:shadow-none'></div>
+						<div className='absolute inset-0 pointer-events-none rounded-t-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-none'></div>
 					</div>
 					<div className='flex flex-col justify-between h-full p-4 bg-bgSecondary rounded-b-md'>
 						<p className='text-blue text-lg'>{item.productName ? item.productName : item.model}</p>

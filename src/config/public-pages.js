@@ -3,6 +3,9 @@ class PublicPages {
 	CAMERAS(path) {
 		return `/cameras${path ? `/${path}` : ''}`
 	}
+	ITEMS(path) {
+		return `/items${path ? `/${path}` : ''}`
+	}
 	SEARCH(searchTerms) {
 		return `/search?term=${searchTerms}`
 	}

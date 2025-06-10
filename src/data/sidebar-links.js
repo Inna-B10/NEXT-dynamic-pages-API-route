@@ -1,4 +1,4 @@
-import { AtSign, Camera, Home } from 'react-feather'
+import { AtSign, Camera, Home, Package } from 'react-feather'
 import { PUB_PAGES } from '@/config/public-pages'
 
 export const NAV_LINKS = [
@@ -11,6 +11,11 @@ export const NAV_LINKS = [
 		icon: Camera,
 		label: 'Cameras',
 		link: PUB_PAGES.CAMERAS()
+	},
+	{
+		icon: Package,
+		label: 'Items',
+		link: PUB_PAGES.ITEMS()
 	},
 	{
 		icon: AtSign,

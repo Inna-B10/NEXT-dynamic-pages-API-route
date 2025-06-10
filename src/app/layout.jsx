@@ -57,6 +57,10 @@ export const metadata = {
 	// }
 }
 
+export const viewport = {
+	themeColor: 'var(--color-bg)'
+}
+
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
