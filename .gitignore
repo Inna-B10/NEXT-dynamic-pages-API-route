@@ -49,3 +49,6 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# user's files/folders
+seed.js
