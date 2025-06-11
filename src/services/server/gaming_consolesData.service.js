@@ -1,10 +1,9 @@
 import { connectToDatabase } from '@/lib/mongoDBconnector'
 
-const COLLECTION_NAME = 'testing-items'
+const COLLECTION_NAME = 'gaming_consoles'
 
-export async function getAllItemsData() {
+export async function getAllGaming_consolesData() {
 	const db = await connectToDatabase()
 	const data = await db.collection(COLLECTION_NAME).find({}).toArray()
-	console.log(data)
 	return data
 }
