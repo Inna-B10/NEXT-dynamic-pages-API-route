@@ -7,7 +7,7 @@ Legg til en ny api route, hent informasjonen derifra og vis den i en ny dynamisk
 - Sjekk lighthouse observability tool for å sjekke hvor høy score dere får   
 <br />
 
-## [Deployed onVercel](https://next-intro-sandy.vercel.app/) 
+## [Deployed on Vercel](https://next-intro-sandy.vercel.app/) 
 <br />
 
 **used libraries:**
@@ -20,6 +20,7 @@ npm install path-to-regexp #Turn a path (as /user/:name) into a regular expressi
 npm install clsx #for constructing className strings conditionally
 npm install framer-motion
 npm install axios
+npm install mongodb
 ```
 <br />
 <br />

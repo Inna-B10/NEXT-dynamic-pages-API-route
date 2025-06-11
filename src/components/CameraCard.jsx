@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import * as m from 'framer-motion/m'
 
 export function CameraCard({ item, index }) {
 	return (
@@ -9,8 +9,9 @@ export function CameraCard({ item, index }) {
 				// href={`/cameras/${index}-${item.modelName}`}
 				href=''
 				title={item.modelName}
+				aria-label={`${item.modelName} - open product's page`}
 			>
-				<motion.div
+				<m.div
 					whileHover={{ scale: 1.03 }}
 					transition={{ type: 'tween', stiffness: 300, damping: 100 }}
 					className='group flex flex-col h-full rounded-md border border-border bg-bgSecondary'
@@ -18,7 +19,7 @@ export function CameraCard({ item, index }) {
 					<div className='relative'>
 						<Image
 							src={item.image}
-							alt={item.modelName}
+							alt={`Image of camera model: ${item.modelName}`}
 							width={268}
 							height={180}
 							className='w-full h-auto max-h-[218px] rounded-t-md transition aspect-67/45'
@@ -32,7 +33,7 @@ export function CameraCard({ item, index }) {
 							Brand: {item.brand}
 						</p>
 					</div>
-				</motion.div>
+				</m.div>
 			</Link>
 		</>
 	)

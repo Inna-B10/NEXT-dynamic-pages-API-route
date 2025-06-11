@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getPreviewData } from '@/services/server/cameraDataService'
+import { getPreviewData } from '@/services/server/camerasData.service'
 
 export async function GET(request) {
 	try {
