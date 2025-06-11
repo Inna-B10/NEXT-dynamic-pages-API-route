@@ -14,8 +14,8 @@ export const NAV_LINKS = [
 	},
 	{
 		icon: Package,
-		label: 'Items',
-		link: PUB_PAGES.ITEMS()
+		label: 'Gaming consoles',
+		link: PUB_PAGES.GAMING_CONSOLES()
 	},
 	{
 		icon: AtSign,

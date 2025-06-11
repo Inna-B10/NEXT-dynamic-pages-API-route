@@ -23,6 +23,8 @@ export function SidebarHeader({ isCollapsed, toggleSidebar }) {
 			<button
 				onClick={toggleSidebar}
 				className='cursor-pointer hover:text-blue'
+				title={isCollapsed ? 'Open Menu' : 'Collapse sidebar'}
+				aria-label={isCollapsed ? 'Open Menu' : 'Collapse sidebar'}
 			>
 				{isCollapsed ? <Menu /> : <LogOut style={{ transform: 'scale(-1,-1)' }} />}
 			</button>

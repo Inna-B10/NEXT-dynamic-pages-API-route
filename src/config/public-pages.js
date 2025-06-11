@@ -3,8 +3,8 @@ class PublicPages {
 	CAMERAS(path) {
 		return `/cameras${path ? `/${path}` : ''}`
 	}
-	ITEMS(path) {
-		return `/items${path ? `/${path}` : ''}`
+	GAMING_CONSOLES(path) {
+		return `/gaming_consoles${path ? `/${path}` : ''}`
 	}
 	SEARCH(searchTerms) {
 		return `/search?term=${searchTerms}`
