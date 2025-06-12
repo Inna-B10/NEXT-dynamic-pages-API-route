@@ -1,5 +1,5 @@
 import { API_URL, LIMIT } from '@/constants/constants'
-import { axiosClient } from '@/lib/axios'
+import { axiosClient } from '@/lib/utils/axios'
 
 class Gaming_consolesService {
 	_ITEMS = `${API_URL}/gaming_consoles`
