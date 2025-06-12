@@ -1,13 +1,12 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { CameraCard } from '@/components/CameraCard'
 import { LIMIT } from '@/constants/constants'
+import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { camerasService } from '@/services/client/cameras.service'
 
 export default function CamerasPage() {
-	const observerRef = useRef()
 	const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
 		useInfiniteQuery({
 			queryKey: ['get_all_cameras'],
@@ -19,17 +18,11 @@ export default function CamerasPage() {
 			}
 		})
 
-	useEffect(() => {
-		if (!observerRef.current || !hasNextPage) return
-
-		const observer = new IntersectionObserver(entries => {
-			if (entries[0].isIntersecting) {
-				fetchNextPage()
-			}
-		})
-		observer.observe(observerRef.current)
-		return () => observer.disconnect()
-	}, [observerRef.current, hasNextPage])
+	const lastElementRef = useEffectScroll(() => {
+		if (hasNextPage && !isFetchingNextPage) {
+			fetchNextPage()
+		}
+	})
 
 	if (isLoading) return <p>Loading...</p>
 	if (isError) return <p>Error loading data</p>
@@ -51,8 +44,8 @@ export default function CamerasPage() {
 					</div>
 					{isFetchingNextPage && <p>Loading next page...</p>}
 					<div
-						ref={observerRef}
-						style={{ height: 1, marginTop: 180 }}
+						ref={lastElementRef}
+						style={{ height: 1 }}
 					/>
 				</>
 			) : (
