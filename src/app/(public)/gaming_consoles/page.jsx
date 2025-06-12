@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { GamingConsoleCard } from '@/components/GamingConsoleCard'
+import { LIMIT } from '@/constants/constants'
 import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
 
 export default function page() {
@@ -10,7 +11,7 @@ export default function page() {
 
 	useEffect(() => {
 		async function fetchData() {
-			const limit = 30
+			const limit = LIMIT
 			const offset = page * limit
 
 			const response = await gaming_consolesService

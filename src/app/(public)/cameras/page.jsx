@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { CameraCard } from '@/components/CameraCard'
+import { LIMIT } from '@/constants/constants'
 import { camerasService } from '@/services/client/cameras.service'
 
 export default function CamerasPage() {
@@ -10,7 +11,7 @@ export default function CamerasPage() {
 
 	useEffect(() => {
 		async function fetchData() {
-			const limit = 30
+			const limit = LIMIT
 			const offset = page * limit
 
 			const response = await camerasService.getPreviewItems({ limit, offset }).catch(console.error)

@@ -4,3 +4,6 @@ export const API_URL = `${process.env.NEXT_PUBLIC_SITE_URL}/api` || 'http://loca
 
 export const DB_URI = process.env.MONGODB_URI
 export const DB_NAME = process.env.MONGODB_NAME
+
+//items per page
+export const LIMIT = 12
