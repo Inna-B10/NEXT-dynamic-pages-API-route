@@ -1,38 +1,40 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { GamingConsoleCard } from '@/components/GamingConsoleCard'
+import InfiniteList from '@/components/InfiniteList'
 import { LIMIT } from '@/constants/constants'
+import { useInfinitePagination } from '@/hooks/useInfinitePagination'
 import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
 
 export default function page() {
-	const [data, setData] = useState([])
-	const [page, setPage] = useState(0)
+	const { data, isLoading, isError, isFetchingNextPage, lastElementRef } = useInfinitePagination({
+		queryKey: ['get_all_consoles'],
+		queryFn: params => gaming_consolesService.getAllGaming_consoles(params),
+		type: 'page',
+		limit: LIMIT
+	})
 
-	useEffect(() => {
-		async function fetchData() {
-			const limit = LIMIT
-			const offset = page * limit
-
-			const response = await gaming_consolesService
-				.getAllGaming_consoles({ limit, offset })
-				.catch(console.error)
-			if (response) setData(response.items)
-		}
-		fetchData()
-	}, [page])
+	const allItems = data?.pages.flatMap(page => page.items) || []
 
 	return (
 		<>
-			{data && (
-				<div className='grid grid-cols-4 gap-y-14 gap-x-8'>
-					{data.map((item, index) => (
+			{allItems?.length ? (
+				<InfiniteList
+					data={allItems}
+					isLoading={isLoading}
+					isError={isError}
+					isFetchingNextPage={isFetchingNextPage}
+					lastElementRef={lastElementRef}
+					renderItem={(item, index) => (
 						<GamingConsoleCard
-							key={index}
 							item={item}
 							index={index}
 						/>
-					))}
+					)}
+				/>
+			) : (
+				<div>
+					<p>No product in this category.</p>
 				</div>
 			)}
 		</>
