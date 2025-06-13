@@ -21,16 +21,18 @@ npm install clsx #for constructing className strings conditionally
 npm install framer-motion
 npm install axios
 npm install mongodb
+npm install @tanstack/react-query
 ```
 <br />
 <br />
+- [x] pagination
+- [x] notFound page
 
 ## [TODO]:
 
 - [ ] metadata
-- [ ] notFound page
+- [ ] Logo
 - [ ] product page
-- [ ] pagination
 - [ ] search
 - [ ] Skeleton/Loader
 - [ ] contact page + check options:
