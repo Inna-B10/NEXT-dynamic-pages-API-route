@@ -25,12 +25,7 @@ export default function page() {
 					isError={isError}
 					isFetchingNextPage={isFetchingNextPage}
 					lastElementRef={lastElementRef}
-					renderItem={(item, index) => (
-						<GamingConsoleCard
-							item={item}
-							index={index}
-						/>
-					)}
+					renderItem={item => <GamingConsoleCard item={item} />}
 				/>
 			) : (
 				<div>

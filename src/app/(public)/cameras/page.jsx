@@ -14,9 +14,9 @@ export default function CamerasPage() {
 		type: 'offset',
 		limit: LIMIT
 	})
-	console.log(data)
+
 	const allItems = data?.pages.flatMap(page => page.items) || []
-	console.log(allItems)
+
 	return (
 		<>
 			{allItems?.length ? (
