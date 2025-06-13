@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import * as m from 'framer-motion/m'
 
-export function GamingConsoleCard({ item, index }) {
+export function GamingConsoleCard({ item }) {
 	const title = item['Product Name']
 		? item['Product Name']
 		: item['Alternate names']
@@ -13,8 +13,7 @@ export function GamingConsoleCard({ item, index }) {
 	return (
 		<>
 			<Link
-				// href={`/cameras/${index}-${item.modelName}`}
-				href='#'
+				href={`/gaming_consoles/${item._id}`}
 				title={title}
 				aria-label={`${title} - open product's page`}
 			>
