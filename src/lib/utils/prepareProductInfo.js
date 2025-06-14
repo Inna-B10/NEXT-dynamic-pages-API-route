@@ -1,9 +1,15 @@
 import { newDownsize } from './remoteImageSize'
 
-const excludedFields = ['Picture URL', 'Price in India', 'url', '_id', 'Total Ratings']
+const excludedFields = [
+	'Picture URL',
+	'Price in India',
+	'url',
+	'_id',
+	'Total Ratings',
+	'Product Name'
+]
 const ratingFields = ['1 Stars', '2 Stars', '3 Stars', '4 Stars', '5 Stars']
 const modelFields = [
-	'Product Name',
 	'Brand',
 	'Model',
 	'Alternate names',
@@ -25,12 +31,17 @@ export function prepareProductInfo(data, newSize = 640) {
 				: 'No Product name'
 
 	const modelData = Object.entries(data).filter(([key, _]) => modelFields.includes(key))
-	const ratingData = Object.entries(data).filter(([key, _]) => ratingFields.includes(key))
+	const ratings = Object.entries(data).filter(([key, _]) => ratingFields.includes(key))
+	const normalizedRatings = ratings.map(([starsStr, countStr]) => {
+		const stars = parseInt(starsStr)
+		const count = parseInt(countStr)
+		return { stars, count }
+	})
 
 	const filteredData = Object.entries(data).filter(
 		([key, _]) =>
 			!excludedFields.includes(key) && !modelFields.includes(key) && !ratingFields.includes(key)
 	)
 
-	return { title, src, modelData, ratingData, filteredData }
+	return { title, src, modelData, ratingData: normalizedRatings, filteredData }
 }

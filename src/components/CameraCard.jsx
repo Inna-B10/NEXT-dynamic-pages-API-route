@@ -29,7 +29,7 @@ export function CameraCard({ item, index }) {
 					</div>
 					<div className='flex flex-col justify-between h-full p-4 bg-bgSecondary rounded-b-md'>
 						<p className='text-blue text-lg'>{item.productName ? item.productName : item.model}</p>
-						<p className='text-secondary font-bold group-hover:text-primary '>
+						<p className='text-dark-gray font-bold group-hover:text-light-gray '>
 							Brand: {item.brand}
 						</p>
 					</div>

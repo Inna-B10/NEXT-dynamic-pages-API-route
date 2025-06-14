@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Nanum_Myeongjo } from 'next/font/google'
 import { Providers } from '@/providers/Providers'
 import { SITE_NAME } from '@/constants/constants'
 import './globals.css'
@@ -10,6 +10,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
 	variable: '--font-geist-mono',
+	subsets: ['latin']
+})
+const nanum = Nanum_Myeongjo({
+	variable: '--font-nanum',
+	weight: ['400', '700'],
 	subsets: ['latin']
 })
 
@@ -64,7 +69,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+			<body className={`${geistSans.variable} ${geistMono.variable} ${nanum.variable} antialiased`}>
 				<Providers>{children}</Providers>
 			</body>
 		</html>

@@ -1,5 +1,18 @@
 import Image from 'next/image'
+import {
+	Facebook,
+	Heart,
+	Instagram,
+	Mail,
+	Minus,
+	Plus,
+	Send,
+	ShoppingCart,
+	Twitter
+} from 'react-feather'
 import { InfoRow } from '@/components/InfoRow'
+import { Rating } from '@/components/Rating'
+import { Footer } from '@/components/layout/Footer'
 import NotFoundPage from '@/app/not-found'
 import { prepareProductInfo } from '@/lib/utils/prepareProductInfo'
 import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
@@ -13,56 +26,123 @@ export default async function page(props) {
 	if (!data) return NotFoundPage(false, 'Product')
 
 	const { title, src, modelData, ratingData, filteredData } = prepareProductInfo(data)
+
 	return (
-		<div className='flex flex-col items-center w-full h-full'>
-			<h1 className='my-16 text-4xl font-bold text-yellow-300 '>{title}</h1>
-			<div className='flex gap-16'>
-				<div className='flex flex-col gap-10'>
-					<div className='relative group rounded-md'>
+		<>
+			<div className='flex flex-col gap-16 w-full max-w-[1280px] mx-auto mt-16'>
+				<h1 className='text-3xl font-bold text-yellow-300 text-center'>{title}</h1>
+				<div className='flex gap-10 w-full'>
+					<div className='relative group rounded-md w-[600px] h-[450px] overflow-hidden bg-bgSecondary'>
 						<Image
 							src={src}
 							alt={`Image of camera model: ${title}`}
-							width={640}
-							height={640}
-							className='w-full h-auto object-contain rounded-md transition'
+							fill
+							className='object-contain object-center rounded-md transition'
 							priority
 						/>
+						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_60px_#2C343B]'></div>
+					</div>
 
-						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-none'></div>
-					</div>
-					{ratingData && (
-						<ul>
-							{ratingData.map(([key, value]) => (
-								<li key={key}>
-									{key}: {value}
-								</li>
+					<div className='flex flex-col w-full gap-4 justify-between min-w-[380px] max-w-[600px]'>
+						<div className='flex flex-col justify-between px-4 py-2 bg-bgSecondary rounded-md'>
+							{modelData.map(([key, value]) => (
+								<InfoRow
+									key={key}
+									label={key}
+									value={value}
+								/>
 							))}
-						</ul>
-					)}
-				</div>
-				<div className='flex flex-col w-full gap-4 max-w-1/2'>
-					{/* <h2 className='text-2xl font-bold text-yellow-300 pl-4'>Model:</h2> */}
-					<div className='w-full flex flex-col justify-between p-4 bg-bgSecondary rounded-md'>
-						{modelData.map(([key, value]) => (
-							<InfoRow
-								key={key}
-								label={key}
-								value={value}
-							/>
-						))}
+						</div>
+						<div className='bg-bgSecondary rounded-md px-4 py-8 w-full flex gap-4 justify-between items-center'>
+							<div className='flex gap-4'>
+								<button className='px-6 h-10 pt-1 w-fit flex gap-4 items-center bg-blue-400 text-white tracking-wider font-bold uppercase rounded hover:bg-blue-500 hover:text-yellow-300 transition'>
+									<ShoppingCart size={24} />
+									Add to cart
+								</button>
+								<div className='flex items-senter border border-border rounded-md h-10 text-lg'>
+									<button className='border-r border-border px-2 rounded-l hover:bg-slate-500 hover:text-black'>
+										<Minus size={20} />
+									</button>
+									<input
+										className='w-12 text-center'
+										type='text'
+										// value='1'
+										pattern='^[0-9]'
+										min={1}
+										required
+										defaultValue={1}
+										style={{
+											MozAppearance: 'textfield',
+											appearance: 'textfield',
+											outline: 'none'
+										}}
+									/>
+									<button className='border-l border-border px-2 rounded-r hover:bg-slate-500 hover:text-black'>
+										<Plus size={20} />
+									</button>
+								</div>
+							</div>
+							<h3 className='text-4xl font-bold text-yellow-300 ml-4 font-[family-name:var(--font-nanum)]'>
+								5 995,-
+							</h3>
+						</div>
 					</div>
-					<h2 className='text-2xl font-bold text-yellow-300 pl-4 mt-6'>Info:</h2>
-					<div className='w-full flex flex-col justify-between p-4 bg-bgSecondary rounded-md'>
-						{filteredData.map(([key, value]) => (
-							<InfoRow
-								key={key}
-								label={key}
-								value={value}
-							/>
-						))}
+				</div>
+				<div className='w-full flex gap-10'>
+					<div className='w-2/3'>
+						<h2 className='text-2xl font-bold text-yellow-300 mb-4 pl-4'>
+							Product specifications:
+						</h2>
+						<div className='flex flex-col justify-between p-4 bg-bgSecondary rounded-md'>
+							{filteredData.map(([key, value]) => (
+								<InfoRow
+									key={key}
+									label={key}
+									value={value}
+								/>
+							))}
+						</div>
+					</div>
+					<div className='w-1/3 flex flex-col justify-between gap-6'>
+						{ratingData && (
+							<div>
+								<h2 className='text-2xl font-bold text-yellow-300 mb-4 pl-4'>Rating:</h2>
+								<div className='bg-bgSecondary rounded-md px-4 py-6 flex flex-col gap-4 justify-between items-center w-full'>
+									<Rating ratings={ratingData} />
+								</div>
+							</div>
+						)}
+						<div className='bg-bgSecondary rounded-md px-4 pb-6 pt-10 flex flex-col gap-6 justify-between items-center'>
+							<button className='px-6 h-10 pt-1 w-full flex gap-4 items-center justify-center bg-blue-400 text-white tracking-wider font-bold uppercase rounded hover:bg-blue-500 hover:text-yellow-300 transition'>
+								<Heart size={24} /> Save to favorites
+							</button>
+							<div className='flex justify-between items-center gap-6'>
+								<Facebook
+									size={24}
+									className=' hover:text-blue hover:scale-105 transition'
+								/>
+								<Twitter
+									size={24}
+									className=' hover:text-blue hover:scale-105 transition'
+								/>
+								<Instagram
+									size={24}
+									className=' hover:text-blue hover:scale-105 transition'
+								/>
+								<Send
+									size={24}
+									className=' hover:text-blue hover:scale-105 transition'
+								/>
+								<Mail
+									size={24}
+									className=' hover:text-blue hover:scale-105 transition'
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<Footer />
+		</>
 	)
 }
