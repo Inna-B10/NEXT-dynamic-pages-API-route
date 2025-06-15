@@ -26,6 +26,7 @@ export function GamingConsoleCard({ item }) {
 						<Image
 							src={item['Picture URL']}
 							alt={`Image of camera model: ${title}`}
+							//TODO change sizes for adaptive layout
 							width={268}
 							height={180}
 							className='w-full h-auto max-h-[268px] rounded-t-md transition'

@@ -28,7 +28,9 @@ export default async function page(props) {
 							src={src}
 							alt={`Image of camera model: ${title}`}
 							fill
-							className='object-contain object-center rounded-md transition'
+							//TODO change sizes for adaptive layout
+							sizes='(max-width: 768px) 100vw, 600px'
+							className='w-full h-auto object-contain object-center rounded-md transition'
 							priority
 						/>
 						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_60px_#2C343B]'></div>

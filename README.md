@@ -33,6 +33,8 @@ npm install @tanstack/react-query
 - [ ] metadata
 - [ ] Logo
 - [ ] product page
+- [ ] add/delete product
+- [ ] change image sizes for adaptive layout
 - [ ] search
 - [ ] Skeleton/Loader
 - [ ] contact page + check options:

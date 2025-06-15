@@ -1,25 +1,30 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Share2 } from 'react-feather'
 import { SOCIAL_MEDIA } from '@/constants/social-media'
 import { SITE_URL } from '@/config/config'
 
 export function ShareButtons({ pathname, title }) {
-	const href = `${SITE_URL}${pathname}`
+	const url = `${SITE_URL}${pathname}`
+	const [canShare, setCanShare] = useState(false)
+
+	useEffect(() => {
+		if (typeof navigator !== 'undefined' && navigator.share) {
+			setCanShare(true)
+		}
+	}, [])
+
 	const handleNativeShare = async () => {
-		if (navigator.share) {
-			try {
-				await navigator.share({
-					title: title,
-					url: href
-				})
-				console.log('Successfully shared')
-			} catch (error) {
-				console.error('Error sharing', error)
-			}
-		} else {
-			alert('Native share is not supported on this device')
+		try {
+			await navigator.share({
+				title: title,
+				url: url
+			})
+			console.log('Successfully shared')
+		} catch (error) {
+			console.error('Error sharing', error)
 		}
 	}
 
@@ -28,7 +33,7 @@ export function ShareButtons({ pathname, title }) {
 			{SOCIAL_MEDIA.map(({ icon: Icon, label, link }) => (
 				<Link
 					key={label}
-					href={link(href, title)}
+					href={link(url, title)}
 					target='_blank'
 					rel='noopener noreferrer'
 					title={`Share on ${label}`}
@@ -38,7 +43,7 @@ export function ShareButtons({ pathname, title }) {
 					<Icon size={24} />
 				</Link>
 			))}
-			{navigator.share && (
+			{canShare && (
 				<button
 					onClick={handleNativeShare}
 					title='Native Share'
