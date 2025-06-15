@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb'
-import { DB_NAME, DB_URI } from '@/constants/constants'
+import { DB_NAME, DB_URI } from '@/config/config'
 
 if (!DB_URI) throw new Error('MONGODB_URI environment variable not set')
 

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { SITE_NAME } from '@/constants/constants'
-import { PUB_PAGES } from '@/config/public-pages'
+import { PUB_PAGES } from '@/routes/public-pages'
 
 export function Logo(isSidebar = true) {
 	return (

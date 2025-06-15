@@ -1,4 +1,5 @@
-import { API_URL, LIMIT } from '@/constants/constants'
+import { LIMIT } from '@/constants/constants'
+import { API_URL } from '@/config/config'
 import { axiosClient } from '@/lib/utils/axios'
 
 class Gaming_consolesService {

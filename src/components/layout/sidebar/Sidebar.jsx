@@ -3,9 +3,9 @@
 import { AnimatePresence } from 'framer-motion'
 import * as m from 'framer-motion/m'
 import { useSidebar } from '@/providers/SidebarProvider'
+import { NAV_LINKS } from '@/constants/sidebar-links'
 import { SidebarHeader } from './header/SidebarHeader'
 import { SidebarMenu } from './menu/SidebarMenu'
-import { NAV_LINKS } from '@/data/sidebar-links'
 
 export function Sidebar() {
 	const { isCollapsedSidebar, toggleSidebar } = useSidebar()
