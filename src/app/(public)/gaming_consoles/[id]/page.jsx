@@ -1,18 +1,10 @@
 import Image from 'next/image'
-import {
-	Facebook,
-	Heart,
-	Instagram,
-	Mail,
-	Minus,
-	Plus,
-	Send,
-	ShoppingCart,
-	Twitter
-} from 'react-feather'
+import { Heart, ShoppingCart } from 'react-feather'
 import { InfoRow } from '@/components/InfoRow'
 import { Rating } from '@/components/Rating'
 import { Footer } from '@/components/layout/Footer'
+import { Button } from '@/components/ui/buttons/Button'
+import { ShareButtons } from '@/components/ui/buttons/ShareButtons'
 import NotFoundPage from '@/app/not-found'
 import { prepareProductInfo } from '@/lib/utils/prepareProductInfo'
 import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
@@ -22,7 +14,6 @@ export default async function page(props) {
 	const id = params.id
 
 	const data = await gaming_consolesService.getConsoleById(id)
-	// console.log('data: ', data)
 	if (!data) return NotFoundPage(false, 'Product')
 
 	const { title, src, modelData, ratingData, filteredData } = prepareProductInfo(data)
@@ -53,38 +44,33 @@ export default async function page(props) {
 								/>
 							))}
 						</div>
-						<div className='bg-bgSecondary rounded-md px-4 py-8 w-full flex gap-4 justify-between items-center'>
-							<div className='flex gap-4'>
-								<button className='px-6 h-10 pt-1 w-fit flex gap-4 items-center bg-blue-400 text-white tracking-wider font-bold uppercase rounded hover:bg-blue-500 hover:text-yellow-300 transition'>
+						<div className='bg-bgSecondary rounded-md p-4 w-full flex gap-4 justify-between items-center'>
+							<div className='w-1/2 h-full flex flex-col gap-6 items-center py-4 border-r border-dashed border-border '>
+								<h3 className='text-4xl font-bold text-yellow-300 ml-4 font-[family-name:var(--font-nanum)]'>
+									5 995,-
+								</h3>
+								<Button
+									title='Add to shopping cart'
+									aria-label='Add to shopping cart'
+								>
 									<ShoppingCart size={24} />
 									Add to cart
-								</button>
-								<div className='flex items-senter border border-border rounded-md h-10 text-lg'>
-									<button className='border-r border-border px-2 rounded-l hover:bg-slate-500 hover:text-black'>
-										<Minus size={20} />
-									</button>
-									<input
-										className='w-12 text-center'
-										type='text'
-										// value='1'
-										pattern='^[0-9]'
-										min={1}
-										required
-										defaultValue={1}
-										style={{
-											MozAppearance: 'textfield',
-											appearance: 'textfield',
-											outline: 'none'
-										}}
-									/>
-									<button className='border-l border-border px-2 rounded-r hover:bg-slate-500 hover:text-black'>
-										<Plus size={20} />
-									</button>
-								</div>
+								</Button>
 							</div>
-							<h3 className='text-4xl font-bold text-yellow-300 ml-4 font-[family-name:var(--font-nanum)]'>
-								5 995,-
-							</h3>
+							<div className='w-1/2 h-full py-4 flex flex-col gap-6 justify-between items-center'>
+								<div className='flex justify-between gap-6'>
+									<ShareButtons
+										pathname={`/gaming_consoles/${id}`}
+										title={title}
+									/>
+								</div>
+								<Button
+									title='Add to favorites'
+									aria-label='Add to favorites'
+								>
+									<Heart size={24} /> Favorites
+								</Button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -112,33 +98,6 @@ export default async function page(props) {
 								</div>
 							</div>
 						)}
-						<div className='bg-bgSecondary rounded-md px-4 pb-6 pt-10 flex flex-col gap-6 justify-between items-center'>
-							<button className='px-6 h-10 pt-1 w-full flex gap-4 items-center justify-center bg-blue-400 text-white tracking-wider font-bold uppercase rounded hover:bg-blue-500 hover:text-yellow-300 transition'>
-								<Heart size={24} /> Save to favorites
-							</button>
-							<div className='flex justify-between items-center gap-6'>
-								<Facebook
-									size={24}
-									className=' hover:text-blue hover:scale-105 transition'
-								/>
-								<Twitter
-									size={24}
-									className=' hover:text-blue hover:scale-105 transition'
-								/>
-								<Instagram
-									size={24}
-									className=' hover:text-blue hover:scale-105 transition'
-								/>
-								<Send
-									size={24}
-									className=' hover:text-blue hover:scale-105 transition'
-								/>
-								<Mail
-									size={24}
-									className=' hover:text-blue hover:scale-105 transition'
-								/>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
