@@ -9,7 +9,7 @@ import { camerasService } from '@/services/client/cameras.service'
 export default function CamerasClientPage({ initialData }) {
 	const { data, isLoading, isError, isFetchingNextPage, lastElementRef } = useInfinitePagination({
 		queryKey: ['get_all_cameras'],
-		queryFn: params => camerasService.getPreviewItems(params),
+		queryFn: params => camerasService.getPreviewCameras(params),
 		type: 'offset',
 		limit: LIMIT,
 		initialData

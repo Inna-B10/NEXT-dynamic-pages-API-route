@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/buttons/Button'
 import { ShareButtons } from '@/components/ui/buttons/ShareButtons'
 import NotFoundPage from '@/app/not-found'
-import { prepareProductInfo } from '@/lib/utils/prepareProductInfo'
+import { prepareGamingConsoleInfo } from '@/lib/utils/prepareGamingConsoleInfo'
 import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
 
 export default async function page(props) {
@@ -16,7 +16,7 @@ export default async function page(props) {
 	const data = await gaming_consolesService.getConsoleById(id)
 	if (!data) return NotFoundPage(false, 'Product')
 
-	const { title, src, modelData, ratingData, filteredData } = prepareProductInfo(data)
+	const { title, src, modelData, ratingData, filteredData } = prepareGamingConsoleInfo(data)
 
 	return (
 		<>
@@ -28,7 +28,7 @@ export default async function page(props) {
 							src={src}
 							alt={`Image of camera model: ${title}`}
 							fill
-							//TODO change sizes for adaptive layout
+							//[TODO] change sizes for adaptive layout
 							sizes='(max-width: 768px) 100vw, 600px'
 							className='w-full h-auto object-contain object-center rounded-md transition'
 							priority
@@ -77,7 +77,7 @@ export default async function page(props) {
 					</div>
 				</div>
 				<div className='w-full flex gap-10'>
-					<div className='w-2/3'>
+					<div className='w-3/4'>
 						<h2 className='text-2xl font-bold text-yellow-300 mb-4 pl-4'>
 							Product specifications:
 						</h2>
@@ -91,7 +91,7 @@ export default async function page(props) {
 							))}
 						</div>
 					</div>
-					<div className='w-1/3 flex flex-col justify-between gap-6'>
+					<div className='w-1/4 flex flex-col justify-between gap-6'>
 						{ratingData && (
 							<div>
 								<h2 className='text-2xl font-bold text-yellow-300 mb-4 pl-4'>Rating:</h2>

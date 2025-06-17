@@ -20,7 +20,7 @@ const modelFields = [
 	'Launched'
 ]
 
-export function prepareProductInfo(data, newSize = 640) {
+export function prepareGamingConsoleInfo(data, newSize = 640) {
 	const src = newDownsize(data['Picture URL'], newSize)
 	const title = data['Product Name']
 		? data['Product Name']
