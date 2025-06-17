@@ -18,12 +18,12 @@ export async function getPreviewData() {
 		model: item['Model'],
 		modelName: item['Model Name'],
 		brand: item['Brand'],
-		series: item['Series'],
-		color: item['Color'],
-		dimensions: item['Dimensions(WxHxD)'],
-		display: item['Display Size'],
-		image: item['Picture URL'],
-		url: item['url']
+		image: item['Picture URL']
 	}))
 	return filtered
+}
+
+export async function getCameraDataById(index) {
+	const data = await readJsonFile(FILE_PATH)
+	return data?.[index]
 }

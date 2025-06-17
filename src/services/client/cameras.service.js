@@ -13,10 +13,15 @@ class CamerasService {
 	}
 
 	//NB using = {} , does not throw an error if the function is called without parameters
-	async getPreviewItems({ limit = LIMIT, offset = 0 } = {}) {
+	async getPreviewCameras({ limit = LIMIT, offset = 0 } = {}) {
 		const { data } = await axiosClient.get(`${this._CAMERAS}/preview`, {
 			params: { limit, offset }
 		})
+		return data
+	}
+
+	async getCameraById(id) {
+		const { data } = await axiosClient.get(`${this._CAMERAS}/by-id/${id}`)
 		return data
 	}
 }
