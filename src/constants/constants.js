@@ -1,4 +1,4 @@
 export const SITE_NAME = 'NEXT intro'
 
 //items per page
-export const LIMIT = 12
+export const LIMIT = 16

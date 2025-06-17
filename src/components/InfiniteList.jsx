@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { Loader } from 'react-feather'
 
 export default function InfiniteList({
 	data,
@@ -18,7 +19,12 @@ export default function InfiniteList({
 					<Fragment key={index}>{renderItem(item, index)}</Fragment>
 				))}
 			</div>
-			{isFetchingNextPage && <p>Loading next page...</p>}
+			{isFetchingNextPage && (
+				<Loader
+					size={60}
+					className='mx-auto mt-10 animate-spin'
+				/>
+			)}
 			<div
 				ref={lastElementRef}
 				style={{ height: 1 }}

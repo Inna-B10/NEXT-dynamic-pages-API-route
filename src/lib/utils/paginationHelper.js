@@ -7,7 +7,7 @@ export function createPagination({ type = 'offset', limit = LIMIT, initialPage =
 		return {
 			initialPageParam: 0,
 			getNextPageParam: (lastPage, pages) => {
-				const loaded = pages.length * limit
+				const loaded = pages.reduce((sum, page) => sum + page.items.length, 0)
 				return loaded < lastPage.total ? loaded : undefined
 			},
 			getQueryParam: pageParam => ({

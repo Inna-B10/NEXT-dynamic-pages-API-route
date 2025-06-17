@@ -10,7 +10,8 @@ export function useInfinitePagination({
 	limit = LIMIT,
 	initialPage = 1,
 	enabled = true,
-	rootMargin = '0px'
+	rootMargin = '0px',
+	initialData = null
 }) {
 	const pagination = createPagination({ type, limit, initialPage })
 
@@ -23,7 +24,12 @@ export function useInfinitePagination({
 			},
 			initialPageParam: pagination.initialPageParam,
 			getNextPageParam: pagination.getNextPageParam,
-			enabled
+			enabled,
+
+			initialData: {
+				pages: [initialData],
+				pageParams: [pagination.initialPageParam]
+			}
 		})
 
 	const lastElementRef = useInfiniteScroll(

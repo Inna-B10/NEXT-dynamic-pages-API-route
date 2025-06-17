@@ -15,6 +15,7 @@ export function Sidebar() {
 			<m.aside
 				className='whitespace-nowrap overflow-hidden border-r border-border my-4 w-0'
 				animate={{ width: isCollapsedSidebar ? 56 : 250 }}
+				initial={false}
 				transition={{ type: 'spring', stiffness: 300, damping: 23 }}
 			>
 				<SidebarHeader
