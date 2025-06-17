@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Nanum_Myeongjo } from 'next/font/google'
+import ScrollToTopButton from '@/components/ui/buttons/ScrollToTopButton'
 import { Providers } from '@/providers/Providers'
 import { SITE_NAME } from '@/constants/constants'
 import './globals.css'
@@ -70,6 +71,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
 			<body className={`${geistSans.variable} ${geistMono.variable} ${nanum.variable} antialiased`}>
+				<ScrollToTopButton />
 				<Providers>{children}</Providers>
 			</body>
 		</html>
