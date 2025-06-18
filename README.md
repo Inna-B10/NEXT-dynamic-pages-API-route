@@ -25,18 +25,27 @@ npm install @tanstack/react-query
 ```
 <br />
 <br />
+
 - [x] pagination
 - [x] notFound page
+- [x] product page
 
-## [TODO]:
+## TODOs:
 
-- [ ] metadata
-- [ ] Logo
-- [ ] product page
+#### *functional:*
+- [ ] registration (clerk?)
+- [ ] user's role
 - [ ] add/delete product
-- [ ] change image sizes for adaptive layout
+- [ ] shopping card
+- [ ] add/delete to shopping card
+- [ ] imitation paying process
 - [ ] search
-- [ ] Skeleton/Loader
 - [ ] contact page + check options:
    - [ ] [Send emails with Next.js - Resend](https://resend.com/docs/send-with-nextjs)
    - [ ] [Easy Contact Form to Email Service](https://web3forms.com/)
+
+#### *design:*
+- [ ] change image sizes for adaptive layout
+- [ ] metadata
+- [ ] Logo
+- [ ] Skeleton/Loader
