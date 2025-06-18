@@ -3,11 +3,7 @@ import { Logo } from '@/components/Logo'
 export default function NotFoundPage(page = true, text = 'Page') {
 	return (
 		<div className='w-full h-screen flex flex-col mx-auto'>
-			{page && (
-				<div className='my-13 mx-5'>
-					<Logo isSidebar={false} />
-				</div>
-			)}
+			{page && <Logo isSidebar={false} />}
 			<div className='mx-auto w-1/2 mt-24 text-center'>
 				<h2 className='font-bold text-6xl mb-5'>404</h2>
 				<p className='text-xl'>{text} not found!</p>

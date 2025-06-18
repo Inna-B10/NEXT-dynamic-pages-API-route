@@ -20,7 +20,7 @@ export default async function page(props) {
 	return (
 		<>
 			<div className='flex flex-col gap-16 w-full max-w-[1280px] mx-auto mt-16'>
-				<h1 className='text-3xl font-bold text-yellow-300 text-center'>{title}</h1>
+				<h1 className='text-3xl font-bold text-yellow text-center'>{title}</h1>
 				<div className='flex gap-10 justify-between w-full'>
 					<div className='relative group rounded-md w-[600px] h-[450px] overflow-hidden bg-bgSecondary'>
 						<Image
@@ -47,7 +47,7 @@ export default async function page(props) {
 						</div>
 						<div className='bg-bgSecondary rounded-md p-4 w-full flex gap-4 justify-between items-center'>
 							<div className='w-1/2 h-full flex flex-col gap-6 items-center py-4 border-r border-dashed border-border '>
-								<h3 className='text-4xl font-bold text-yellow-300 ml-4 font-[family-name:var(--font-nanum)]'>
+								<h3 className='text-4xl font-bold text-yellow ml-4 font-[family-name:var(--font-nanum)]'>
 									5 995,-
 								</h3>
 								<Button
@@ -77,9 +77,7 @@ export default async function page(props) {
 				</div>
 				<div className='w-full flex gap-10'>
 					<div className='w-3/4'>
-						<h2 className='text-2xl font-bold text-yellow-300 mb-4 pl-4'>
-							Product specifications:
-						</h2>
+						<h2 className='text-2xl font-bold text-yellow mb-4 pl-4'>Product specifications:</h2>
 						<div className='flex flex-col justify-between p-4 bg-bgSecondary rounded-md'>
 							{filteredData.map(([key, value]) => (
 								<InfoRow
@@ -93,7 +91,7 @@ export default async function page(props) {
 					<div className='w-1/4 flex flex-col justify-between gap-6'>
 						{ratingData && (
 							<div>
-								<h2 className='text-2xl font-bold text-yellow-300 mb-4 pl-4'>Rating:</h2>
+								<h2 className='text-2xl font-bold text-yellow mb-4 pl-4'>Rating:</h2>
 								<div className='bg-bgSecondary rounded-md px-4 py-6 flex flex-col gap-4 justify-between items-center w-full'>
 									<Rating ratings={ratingData} />
 								</div>

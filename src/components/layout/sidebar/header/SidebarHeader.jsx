@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import clsx from 'clsx'
 import { LogOut, Menu } from 'react-feather'
-import { SITE_NAME } from '@/constants/constants'
+import { Logo } from '@/components/Logo'
 
 export function SidebarHeader({ isCollapsed, toggleSidebar }) {
 	return (
@@ -11,15 +10,7 @@ export function SidebarHeader({ isCollapsed, toggleSidebar }) {
 				isCollapsed ? 'justify-center' : 'justify-between'
 			)}
 		>
-			{!isCollapsed && (
-				<Link
-					href='/'
-					title={`${SITE_NAME} - homepage`}
-					aria-label={`${SITE_NAME} - homepage`}
-				>
-					<h2 className='text-2xl'>SiteLogo</h2>
-				</Link>
-			)}
+			{!isCollapsed && <Logo />}
 			<button
 				onClick={toggleSidebar}
 				className='cursor-pointer hover:text-blue'
