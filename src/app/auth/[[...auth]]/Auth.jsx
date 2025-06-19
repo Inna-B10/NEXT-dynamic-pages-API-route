@@ -1,9 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { SignIn, SignUp } from '@clerk/nextjs'
 import { Logo } from '@/components/Logo'
+import { SignIn, SignUp } from '@clerk/nextjs'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import styles from './clerkAuth.module.css'
+
+const tabs = [
+	{ label: 'Sign In', value: 'sign-in' },
+	{ label: 'Sign Up', value: 'sign-up' }
+]
 
 export function Auth() {
 	const searchParams = useSearchParams()
@@ -14,7 +20,9 @@ export function Auth() {
 	const [mode, setMode] = useState(initialMode)
 
 	useEffect(() => {
-		setMode(modeParam === 'sign-up' ? 'sign-up' : 'sign-in')
+		if (modeParam === 'sign-up' || modeParam === 'sign-in') {
+			setMode(modeParam)
+		}
 	}, [modeParam])
 
 	const handleTabClick = newMode => {
@@ -22,24 +30,21 @@ export function Auth() {
 	}
 
 	return (
-		<section className='w-full h-screen flex flex-col mx-auto'>
+		<section className='w-full h-full flex flex-col mx-auto mb-6'>
 			<Logo isSidebar={false} />
-			<div className='w-fit bg-bg p-8 border border-border rounded mx-auto'>
+			<div className='w-fit min-h-[411px]  xs:w-fit xs:min-w-96 bg-bg p-4 xs:p-8 xs:border border-border rounded mx-auto flex flex-col justify-between gap-6'>
 				<div className='flex justify-center gap-6'>
-					<button
-						onClick={() => handleTabClick('sign-in')}
-						className={`px-4 py-2 ${mode === 'sign-in' ? 'font-bold text-yellow border-b-2 border-yellow' : ''}`}
+					{tabs.map(tab => (
+						<button
+						key={tab.value}
+						onClick={() => handleTabClick(tab.value)}
+						className={`px-4 py-2 ${mode === tab.value ? 'font-bold text-yellow border-b-2 border-yellow' : ''}`}
 					>
-						Sign In
+						{tab.label}
 					</button>
-					<button
-						onClick={() => handleTabClick('sign-up')}
-						className={`px-4 py-2 ${mode === 'sign-up' ? 'font-bold  text-yellow-300 border-b-2 border-yellow' : ''}`}
-					>
-						Sign Up
-					</button>
+					))}
 				</div>
-				<div>
+				<div className={styles.clerkContainer}>
 					{/*
 					//NB default route:
 					//NB	path='/auth'
@@ -48,51 +53,10 @@ export function Auth() {
 					//NB custom route:
 					//NB routing='hash' //no path needed 
 					 */}
-					{mode === 'sign-in' ? (
-						<SignIn
-							routing='hash'
-							appearance={{
-								elements: {
-									footer: { display: 'none' },
-									cardBox: { boxShadow: 'none' },
-									card: { background: '#161A1D' },
-									socialButtonsBlockButton__google: {
-										background: '#7CBAFD'
-									},
-									socialButtonsBlockButtonText__google: {
-										color: 'black',
-										letterSpacing: '1px',
-										fontWeight: 'bold'
-									},
-									headerTitle: { color: '#7CBAFD', marginBottom: '0.5rem', fontSize: '1.5rem' },
-									formButtonPrimary: { color: 'black', letterSpacing: '1px', fontWeight: 'bold' },
-									buttonArrowIcon: { color: 'black', opacity: 1 }
-								}
-							}}
-						/>
-					) : (
-						<SignUp
-							routing='hash'
-							appearance={{
-								elements: {
-									footer: { display: 'none' },
-									cardBox: { boxShadow: 'none' },
-									card: { background: '#161A1D' },
-									socialButtonsBlockButton__google: {
-										background: '#7CBAFD'
-									},
-									socialButtonsBlockButtonText__google: {
-										color: 'black',
-										letterSpacing: '1px',
-										fontWeight: 'bold'
-									},
-									headerTitle: { color: '#7CBAFD', marginBottom: '0.5rem', fontSize: '1.5rem' },
-									formButtonPrimary: { color: 'black', letterSpacing: '1px', fontWeight: 'bold' },
-									buttonArrowIcon: { color: 'black', opacity: 1 }
-								}
-							}}
-						/>
-					)}
+					{mode === 'sign-in' 
+					? <SignIn routing='hash' />
+				  : <SignUp routing='hash' />
+					}
 				</div>
 			</div>
 		</section>

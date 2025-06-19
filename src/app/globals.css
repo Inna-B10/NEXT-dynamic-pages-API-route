@@ -8,6 +8,7 @@
   --color-bgSecondary: #252836;
   --color-blue: #7CBAFD;
   --color-yellow: #FFDF20;
+  --breakpoint-xs: 480px;
 }
 
 :root {
