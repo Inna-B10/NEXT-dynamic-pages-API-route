@@ -13,8 +13,8 @@ export function Sidebar() {
 	return (
 		<AnimatePresence>
 			<m.aside
-				className='whitespace-nowrap overflow-hidden border-r border-border my-4 w-0'
-				animate={{ width: isCollapsedSidebar ? 56 : 250 }}
+				className='whitespace-nowrap border-r border-border bg-bg fixed top-0 left-0 bottom-0 w-0 z-50'
+				animate={{ width: isCollapsedSidebar ? 56 : 200 }}
 				initial={false}
 				transition={{ type: 'spring', stiffness: 300, damping: 23 }}
 			>

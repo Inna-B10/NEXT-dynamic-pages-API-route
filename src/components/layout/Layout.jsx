@@ -4,7 +4,7 @@ import { Sidebar } from './sidebar/Sidebar'
 
 export function Layout({ children }) {
 	return (
-		<main className='flex min-h-screen'>
+		<main className='flex min-h-screen w-full ml-[56px]'>
 			<Sidebar />
 			<div className='flex flex-col w-full'>
 				<Header />
