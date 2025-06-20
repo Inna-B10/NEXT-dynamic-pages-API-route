@@ -20,7 +20,7 @@ export function GamingConsoleCard({ item }) {
 				<m.div
 					whileHover={{ scale: 1.03 }}
 					transition={{ type: 'tween', stiffness: 300, damping: 100 }}
-					className='group flex flex-col h-full justify-between rounded-md border border-border bg-bgSecondary font-bold xs:text-sm tracking-wide md:text-base lg:text-lg lg:tracking-normal'
+					className='group flex flex-col h-full justify-between rounded-md border border-border bg-bgSecondary font-bold bp480:text-sm tracking-wide md:text-base lg:text-lg lg:tracking-normal'
 				>
 					<div>
 						<div className='relative w-full aspect-[268/201] bg-white rounded-t-md'>

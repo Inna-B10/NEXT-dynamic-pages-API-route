@@ -9,7 +9,8 @@
   --color-bgSecondary: #252836;
   --color-blue: #7CBAFD;
   --color-yellow: #FFDF20;
-  --breakpoint-xs: 480px;
+  --breakpoint-bp520: 520px;
+  --breakpoint-bp480: 480px;
   --font-geist-sans: 'Geist', sans-serif;
   --font-geist-mono: 'Geist Mono', monospace;
   --font-nanum: 'Nanum Myeongjo', sans-serif;
@@ -18,7 +19,7 @@
 
 @layer utilities {
   .grid-cols {
-    @apply grid grid-cols-1 gap-8 xs:grid-cols-2 xs:gap-4 md:gap-8 lg:grid-cols-3 xl:grid-cols-4
+    @apply grid grid-cols-1 gap-8 bp480:grid-cols-2 bp480:gap-4 md:gap-8 lg:grid-cols-3 xl:grid-cols-4
   }
 }
 
