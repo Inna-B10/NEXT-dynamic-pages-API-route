@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 @theme {
   --color-light-gray: #D1D9E3;
@@ -9,23 +10,23 @@
   --color-blue: #7CBAFD;
   --color-yellow: #FFDF20;
   --breakpoint-xs: 480px;
+  --font-geist-sans: 'Geist', sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
+  --font-nanum: 'Nanum Myeongjo', sans-serif;
+
 }
 
-:root {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-nanum: var(--font-nanum);
-}
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .grid-cols {
+    @apply grid grid-cols-1 gap-8 xs:grid-cols-2 xs:gap-4 md:gap-8 lg:grid-cols-3 xl:grid-cols-4
   }
-} */
+}
+
+
 
 body {
   background: var(--color-bg);
   color: var(--color-light-gray);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans);
+  /* font-family: Arial, Helvetica, sans-serif; */
 }

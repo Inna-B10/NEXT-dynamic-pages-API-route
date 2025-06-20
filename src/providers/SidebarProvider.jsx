@@ -4,7 +4,10 @@ import { usePathname } from 'next/navigation'
 const SidebarContext = createContext(undefined)
 
 export function SidebarProvider({ children }) {
-	const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(false)
+	const [isCollapsedSidebar, setIsCollapsedSidebar] = useState(() => {
+		if (typeof window !== 'undefined' && window.innerWidth < 1024) return true
+		return false
+	})
 	const pathname = usePathname()
 
 	//screen<1024px - fixed, z-50, auto-collapsed

@@ -23,14 +23,14 @@ export default async function GamingConsole(props) {
 			<div className='flex flex-col gap-16 w-full max-w-[1280px] mx-auto mt-16'>
 				<h1 className='text-3xl font-bold text-yellow text-center'>{title}</h1>
 				<div className='flex gap-10 w-full'>
-					<div className='relative group rounded-md w-[600px] h-[450px] overflow-hidden bg-bgSecondary'>
+					<div className='relative group rounded-md w-[600px] h-[450px] overflow-hidden bg-white'>
 						<Image
 							src={src}
 							alt={`Image of camera model: ${title}`}
 							fill
 							//[TODO] change sizes for adaptive layout
 							sizes='(max-width: 768px) 100vw, 600px'
-							className='w-full h-auto object-contain object-center rounded-md transition'
+							className='w-full h-auto object-contain object-center rounded-lg transition'
 							priority
 						/>
 						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_60px_#2C343B]'></div>
@@ -48,9 +48,7 @@ export default async function GamingConsole(props) {
 						</div>
 						<div className='bg-bgSecondary rounded-md p-4 w-full flex gap-4 justify-between items-center'>
 							<div className='w-1/2 h-full flex flex-col gap-6 items-center py-4 border-r border-dashed border-border '>
-								<h3 className='text-4xl font-bold text-yellow ml-4 font-[family-name:var(--font-nanum)]'>
-									5 995,-
-								</h3>
+								<h3 className='text-4xl font-bold text-yellow ml-4 font-nanum'>5 995,-</h3>
 								<Button
 									title='Add to shopping cart'
 									aria-label='Add to shopping cart'
