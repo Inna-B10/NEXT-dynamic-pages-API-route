@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Loader } from 'react-feather'
+import Spinner from './ui/Spinner'
 
 export default function InfiniteList({
 	data,
@@ -20,9 +20,9 @@ export default function InfiniteList({
 				))}
 			</div>
 			{isFetchingNextPage && (
-				<Loader
+				<Spinner
 					size={60}
-					className='mx-auto mt-10 animate-spin'
+					message='Loading more items...'
 				/>
 			)}
 			<div

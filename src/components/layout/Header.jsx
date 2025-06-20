@@ -1,4 +1,5 @@
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { AuthButton } from '../ui/buttons/AuthButton'
 
 export function Header() {
 	return (
@@ -12,8 +13,7 @@ export function Header() {
 			</div>
 			<div className='flex items-center gap-2 p-4'>
 				<SignedOut>
-					<SignInButton />
-					<SignUpButton />
+					<AuthButton />
 				</SignedOut>
 				<SignedIn>
 					<UserButton />
