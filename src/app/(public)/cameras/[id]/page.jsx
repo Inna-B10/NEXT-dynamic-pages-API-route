@@ -5,10 +5,11 @@ import { Rating } from '@/components/Rating'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/buttons/Button'
 import { ShareButtons } from '@/components/ui/buttons/ShareButtons'
+import NotFoundPage from '@/app/not-found'
 import { prepareCameraInfo } from '@/lib/utils/prepareCameraInfo'
 import { camerasService } from '@/services/client/cameras.service'
 
-export default async function page(props) {
+export default async function Camera(props) {
 	const params = await props.params
 	const id = params.id.split('-')
 

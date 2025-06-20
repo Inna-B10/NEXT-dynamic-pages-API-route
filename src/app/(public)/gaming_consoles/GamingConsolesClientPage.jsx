@@ -6,7 +6,7 @@ import { LIMIT } from '@/constants/constants'
 import { useInfinitePagination } from '@/hooks/useInfinitePagination'
 import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
 
-export default function GamingConsolesClientPage({ initialData }) {
+export default function GamingConsolesCategoryClient({ initialData }) {
 	const { data, isLoading, isError, isFetchingNextPage, lastElementRef } = useInfinitePagination({
 		queryKey: ['get_all_consoles'],
 		queryFn: params => gaming_consolesService.getAllGaming_consoles(params),
