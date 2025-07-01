@@ -25,6 +25,7 @@ npm install @tanstack/react-query
 npm install @clerk/nextjs
 npm install @clerk/themes
 npm install tailwind-merge
+npm install react-hot-toast
 ```
 <br />
 <br />

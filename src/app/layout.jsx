@@ -59,7 +59,6 @@ export default function RootLayout({ children }) {
 				<ScrollToTopButton />
 				<Providers>
 					{children}
-
 					<Onboarding />
 				</Providers>
 			</body>

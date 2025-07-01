@@ -1,40 +1,47 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
+import toast from 'react-hot-toast'
 
 export default function Onboarding() {
 	const { isSignedIn, user } = useUser()
-	const [userChecked, setUserChecked] = useState(false)
+	// const [userChecked, setUserChecked] = useState(false)
 
 	useEffect(() => {
-		if (!isSignedIn || !user || userChecked) {
-			sessionStorage.removeItem('lastAuthMode')
-			sessionStorage.removeItem('lastRedirectUrl')
-			return
-		}
+		if (!isSignedIn || !user) return
 
+		const alreadyChecked = sessionStorage.getItem('userChecked')
+		if (alreadyChecked === 'true') return
 		const checkUser = async () => {
 			try {
-				console.log('Checking user creation...')
 				const res = await fetch('/api/user/check-or-create', { method: 'POST' })
+
 				if (res.ok) {
-					const text = await res.text()
-					console.log('Server response:', text)
+					// toast only on first creation or check
+					toast.success('Welcome! You are signed in')
 				} else {
-					console.warn('Error response from server:', res.status)
+					console.log(res)
+					toast.error(`Error authenticating: ${res.status}`)
 				}
 			} catch (err) {
-				console.error('Error while calling /check-or-create:', err)
+				toast.error('Error authenticating!')
+				console.error(err)
 			} finally {
-				setUserChecked(true)
+				sessionStorage.setItem('userChecked', 'true')
 				sessionStorage.removeItem('lastAuthMode')
 				sessionStorage.removeItem('lastRedirectUrl')
 			}
 		}
 
 		checkUser()
-	}, [isSignedIn, user, userChecked])
+	}, [isSignedIn, user])
+
+	useEffect(() => {
+		if (!isSignedIn) {
+			sessionStorage.removeItem('userChecked')
+		}
+	}, [isSignedIn])
 
 	return null
 }
