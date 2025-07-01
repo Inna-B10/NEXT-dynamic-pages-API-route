@@ -7,52 +7,52 @@
   /* basic styles */
 }
 
-:global(.cl-cardBox),
-:global(.cl-card),
-:global(.cl-rootBox) {
+.cl-cardBox,
+.cl-card,
+.cl-rootBox {
   width: 100%;
 }
 
-:global(.cl-cardBox),
-:global(.cl-card) {
+.cl-cardBox,
+.cl-card {
   background: #161A1D;
   box-shadow: none;
   padding: 2px;
 }
 
-:global(.cl-footer),
-:global(.cl-headerSubtitle) {
+.cl-footer,
+.cl-headerSubtitle {
   display: none;
 }
 
-:global(.cl-socialButtonsBlockButton__google) {
+.cl-socialButtonsBlockButton__google {
   background-color: var(--google-bg);
   transition: background-color 0.2s ease;
 }
 
-:global(.cl-socialButtonsBlockButton__google:hover) {
+.cl-socialButtonsBlockButton__google:hover {
   background-color: var(--google-bg-hover);
 }
 
-:global(.cl-socialButtonsBlockButtonText__google) {
+.cl-socialButtonsBlockButtonText__google {
   color: var(--text);
   letter-spacing: 1px;
   font-weight: bold;
 }
 
-:global(.cl-headerTitle) {
+.cl-headerTitle {
   color: #7CBAFD;
   font-size: 1.5rem;
   margin-bottom: -0.5rem;
 }
 
-:global(.cl-formButtonPrimary) {
+.cl-formButtonPrimary {
   color: var(--text);
   letter-spacing: 1px;
   font-weight: bold;
 }
 
-:global(.cl-buttonArrowIcon) {
+.cl-buttonArrowIcon {
   color: var(--text);
   opacity: 1;
 }
