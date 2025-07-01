@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { LogOut, Menu } from 'react-feather'
-import { Logo } from '@/components/Logo'
+import { Logo } from '@/components/ui/Logo'
 
 export function SidebarHeader({ isCollapsed, toggleSidebar }) {
 	return (

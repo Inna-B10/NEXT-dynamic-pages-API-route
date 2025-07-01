@@ -1,4 +1,4 @@
-import { Logo } from '@/components/Logo'
+import { Logo } from '@/components/ui/Logo'
 
 export default function NotFoundPage(page = true, text = 'Page') {
 	return (

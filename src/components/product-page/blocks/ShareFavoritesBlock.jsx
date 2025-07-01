@@ -1,6 +1,6 @@
 import { Heart } from 'react-feather'
-import { Button } from '../../ui/buttons/Button'
-import { ShareButtons } from '../../ui/buttons/ShareButtons'
+import { ShareButtons } from '../../buttons/ShareButtons'
+import { Button } from '../../ui/Button'
 
 export function ShareFavoritesBlock({ title, id, variant }) {
 	if (variant === 'bigScreen') {
