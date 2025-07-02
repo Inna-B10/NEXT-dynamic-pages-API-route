@@ -22,6 +22,10 @@ npm install framer-motion
 npm install axios
 npm install mongodb
 npm install @tanstack/react-query
+npm install @clerk/nextjs
+npm install @clerk/themes
+npm install tailwind-merge
+npm install react-hot-toast
 ```
 <br />
 <br />

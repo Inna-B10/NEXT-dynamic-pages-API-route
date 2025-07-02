@@ -29,7 +29,7 @@ export function ShareButtons({ pathname, title }) {
 	}
 
 	return (
-		<>
+		<div className='flex justify-between w-full'>
 			{SOCIAL_MEDIA.map(({ icon: Icon, label, link }) => (
 				<Link
 					key={label}
@@ -38,9 +38,9 @@ export function ShareButtons({ pathname, title }) {
 					rel='noopener noreferrer'
 					title={`Share on ${label}`}
 					aria-label={`Share on ${label}`}
-					className='hover:text-blue-500 hover:scale-110 transition'
+					className='hover:text-blue hover:scale-110 transition'
 				>
-					<Icon size={24} />
+					<Icon className='w-6 h-6 bp520:w-5 bp520:h-5 md:w-6 md:h-6' />
 				</Link>
 			))}
 			{canShare && (
@@ -48,11 +48,11 @@ export function ShareButtons({ pathname, title }) {
 					onClick={handleNativeShare}
 					title='Native Share'
 					aria-label='Open Native Share Menu'
-					className='hover:text-blue-500 hover:scale-110 transition'
+					className='hover:text-blue hover:scale-110 transition'
 				>
-					<Share2 size={24} />
+					<Share2 className='w-6 h-6 bp520:w-5 bp520:h-5 md:w-6 md:h-6' />
 				</button>
 			)}
-		</>
+		</div>
 	)
 }

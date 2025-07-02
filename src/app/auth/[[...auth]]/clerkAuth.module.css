@@ -1,0 +1,58 @@
+/* clerk-auth.module.css */
+.clerkContainer {
+  --google-bg: #7CBAFD;
+  --google-bg-hover: #D6ECFF;
+  --text: black;
+  width: 100%;
+  /* basic styles */
+}
+
+.cl-cardBox,
+.cl-card,
+.cl-rootBox {
+  width: 100%;
+}
+
+.cl-cardBox,
+.cl-card {
+  background: #161A1D;
+  box-shadow: none;
+  padding: 2px;
+}
+
+.cl-footer,
+.cl-headerSubtitle {
+  display: none;
+}
+
+.cl-socialButtonsBlockButton__google {
+  background-color: var(--google-bg);
+  transition: background-color 0.2s ease;
+}
+
+.cl-socialButtonsBlockButton__google:hover {
+  background-color: var(--google-bg-hover);
+}
+
+.cl-socialButtonsBlockButtonText__google {
+  color: var(--text);
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.cl-headerTitle {
+  color: #7CBAFD;
+  font-size: 1.5rem;
+  margin-bottom: -0.5rem;
+}
+
+.cl-formButtonPrimary {
+  color: var(--text);
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.cl-buttonArrowIcon {
+  color: var(--text);
+  opacity: 1;
+}

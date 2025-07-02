@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Loader } from 'react-feather'
+import Spinner from './ui/Spinner'
 
 export default function InfiniteList({
 	data,
@@ -9,20 +9,26 @@ export default function InfiniteList({
 	lastElementRef,
 	renderItem
 }) {
-	if (isLoading) return <p>Loading...</p>
-	if (isError) return <p>Error loading data.</p>
+	if (isLoading)
+		return (
+			<Spinner
+				size={60}
+				message='Loading...'
+			/>
+		)
+	if (isError) return <p className='text-center text-2xl'>Error loading data.</p>
 
 	return (
 		<>
-			<div className='grid grid-cols-4 gap-y-14 gap-x-8'>
+			<div className='grid-cols w-full'>
 				{data?.map((item, index) => (
 					<Fragment key={index}>{renderItem(item, index)}</Fragment>
 				))}
 			</div>
 			{isFetchingNextPage && (
-				<Loader
+				<Spinner
 					size={60}
-					className='mx-auto mt-10 animate-spin'
+					message='Loading more items...'
 				/>
 			)}
 			<div

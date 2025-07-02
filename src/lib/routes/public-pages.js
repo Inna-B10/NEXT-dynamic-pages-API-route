@@ -5,3 +5,5 @@ export const PUB_PAGES = {
 	SEARCH: searchTerms => `/search?term=${searchTerms}`,
 	CONTACT: '/contact'
 }
+
+export const USER_PAGES = {}

@@ -7,7 +7,7 @@ import { MenuItem } from './MenuItem'
 export function SidebarMenu({ menu, isCollapsed }) {
 	const pathname = usePathname()
 	return (
-		<nav>
+		<nav className='overflow-hidden'>
 			<ul className='p-4'>
 				{menu.map(menuItem => {
 					const props = {

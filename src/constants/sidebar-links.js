@@ -1,5 +1,5 @@
 import { AtSign, Camera, Home, Package } from 'react-feather'
-import { PUB_PAGES } from '@/routes/public-pages'
+import { PUB_PAGES } from '@/lib/routes/public-pages'
 
 export const NAV_LINKS = [
 	{
