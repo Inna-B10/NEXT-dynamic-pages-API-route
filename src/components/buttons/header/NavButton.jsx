@@ -11,7 +11,7 @@ export default function NavButton({ children, label, href, count, ...props }) {
 			<Button
 				aria-label={label}
 				className='relative'
-				variant='rounded'
+				variant='transparent-rounded'
 				{...props}
 			>
 				{children}

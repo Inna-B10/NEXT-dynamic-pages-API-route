@@ -23,11 +23,15 @@
   }
 }
 
-
-
 body {
   background: var(--color-bg);
   color: var(--color-light-gray);
   font-family: var(--font-geist-sans);
   /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
