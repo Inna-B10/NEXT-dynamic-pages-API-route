@@ -2,13 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Share2 } from 'react-feather'
 import { SOCIAL_MEDIA } from '@/constants/social-media'
 import { SITE_URL } from '@/config/config'
 
-export function ShareButtons({ pathname, title }) {
-	const url = `${SITE_URL}${pathname}`
+export function ShareButtons({ title }) {
 	const [canShare, setCanShare] = useState(false)
+	const pathname = usePathname()
+	const url = `${SITE_URL}${pathname}`
 
 	useEffect(() => {
 		if (typeof navigator !== 'undefined' && navigator.share) {

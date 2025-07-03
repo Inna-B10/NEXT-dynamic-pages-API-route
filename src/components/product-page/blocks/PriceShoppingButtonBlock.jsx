@@ -1,5 +1,5 @@
 import { ShoppingCart } from 'react-feather'
-import { Button } from '../../ui/Button'
+import { Button } from '@/components/ui/Button'
 
 export function PriceShoppingButtonBlock() {
 	return (
