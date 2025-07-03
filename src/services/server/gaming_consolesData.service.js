@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb'
-import { connectToDatabase } from '@/lib/mongoDBconnector'
+import { connectToDatabase } from '@/lib/db/mongoDBconnector'
 
 const COLLECTION_NAME = 'gaming_consoles'
 

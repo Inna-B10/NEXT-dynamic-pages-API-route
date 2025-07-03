@@ -2,6 +2,7 @@
   "name": "next-dynamic-pages-api-route",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -14,6 +15,7 @@
     "@tanstack/react-query": "^5.80.7",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
+    "dotenv": "^17.0.1",
     "framer-motion": "^12.15.0",
     "mongodb": "^6.17.0",
     "next": "15.3.3",

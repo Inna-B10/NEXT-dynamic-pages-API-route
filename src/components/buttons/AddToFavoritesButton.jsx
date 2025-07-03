@@ -7,7 +7,7 @@ import { Button } from '../ui/Button'
 export function AddToFavoritesButton({ variant, itemId }) {
 	const { isLoaded, isSignedIn, user } = useUser()
 	// console.log(user.id)
-	const userId = user.id
+	// const userId = user.id
 	// const userFavorites = favoritesService.getAllFavorites(userId)
 
 	// const isFavorite = userFavorites.filter(item)
@@ -20,7 +20,7 @@ export function AddToFavoritesButton({ variant, itemId }) {
 			title='Add to favorites'
 			aria-label='Add to favorites'
 			disabled={!isSignedIn}
-			onClick={isSignedIn && toggleFavorite}
+			onClick={isSignedIn ? toggleFavorite : undefined}
 		>
 			<Heart className='w-5 h-5 sm:w-6 sm:h-6' /> {variant === 'bigScreen' ? 'Favorites' : 'Save'}
 		</Button>

@@ -1,4 +1,4 @@
-import { connectToDatabase } from '@/lib/mongoDBconnector'
+import { connectToDatabase } from '@/lib/db/mongoDBconnector'
 
 export async function checkOrCreateUser(clerkUser) {
 	const db = await connectToDatabase()
