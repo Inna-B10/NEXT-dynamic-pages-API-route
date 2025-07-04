@@ -32,7 +32,7 @@ export default function InfiniteList({
 		<>
 			<div className='grid-cols w-full'>
 				{data?.map((item, index) => {
-					const title = getTitle()
+					const title = getTitle(item)
 					return (
 						<ProductCard
 							key={index}

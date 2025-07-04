@@ -1,14 +1,14 @@
 'use client'
 
 import CategoryClient from '@/components/CategoryClient'
-import { camerasService } from '@/services/client/cameras.service'
+import { productsService } from '@/services/client/products.service'
 
 export default function CamerasCategoryClient({ initialData }) {
 	return (
 		<CategoryClient
 			initialData={initialData}
 			queryKey={['get_all_cameras']}
-			queryFn={params => camerasService.getAllCameras(params)}
+			queryFn={params => productsService.getAllProducts({ ...params, category: 'cameras' })}
 			category='cameras'
 		/>
 	)

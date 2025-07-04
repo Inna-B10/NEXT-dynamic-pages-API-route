@@ -1,10 +1,10 @@
-import { getConsoleDataById } from '@/services/server/gaming_consolesData.service'
+import { getProductDataById } from '@/services/server/productsData.service'
 
 export async function GET(req, { params }) {
 	const param = await params
 	const id = param.id
 
-	const data = await getConsoleDataById(id)
+	const data = await getProductDataById(id, 'gaming_consoles')
 
 	if (!data) {
 		return new Response(JSON.stringify({ message: 'Not Found' }), { status: 404 })
