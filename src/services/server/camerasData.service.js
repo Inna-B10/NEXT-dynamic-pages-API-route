@@ -1,29 +1,23 @@
-import path from 'path'
-import { readJsonFile } from '@/lib/utils/readJsonFile'
+import { ObjectId } from 'mongodb'
+import { connectToDatabase } from '@/lib/db/mongoDBconnector'
 
-// const FILE_PATH = './src/data/cameras.json'
-const FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cameras.json')
+const COLLECTION_NAME = 'cameras'
 
-export async function getFullData() {
-	const data = await readJsonFile(FILE_PATH)
+export async function getAllCamerasData() {
+	const db = await connectToDatabase()
+	const data = await db.collection(COLLECTION_NAME).find({}).toArray()
 	return data
 }
 
-// leave only the necessary fields
-export async function getPreviewData() {
-	const data = await readJsonFile(FILE_PATH)
+export async function getCameraDataById(id) {
+	let objectId
+	try {
+		objectId = ObjectId.createFromHexString(id)
+	} catch (e) {
+		return null
+	}
+	const db = await connectToDatabase()
+	const data = await db.collection(COLLECTION_NAME).findOne({ _id: objectId })
 
-	const filtered = data.map(item => ({
-		productName: item['Product Name'],
-		model: item['Model'],
-		modelName: item['Model Name'],
-		brand: item['Brand'],
-		image: item['Picture URL']
-	}))
-	return filtered
-}
-
-export async function getCameraDataById(index) {
-	const data = await readJsonFile(FILE_PATH)
-	return data?.[index]
+	return data
 }

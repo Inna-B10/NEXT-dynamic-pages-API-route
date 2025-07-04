@@ -3,6 +3,10 @@ import CamerasCategoryClient from './CamerasClientPage'
 import { camerasService } from '@/services/client/cameras.service'
 
 export default async function CamerasCategoryPage() {
-	const firstPage = await camerasService.getPreviewCameras({ limit: LIMIT, offset: 0 })
+	const firstPage = await camerasService.getAllCameras({
+		page: 1,
+		limit: LIMIT
+	})
+
 	return <CamerasCategoryClient initialData={firstPage} />
 }

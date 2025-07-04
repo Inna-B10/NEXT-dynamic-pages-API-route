@@ -1,6 +1,13 @@
 import { newDownsize } from './remoteImageSize'
 
-const excludedFields = ['Picture URL', 'Price in India', 'url', 'Total Ratings', 'Product Name']
+const excludedFields = [
+	'Picture URL',
+	'Price in India',
+	'url',
+	'_id',
+	'Total Ratings',
+	'Product Name'
+]
 const ratingFields = ['1 Stars', '2 Stars', '3 Stars', '4 Stars', '5 Stars']
 const modelFields = [
 	'Brand',
@@ -9,10 +16,14 @@ const modelFields = [
 	'Model Name',
 	'Model Number',
 	'Alternate names',
+	'Console Family',
+	'Console Type',
+	'Release Date',
+	'Release Year',
 	'Launched'
 ]
 
-export function prepareCameraInfo(data, newSize = 640) {
+export function prepareProductInfo(data, newSize = 640) {
 	const src = newDownsize(data['Picture URL'], newSize)
 	const title = data['Product Name']
 		? data['Product Name']
@@ -20,7 +31,7 @@ export function prepareCameraInfo(data, newSize = 640) {
 			? data['Alternate names'] || data['Model Name']
 			: data['Brand'] && data['Model']
 				? data['Brand'] + ' ' + data['Model']
-				: 'No Product name'
+				: 'Unknown product name'
 
 	const modelData = Object.entries(data).filter(([key, _]) => modelFields.includes(key))
 	const ratings = Object.entries(data).filter(([key, _]) => ratingFields.includes(key))

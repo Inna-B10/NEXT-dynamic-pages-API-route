@@ -6,14 +6,13 @@ import { createPagination } from '@/lib/utils/paginationHelper'
 export function useInfinitePagination({
 	queryKey,
 	queryFn,
-	type = 'offset',
 	limit = LIMIT,
 	initialPage = 1,
 	enabled = true,
 	rootMargin = '0px',
 	initialData = null
 }) {
-	const pagination = createPagination({ type, limit, initialPage })
+	const pagination = createPagination({ limit, initialPage })
 
 	const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
 		useInfiniteQuery({

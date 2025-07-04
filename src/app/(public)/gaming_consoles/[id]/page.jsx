@@ -1,6 +1,6 @@
 import { ProductPage } from '@/components/product-page/ProductPage'
 import NotFoundPage from '@/app/not-found'
-import { prepareGamingConsoleInfo } from '@/lib/utils/prepareGamingConsoleInfo'
+import { prepareProductInfo } from '@/lib/utils/prepareProductInfo'
 import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
 
 export default async function GamingConsole(props) {
@@ -10,7 +10,7 @@ export default async function GamingConsole(props) {
 	const data = await gaming_consolesService.getConsoleById(id)
 	if (!data) return NotFoundPage(false, 'Product')
 
-	const { title, src, modelData, ratingData, filteredData } = prepareGamingConsoleInfo(data)
+	const { title, src, modelData, ratingData, filteredData } = prepareProductInfo(data)
 
 	return (
 		<ProductPage

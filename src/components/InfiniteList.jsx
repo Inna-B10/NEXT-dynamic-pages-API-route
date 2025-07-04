@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { ProductCard } from './product-cards/ProductCard'
 import Spinner from './ui/Spinner'
 
 export default function InfiniteList({
@@ -7,8 +7,18 @@ export default function InfiniteList({
 	isError,
 	isFetchingNextPage,
 	lastElementRef,
-	renderItem
+	category
 }) {
+	const getTitle = item => {
+		item['Product Name']
+			? item['Product Name']
+			: item['Alternate names']
+				? item['Alternate names']
+				: item['Brand'] && item['Model']
+					? item['Brand'] + ' ' + item['Model']
+					: 'Unknown product name'
+	}
+
 	if (isLoading)
 		return (
 			<Spinner
@@ -21,9 +31,19 @@ export default function InfiniteList({
 	return (
 		<>
 			<div className='grid-cols w-full'>
-				{data?.map((item, index) => (
-					<Fragment key={index}>{renderItem(item, index)}</Fragment>
-				))}
+				{data?.map((item, index) => {
+					const title = getTitle()
+					return (
+						<ProductCard
+							key={index}
+							href={`/${category}/${item._id}`}
+							title={title}
+							//[TODO] change default image
+							imageSrc={item['Picture URL'] || '/images/default-no-product.webp'}
+							brand={item['Brand']}
+						/>
+					)
+				})}
 			</div>
 			{isFetchingNextPage && (
 				<Spinner

@@ -4,7 +4,7 @@ import { gaming_consolesService } from '@/services/client/gaming_consoles.servic
 
 export default async function GamingConsolesCategoryPage() {
 	const firstPage = await gaming_consolesService.getAllGaming_consoles({
-		type: 'page',
+		page: 1,
 		limit: LIMIT
 	})
 

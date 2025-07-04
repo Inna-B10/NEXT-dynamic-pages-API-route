@@ -5,17 +5,10 @@ import { axiosClient } from '@/lib/utils/axios'
 class CamerasService {
 	_CAMERAS = `${API_URL}/cameras`
 
-	async getAllItems({ limit = LIMIT, offset = 0 } = {}) {
-		const { data } = await axiosClient.get(`${this._CAMERAS}/full`, {
-			params: { limit, offset }
-		})
-		return data
-	}
-
 	//NB using = {} , does not throw an error if the function is called without parameters
-	async getPreviewCameras({ limit = LIMIT, offset = 0 } = {}) {
-		const { data } = await axiosClient.get(`${this._CAMERAS}/preview`, {
-			params: { limit, offset }
+	async getAllCameras({ page, limit = LIMIT } = {}) {
+		const { data } = await axiosClient.get(this._CAMERAS, {
+			params: { page, limit }
 		})
 		return data
 	}
