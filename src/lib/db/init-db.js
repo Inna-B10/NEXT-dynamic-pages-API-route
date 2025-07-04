@@ -1,3 +1,4 @@
+import { clerkClient } from '@clerk/nextjs/server'
 import { dbCollections } from './db-schema'
 import { connectToDatabase } from './mongoDBconnector'
 
@@ -54,20 +55,27 @@ export async function initDatabase() {
 				}
 			}
 		}
-		//If current collection is "users" - check / add superuser
+		//If current collection is "users" - check / add superUser
 		if (name === 'users') {
-			const superuser = await collection.findOne({ clerkUserId: process.env.SUPERUSER_CLERK_ID })
+			const superUser = await collection.findOne({ clerkUserId: process.env.SUPERUSER_CLERK_ID })
 
-			if (!superuser) {
+			if (!superUser) {
 				await collection.insertOne({
 					clerkUserId: process.env.SUPERUSER_CLERK_ID,
 					email: process.env.SUPERUSER_EMAIL,
 					createdAt: new Date(),
 					role: 'admin'
 				})
-				console.log('Superuser added to users collection')
+				const client = await clerkClient()
+				await client.users.updateUser(process.env.SUPERUSER_CLERK_ID, {
+					publicMetadata: {
+						role: 'admin'
+					}
+				})
+				console.log('updated superUser Clerk metadata')
+				console.log('SuperUser added to users collection')
 			} else {
-				console.log('Superuser already exists in users collection')
+				console.log('SuperUser already exists in users collection')
 			}
 		}
 	}
