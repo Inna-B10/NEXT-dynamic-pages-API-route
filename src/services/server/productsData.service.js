@@ -12,6 +12,32 @@ export async function getAllProductsData(category) {
 	const data = await db.collection(category).find({}).toArray()
 	return data
 }
+export async function getPreviewProductsData(category) {
+	if (!category) {
+		if (process.env.NODE_ENV === 'development') {
+			throw new Error('Category is required')
+		}
+		return
+	}
+	const db = await connectToDatabase()
+	const data = await db
+		.collection(category)
+		.find(
+			{},
+			{
+				projection: {
+					'Product Name': 1,
+					Model: 1,
+					Brand: 1,
+					'Model Name': 1,
+					Price: 1,
+					'Picture URL': 1
+				}
+			}
+		)
+		.toArray()
+	return data
+}
 
 export async function getProductDataById(id, category) {
 	if (!category) {
