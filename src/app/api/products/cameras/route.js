@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { LIMIT } from '@/constants/constants'
-import { getAllProductsData } from '@/services/server/productsData.service'
+import { getPreviewProductsData } from '@/services/server/productsData.service'
 
 export async function GET(request) {
 	try {
@@ -11,8 +11,7 @@ export async function GET(request) {
 		const start = (page - 1) * limit
 		const end = start + limit
 
-		const data = await getAllProductsData('cameras')
-
+		const data = await getPreviewProductsData('cameras')
 		const items = data.slice(start, end)
 
 		return NextResponse.json({ items, page, totalPages: Math.ceil(data.length / limit) })
