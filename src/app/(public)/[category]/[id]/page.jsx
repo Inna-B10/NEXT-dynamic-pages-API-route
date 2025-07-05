@@ -1,3 +1,4 @@
+import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
 import { ProductPage } from '@/components/product-page/ProductPage'
 import { CATEGORIES } from '@/constants/categories'
 import NotFoundPage from '@/app/not-found'
@@ -31,14 +32,17 @@ export default async function Camera(props) {
 	const { title, src, modelData, ratingData, filteredData, price } = prepareProductInfo(data)
 
 	return (
-		<ProductPage
-			title={title}
-			src={src}
-			modelData={modelData}
-			ratingData={ratingData}
-			filteredData={filteredData}
-			price={price}
-			id={id}
-		/>
+		<>
+			<ProductPage
+				title={title}
+				src={src}
+				modelData={modelData}
+				ratingData={ratingData}
+				filteredData={filteredData}
+				price={price}
+				id={id}
+			/>
+			<ScrollToTopButton />
+		</>
 	)
 }

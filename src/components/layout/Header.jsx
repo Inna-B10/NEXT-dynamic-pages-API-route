@@ -1,12 +1,11 @@
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-import { currentUser } from '@clerk/nextjs/server'
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { Grid, Heart, ShoppingBag } from 'react-feather'
 import { AuthButton } from '../buttons/header/AuthButton'
 import NavButton from '../buttons/header/NavButton'
 import { Button } from '../ui/Button'
 
-export async function Header() {
-	const user = await currentUser()
+export function Header() {
+	const { user } = useUser()
 	const role = user?.publicMetadata?.role
 	return (
 		<section className='flex justify-between items-center h-20 lg:h-30 border-b border-border mx-4'>

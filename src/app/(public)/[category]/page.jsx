@@ -1,5 +1,6 @@
 import { CategoryClientPage } from '@/components/CategoryClientPage'
 import { ProductCard } from '@/components/ProductCard'
+import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
 import { CATEGORIES } from '@/constants/categories'
 import { LIMIT } from '@/constants/constants'
 import { getPreviewProductsData } from '@/services/server/productsData.service'
@@ -52,6 +53,7 @@ export default async function CategoryPage(props) {
 					category={category}
 				/>
 			</div>
+			<ScrollToTopButton />
 		</>
 	)
 }
