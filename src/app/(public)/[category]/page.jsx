@@ -10,7 +10,8 @@ export async function generateStaticParams() {
 	return CATEGORIES.map(category => ({ category }))
 }
 
-export default async function CategoryPage({ params }) {
+export default async function CategoryPage(props) {
+	const params = await props.params
 	const category = params.category
 
 	const all = await getPreviewProductsData(category)

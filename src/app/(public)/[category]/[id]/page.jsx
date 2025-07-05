@@ -21,9 +21,9 @@ export async function generateStaticParams() {
 	return allParams.flat()
 }
 
-export default async function Camera({ params }) {
-	const category = params.category
-	const id = params.id
+export default async function Camera(props) {
+	const params = await props.params
+	const { category, id } = params
 
 	const data = await getProductDataById(id, category)
 	if (!data) return NotFoundPage(false, 'Product')
