@@ -1,11 +1,12 @@
 import { LIMIT } from '@/constants/constants'
 import GamingConsolesCategoryClient from './GamingConsolesClientPage'
-import { gaming_consolesService } from '@/services/client/gaming_consoles.service'
+import { productsService } from '@/services/client/products.service'
 
 export default async function GamingConsolesCategoryPage() {
-	const firstPage = await gaming_consolesService.getAllGaming_consoles({
-		type: 'page',
-		limit: LIMIT
+	const firstPage = await productsService.getAllProducts({
+		page: 1,
+		limit: LIMIT,
+		category: 'gaming_consoles'
 	})
 
 	return <GamingConsolesCategoryClient initialData={firstPage} />

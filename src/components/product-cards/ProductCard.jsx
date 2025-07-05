@@ -2,24 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion as m } from 'framer-motion'
 
-export function ProductCard({
-	href,
-	title,
-	slug,
-	imageSrc,
-	brand,
-	price = '5995,-',
-	index,
-	showIndexInUrl = false
-}) {
-	const finalHref =
-		showIndexInUrl && typeof index !== 'undefined'
-			? `${href}/${index}-${encodeURIComponent(slug)}`
-			: `${href}`
-
+export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) {
 	return (
 		<Link
-			href={finalHref}
+			href={href}
 			title={title}
 			aria-label={`${title} - open product's page`}
 		>

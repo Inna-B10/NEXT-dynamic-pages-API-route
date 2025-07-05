@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { LIMIT } from '@/constants/constants'
-import { getAllGaming_consolesData } from '@/services/server/gaming_consolesData.service'
+import { getAllProductsData } from '@/services/server/productsData.service'
 
 export async function GET(request) {
 	try {
@@ -11,7 +11,7 @@ export async function GET(request) {
 		const start = (page - 1) * limit
 		const end = start + limit
 
-		const data = await getAllGaming_consolesData()
+		const data = await getAllProductsData('gaming_consoles')
 
 		const items = data.slice(start, end)
 

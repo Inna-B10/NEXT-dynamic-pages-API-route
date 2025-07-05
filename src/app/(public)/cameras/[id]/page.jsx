@@ -1,16 +1,16 @@
 import { ProductPage } from '@/components/product-page/ProductPage'
 import NotFoundPage from '@/app/not-found'
-import { prepareCameraInfo } from '@/lib/utils/prepareCameraInfo'
-import { camerasService } from '@/services/client/cameras.service'
+import { prepareProductInfo } from '@/lib/utils/prepareProductInfo'
+import { productsService } from '@/services/client/products.service'
 
 export default async function Camera(props) {
 	const params = await props.params
-	const id = params.id.split('-')
+	const id = params.id
 
-	const { data } = await camerasService.getCameraById(id[0])
+	const data = await productsService.getProductById(id, 'cameras')
 	if (!data) return NotFoundPage(false, 'Product')
 
-	const { title, src, modelData, ratingData, filteredData } = prepareCameraInfo(data)
+	const { title, src, modelData, ratingData, filteredData } = prepareProductInfo(data)
 
 	return (
 		<ProductPage
@@ -19,7 +19,7 @@ export default async function Camera(props) {
 			modelData={modelData}
 			ratingData={ratingData}
 			filteredData={filteredData}
-			id={id[0]}
+			id={id}
 		/>
 	)
 }
