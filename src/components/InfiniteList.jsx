@@ -10,13 +10,10 @@ export default function InfiniteList({
 	category
 }) {
 	const getTitle = item => {
-		item['Product Name']
-			? item['Product Name']
-			: item['Alternate names']
-				? item['Alternate names']
-				: item['Brand'] && item['Model']
-					? item['Brand'] + ' ' + item['Model']
-					: 'Unknown product name'
+		if (item['Product Name']) return item['Product Name']
+		if (item['Model']) return item['Model']
+		if (item['Brand'] && item['Model Name']) return `${item['Brand']} ${item['Model Name']}`
+		return 'Unknown product name'
 	}
 
 	if (isLoading)
@@ -41,6 +38,7 @@ export default function InfiniteList({
 							//[TODO] change default image
 							imageSrc={item['Picture URL'] || '/images/default-no-product.webp'}
 							brand={item['Brand']}
+							price={item['Price']}
 						/>
 					)
 				})}

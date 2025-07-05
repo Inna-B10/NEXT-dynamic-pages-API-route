@@ -6,7 +6,8 @@ const excludedFields = [
 	'url',
 	'_id',
 	'Total Ratings',
-	'Product Name'
+	'Product Name',
+	'Price'
 ]
 const ratingFields = ['1 Stars', '2 Stars', '3 Stars', '4 Stars', '5 Stars']
 const modelFields = [
@@ -25,13 +26,14 @@ const modelFields = [
 
 export function prepareProductInfo(data, newSize = 640) {
 	const src = newDownsize(data['Picture URL'], newSize)
-	const title = data['Product Name']
-		? data['Product Name']
-		: data['Alternate names'] || data['Model Name']
-			? data['Alternate names'] || data['Model Name']
-			: data['Brand'] && data['Model']
-				? data['Brand'] + ' ' + data['Model']
-				: 'Unknown product name'
+	const price = data['Price']
+	const getTitle = data => {
+		if (data['Product Name']) return data['Product Name']
+		if (data['Model']) return data['Model']
+		if (data['Brand'] && data['Model Name']) return `${data['Brand']} ${data['Model Name']}`
+		return 'Unknown product name'
+	}
+	const title = getTitle(data)
 
 	const modelData = Object.entries(data).filter(([key, _]) => modelFields.includes(key))
 	const ratings = Object.entries(data).filter(([key, _]) => ratingFields.includes(key))
@@ -46,5 +48,5 @@ export function prepareProductInfo(data, newSize = 640) {
 			!excludedFields.includes(key) && !modelFields.includes(key) && !ratingFields.includes(key)
 	)
 
-	return { title, src, modelData, ratingData: normalizedRatings, filteredData }
+	return { title, src, modelData, ratingData: normalizedRatings, filteredData, price }
 }

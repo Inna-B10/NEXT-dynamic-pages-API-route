@@ -10,7 +10,7 @@ export default async function Camera(props) {
 	const data = await productsService.getProductById(id, 'cameras')
 	if (!data) return NotFoundPage(false, 'Product')
 
-	const { title, src, modelData, ratingData, filteredData } = prepareProductInfo(data)
+	const { title, src, modelData, ratingData, filteredData, price } = prepareProductInfo(data)
 
 	return (
 		<ProductPage
@@ -19,6 +19,7 @@ export default async function Camera(props) {
 			modelData={modelData}
 			ratingData={ratingData}
 			filteredData={filteredData}
+			price={price}
 			id={id}
 		/>
 	)

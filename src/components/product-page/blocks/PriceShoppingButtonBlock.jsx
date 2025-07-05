@@ -1,10 +1,10 @@
 import { ShoppingCart } from 'react-feather'
 import { Button } from '@/components/ui/Button'
 
-export function PriceShoppingButtonBlock() {
+export function PriceShoppingButtonBlock({ price = '5995,-' }) {
 	return (
 		<div className='w-full flex flex-col gap-4 items-center pb-2 lg:w-1/2 lg:h-full lg:gap-6 lg:pb-0 lg:border-r lg:pr-4 border-dashed border-border'>
-			<h3 className='text-3xl lg:text-4xl font-bold text-yellow font-nanum'>5 995,-</h3>
+			<h3 className='text-3xl lg:text-4xl font-bold text-yellow var(--font-nanum)'>{price}</h3>
 			<Button
 				title='Add to shopping cart'
 				aria-label='Add to shopping cart'

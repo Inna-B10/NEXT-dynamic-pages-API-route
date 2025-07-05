@@ -5,7 +5,7 @@ import { PriceShoppingButtonBlock } from './blocks/PriceShoppingButtonBlock'
 import RatingBlock from './blocks/RatingBlock'
 import { ShareFavoritesBlock } from './blocks/ShareFavoritesBlock'
 
-export function ProductPage({ title, src, id, modelData, ratingData, filteredData }) {
+export function ProductPage({ title, src, id, modelData, ratingData, filteredData, price }) {
 	return (
 		<>
 			<div className='flex flex-col gap-8 lg:gap-10 xl:gap-16 w-full max-w-[1440px] mx-auto mt-8 lg:mt-16'>
@@ -45,7 +45,7 @@ export function ProductPage({ title, src, id, modelData, ratingData, filteredDat
 
 						{/*//# ---------------------------------- Price block  */}
 						<div className='bg-bgSecondary rounded-md p-4 lg:py-8 lg:px-6 w-full flex lg:flex-row gap-4 justify-between items-center'>
-							<PriceShoppingButtonBlock />
+							<PriceShoppingButtonBlock price={price} />
 							<ShareFavoritesBlock
 								variant='bigScreen'
 								title={title}
