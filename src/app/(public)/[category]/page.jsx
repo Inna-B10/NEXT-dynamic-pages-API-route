@@ -3,12 +3,42 @@ import { ProductCard } from '@/components/ProductCard'
 import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
 import { CATEGORIES } from '@/constants/categories'
 import { LIMIT } from '@/constants/constants'
+import { PUB_PAGES } from '@/lib/routes/public-pages'
+import { formatProductTitle } from '@/lib/utils/formatProductTitle'
+import { getCategoryLabel } from '@/lib/utils/getCategoryLabel'
 import { getPreviewProductsData } from '@/services/server/productsData.service'
 
 export const revalidate = 60 //ISR
 
+export async function generateMetadata(props) {
+	const params = await props.params
+	const category = params.category
+
+	const categoryTitle = getCategoryLabel(category) || 'Products'
+	const title = `${categoryTitle} - Product Catalog`
+	const description = `Explore our selection of ${categoryTitle.toLowerCase()}. Find the latest models, reviews, and deals.`
+
+	return {
+		title,
+		description,
+		openGraph: {
+			title,
+			description,
+			url: PUB_PAGES.CATEGORY(category)
+			//[TODO] add image
+			// images: [
+			// 	{
+			// 		url: `https://your-site.com/og/${category}.png`,
+			// 		width: 1200,
+			// 		height: 630,
+			// 		alt: `${categoryTitle} image`
+			// 	}
+			// ]
+		}
+	}
+}
 export async function generateStaticParams() {
-	return CATEGORIES.map(category => ({ category }))
+	return CATEGORIES.map(({ slug }) => ({ category: slug }))
 }
 
 export default async function CategoryPage(props) {
@@ -19,20 +49,13 @@ export default async function CategoryPage(props) {
 	const firstItems = all.slice(0, LIMIT)
 	const totalPages = Math.ceil(all.length / LIMIT)
 
-	const getTitle = item => {
-		if (item['Product Name']) return item['Product Name']
-		if (item['Model']) return item['Model']
-		if (item['Brand'] && item['Model Name']) return `${item['Brand']} ${item['Model Name']}`
-		return 'Unknown product name'
-	}
-
 	if (!firstItems) return <p className='text-center text-2xl'>No products in this category.</p>
 
 	return (
 		<>
 			<div className='grid-cols w-full relative'>
 				{firstItems?.map(item => {
-					const title = getTitle(item)
+					const title = formatProductTitle(item)
 					return (
 						<ProductCard
 							key={item._id}
