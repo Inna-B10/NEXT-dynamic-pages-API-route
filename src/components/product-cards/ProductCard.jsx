@@ -32,7 +32,7 @@ export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) 
 				<div className='flex flex-col p-4 pt-0 bg-bgSecondary rounded-b-md'>
 					{brand && <p className='text-dark-gray group-hover:text-light-gray'>Brand: {brand}</p>}
 					<p className='text-dark-gray group-hover:text-light-gray'>
-						Price: <span className='font-nanum'>{price}</span>
+						Price: <span className='font-nanum font-bold'>{price}</span>
 					</p>
 				</div>
 			</m.div>
