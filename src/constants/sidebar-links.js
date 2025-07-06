@@ -1,4 +1,5 @@
-import { AtSign, Camera, Home, Package } from 'react-feather'
+import { AtSign, Home } from 'react-feather'
+import { CATEGORIES } from './categories'
 import { PUB_PAGES } from '@/lib/routes/public-pages'
 
 export const NAV_LINKS = [
@@ -7,16 +8,11 @@ export const NAV_LINKS = [
 		label: 'Home',
 		link: PUB_PAGES.HOME
 	},
-	{
-		icon: Camera,
-		label: 'Cameras',
-		link: PUB_PAGES.CAMERAS()
-	},
-	{
-		icon: Package,
-		label: 'Gaming consoles',
-		link: PUB_PAGES.GAMING_CONSOLES()
-	},
+	...CATEGORIES.map(cat => ({
+		icon: cat.icon,
+		label: cat.label,
+		link: PUB_PAGES.CATEGORY(cat.slug)
+	})),
 	{
 		icon: AtSign,
 		label: 'Contact',

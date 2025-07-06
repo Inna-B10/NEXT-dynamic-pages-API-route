@@ -1,56 +1,63 @@
-import { ProductCard } from './product-cards/ProductCard'
+import { useEffect, useRef, useState } from 'react'
+import { LIMIT } from '@/constants/constants'
+import { ProductCard } from './ProductCard'
 import Spinner from './ui/Spinner'
+import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 
-export default function InfiniteList({
-	data,
-	isLoading,
-	isError,
-	isFetchingNextPage,
-	lastElementRef,
-	category
-}) {
-	const getTitle = item => {
-		if (item['Product Name']) return item['Product Name']
-		if (item['Model']) return item['Model']
-		if (item['Brand'] && item['Model Name']) return `${item['Brand']} ${item['Model Name']}`
-		return 'Unknown product name'
+export default function InfiniteList({ totalPages, currentPage, category }) {
+	const [page, setPage] = useState(currentPage + 1)
+	const [items, setItems] = useState([])
+	const [isLoading, setIsLoading] = useState(false)
+	const loaderRef = useRef(null)
+
+	const loadMore = async () => {
+		if (page > totalPages || isLoading) return
+		setIsLoading(true)
+		const res = await fetch(`/api/products/${category}?page=${page}&limit=${LIMIT}`)
+		const data = await res.json()
+		setItems(prev => [...prev, ...data.items])
+		setPage(p => p + 1)
+		setIsLoading(false)
 	}
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(entries => {
+			if (entries[0].isIntersecting) loadMore()
+		})
+		if (loaderRef.current) observer.observe(loaderRef.current)
+		return () => observer.disconnect()
+	}, [loaderRef.current])
 
 	if (isLoading)
 		return (
-			<Spinner
-				size={60}
-				message='Loading...'
-			/>
+			<div className='z-10 absolute top-full left-1/2 translate-x-[-50%]'>
+				<Spinner
+					size={60}
+					message='Loading more...'
+				/>
+			</div>
 		)
-	if (isError) return <p className='text-center text-2xl'>Error loading data.</p>
+	if (!items) return
 
 	return (
 		<>
-			<div className='grid-cols w-full'>
-				{data?.map((item, index) => {
-					const title = getTitle(item)
-					return (
-						<ProductCard
-							key={index}
-							href={`/${category}/${item._id}`}
-							title={title}
-							//[TODO] change default image
-							imageSrc={item['Picture URL'] || '/images/default-no-product.webp'}
-							brand={item['Brand']}
-							price={item['Price']}
-						/>
-					)
-				})}
-			</div>
-			{isFetchingNextPage && (
-				<Spinner
-					size={60}
-					message='Loading more items...'
-				/>
-			)}
+			{items?.map(item => {
+				const title = formatProductTitle(item)
+				return (
+					<ProductCard
+						key={item._id}
+						href={`/${category}/${item._id}`}
+						title={title}
+						//[TODO] change default image
+						imageSrc={item['Picture URL'] || '/images/default-no-product.webp'}
+						brand={item['Brand']}
+						price={item['Price']}
+					/>
+				)
+			})}
+
 			<div
-				ref={lastElementRef}
+				ref={loaderRef}
 				style={{ height: 1 }}
 			/>
 		</>

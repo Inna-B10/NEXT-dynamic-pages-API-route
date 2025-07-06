@@ -1,9 +1,10 @@
 import { Geist, Geist_Mono, Nanum_Myeongjo } from 'next/font/google'
-import Onboarding from '@/components/Onboarding'
-import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
-import { Providers } from '@/providers/Providers'
+import OnboardingDynWrapper from '@/components/Onboarding/OnboardingDynWrapper'
+import ProvidersDynWrapper from '@/providers/ProvidersDynWrapper'
 import { SITE_NAME } from '@/constants/constants'
 import './globals.css'
+
+export const fetchCache = 'default-cache'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -75,11 +76,10 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
 			<body className={`${geistSans.variable} ${geistMono.variable} ${nanum.variable} antialiased`}>
-				<ScrollToTopButton />
-				<Providers>
+				<ProvidersDynWrapper>
 					{children}
-					<Onboarding />
-				</Providers>
+					<OnboardingDynWrapper />
+				</ProvidersDynWrapper>
 			</body>
 		</html>
 	)

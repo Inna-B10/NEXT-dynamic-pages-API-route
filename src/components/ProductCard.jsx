@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion as m } from 'framer-motion'
 
 export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) {
 	return (
@@ -9,11 +8,7 @@ export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) 
 			title={title}
 			aria-label={`${title} - open product's page`}
 		>
-			<m.div
-				whileHover={{ scale: 1.03 }}
-				transition={{ type: 'tween', stiffness: 300, damping: 100 }}
-				className='group flex flex-col h-full justify-between rounded-md border border-border bg-bgSecondary font-bold bp480:text-sm tracking-wide md:text-base lg:text-lg lg:tracking-normal'
-			>
+			<div className='group flex flex-col h-full justify-between rounded-md border border-border bg-bgSecondary font-bold bp480:text-sm tracking-wide md:text-base lg:text-lg lg:tracking-normal hover:scale-[1.03] transition-transform duration-300 ease-in-out transform-gpu will-change-transform'>
 				<div>
 					<div className='relative w-full aspect-[268/201] bg-white rounded-t-md'>
 						<Image
@@ -35,7 +30,7 @@ export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) 
 						Price: <span className='font-nanum font-bold'>{price}</span>
 					</p>
 				</div>
-			</m.div>
+			</div>
 		</Link>
 	)
 }
