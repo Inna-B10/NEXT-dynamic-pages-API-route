@@ -1,7 +1,7 @@
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { Grid, Heart, ShoppingBag } from 'react-feather'
 import { AuthButton } from '../buttons/header/AuthButton'
-import NavButton from '../buttons/header/NavButton'
+import UserMenuButton from '../buttons/header/UserMenuButton'
 import { Button } from '../ui/Button'
 
 export function Header() {
@@ -13,41 +13,41 @@ export function Header() {
 				<input
 					type='search'
 					placeholder='search'
-					className='w-full outline-0 border border-blue text-xs italic p-2 rounded md:ml-4'
+					className='w-full outline-0 border border-accentSecondary text-xs italic p-2 rounded md:ml-4'
 				/>
 			</div>
 			<div className='flex items-center gap-4 md:pr-4 max-w-[250px]'>
 				{role === 'admin' && (
-					<div className='flex items-center justify-center rounded-full border-2 border-blue w-10 h-10 text-blue hover:border-yellow hover:bg-blue-500 hover:text-yellow'>
-						<NavButton
+					<div className='flex items-center justify-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
+						<UserMenuButton
 							label='Open Admin Panel'
 							href='/admin'
 						>
 							<Grid />
-						</NavButton>
+						</UserMenuButton>
 					</div>
 				)}
 				<SignedIn>
-					<div className='flex items-center justify-center rounded-full border-2 border-blue w-10 h-10 text-blue hover:border-yellow hover:bg-blue-500 hover:text-yellow'>
-						<NavButton
+					<div className='flex items-center justify-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
+						<UserMenuButton
 							label='Open List of Favorites'
 							href='/user/favorites'
 							// count={favoritesCount}
 						>
 							<Heart />
-						</NavButton>
+						</UserMenuButton>
 					</div>
 				</SignedIn>
-				<div className='flex items-center justify-center rounded-full border-2 border-blue w-10 h-10 text-blue hover:border-yellow hover:bg-blue-500 hover:text-yellow'>
-					<NavButton
+				<div className='flex items-center justify-center rounded-full border-2  border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
+					<UserMenuButton
 						label='Open Shopping Cart'
 						href='/user/shopping-cart'
 						// count={cartCount}
 					>
 						<ShoppingBag />
-					</NavButton>
+					</UserMenuButton>
 				</div>
-				<div className='flex items-center justify-center rounded-full border-2 border-blue w-10 h-10 text-blue hover:border-yellow hover:bg-blue-500 hover:text-yellow'>
+				<div className='flex items-center justify-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
 					<SignedIn>
 						<Button
 							aria-label='Open Profile'

@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import { Button } from '../../ui/Button'
 
-export default function NavButton({ children, label, href, count, ...props }) {
+export default function UserMenuButton({ children, label, href, count, ...props }) {
 	return (
 		<Link
 			href={href}
 			aria-label={label}
 			title={label}
+			className='focus:outline-none'
+			tabIndex={-1}
 		>
 			<Button
 				aria-label={label}

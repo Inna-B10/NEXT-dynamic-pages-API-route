@@ -2,17 +2,17 @@
 @tailwind utilities;
 
 @theme {
-  --color-light-gray: #D1D9E3;
-  --color-dark-gray: #94A3B8;
-  --color-border: #383C40;
+  --color-foreground: #D1D9E3;
   --color-bg: #161A1D;
   --color-bgSecondary: #252836;
-  --color-blue: #7CBAFD;
-  --color-yellow: #FFDF20;
+  --color-border: #383C40;
+  --color-accent: #FFDF20;
+  --color-accentSecondary: #00CADB;
+  --color-accentSecondary-dark: #00ABBA;
+  --color-dark-gray: #65646B;
   --breakpoint-bp520: 520px;
   --breakpoint-bp480: 480px;
   --font-geist-sans: 'Geist', sans-serif;
-  --font-geist-mono: 'Geist Mono', monospace;
   --font-nanum: 'Nanum Myeongjo', sans-serif;
 
 }
@@ -25,14 +25,11 @@
 
 body {
   background: var(--color-bg);
-  color: var(--color-light-gray);
-  font-family: var(--font-geist-sans);
-  /* font-family: Arial, Helvetica, sans-serif; */
+  color: var(--color-foreground);
+  font-family: var(--font-geist-sans), sans-serif;
 }
 
 button {
-  outline: none;
-  border: none;
   cursor: pointer;
 }
 

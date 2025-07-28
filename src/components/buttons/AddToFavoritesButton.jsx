@@ -19,6 +19,7 @@ export function AddToFavoritesButton({ variant, itemId }) {
 		<Button
 			title='Add to favorites'
 			aria-label='Add to favorites'
+			className='w-full'
 			disabled={!isSignedIn}
 			onClick={isSignedIn ? toggleFavorite : undefined}
 		>

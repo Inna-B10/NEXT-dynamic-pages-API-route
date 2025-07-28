@@ -13,10 +13,11 @@ export function Button({
 		<button
 			className={twMerge(
 				clsx(
-					'flex items-center justify-center gap-2 tracking-wider text-sm font-bold uppercase rounded hover:bg-blue-500 hover:text-yellow transition cursor-pointer focus:outline-none disabled:bg-dark-gray disabled:hover:text-white',
+					'flex items-center justify-center gap-2 tracking-wider text-sm text-nowrap font-bold uppercase rounded transition-all cursor-pointer disabled:bg-dark-gray disabled:hover:text-foreground disabled:text-foreground border-none',
 					className,
 					{
-						'px-4 py-2 h-9 lg:h-10 bg-blue-400 text-white': variant === 'primary',
+						'px-4 py-2 h-9 lg:h-10 bg-accentSecondary-dark text-accent text-shadow-md hover:bg-accentSecondary hover:text-accent':
+							variant === 'primary',
 						'bg-transparent': variant === 'transparent',
 
 						'bg-transparent rounded-full': variant === 'transparent-rounded'

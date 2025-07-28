@@ -1,7 +1,7 @@
 import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
-import { ProductPage } from '@/components/product-page/ProductPage'
 import { CATEGORIES } from '@/constants/categories'
 import { SITE_NAME } from '@/constants/constants'
+import { ProductDetails } from '@/app/(public)/[category]/[id]/product-page/ProductDetails'
 import NotFoundPage from '@/app/not-found'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 import { prepareProductInfo } from '@/lib/utils/prepareProductInfo'
@@ -53,7 +53,7 @@ export async function generateStaticParams() {
 	return allParams.flat()
 }
 
-export default async function Camera(props) {
+export default async function ProductPage(props) {
 	const params = await props.params
 	const { category, id } = params
 
@@ -64,7 +64,7 @@ export default async function Camera(props) {
 
 	return (
 		<>
-			<ProductPage
+			<ProductDetails
 				title={title}
 				src={src}
 				modelData={modelData}

@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/Button'
 export function PriceShoppingButtonBlock({ price = '5995,-' }) {
 	return (
 		<div className='w-full flex flex-col gap-4 items-center pb-2 lg:w-1/2 lg:h-full lg:gap-6 lg:pb-0 lg:border-r lg:pr-4 border-dashed border-border'>
-			<h3 className='text-3xl lg:text-4xl font-bold text-yellow font-nanum'>{price}</h3>
+			<h3 className='text-3xl lg:text-4xl font-bold text-accent font-nanum'>{price}</h3>
 			<Button
 				title='Add to shopping cart'
 				aria-label='Add to shopping cart'
+				className='w-full sm:w-1/2 md:w-full'
 			>
 				<ShoppingCart className='w-5 h-5 sm:w-6 sm:h-6' />
 				Add to cart

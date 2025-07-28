@@ -41,7 +41,7 @@ export function Auth() {
 							onClick={() => {
 								handleTabClick(tab.value)
 							}}
-							className={`px-4 py-2 cursor-pointer ${mode === tab.value ? 'font-bold text-yellow border-b-2 border-yellow' : ''}`}
+							className={`px-4 py-2 cursor-pointer ${mode === tab.value ? 'font-bold text-accent border-b-2 border-accent' : ''}`}
 						>
 							{tab.label}
 						</button>

@@ -35,7 +35,7 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL='/auth?mode=sign-up'
 
 **3. after first start of the project**  
 - go to http://localhost:3000/api/init-db   
-for initiate DB and create collections and indexes   
+for initiate DB and create collections, indexes  and admin user in DB 
 - then run in the terminal ./src/scripts/seed.js   
 for seeding data in the DB
 ---
