@@ -10,7 +10,7 @@ export function PriceShoppingButtonBlock({ price = '5995,-' }) {
 				aria-label='Add to shopping cart'
 				className='w-full sm:w-1/2 md:w-full'
 			>
-				<ShoppingCart className='w-5 h-5 sm:w-6 sm:h-6' />
+				<ShoppingCart className='min-w-5 min-h-5 sm:min-w-6 sm:min-h-6' />
 				Add to cart
 			</Button>
 		</div>

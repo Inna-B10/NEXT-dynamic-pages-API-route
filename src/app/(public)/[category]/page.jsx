@@ -3,6 +3,7 @@ import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
 import { CATEGORIES } from '@/constants/categories'
 import { LIMIT } from '@/constants/constants'
 import { CategoryClientPage } from '@/app/(public)/[category]/CategoryClientPage'
+import NotFoundPage from '@/app/not-found'
 import { PUB_PAGES } from '@/lib/routes/public-pages'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 import { getCategoryLabel } from '@/lib/utils/getCategoryLabel'
@@ -44,6 +45,9 @@ export async function generateStaticParams() {
 export default async function CategoryPage(props) {
 	const params = await props.params
 	const category = params.category
+
+	if (!category || !CATEGORIES.map(({ slug }) => slug).includes(category))
+		return NotFoundPage(false)
 
 	const all = await getPreviewProductsData(category)
 	const firstItems = all.slice(0, LIMIT)
