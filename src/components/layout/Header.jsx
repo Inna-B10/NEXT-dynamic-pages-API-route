@@ -1,8 +1,7 @@
+import Link from 'next/link'
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { Grid, Heart, ShoppingBag } from 'react-feather'
 import { AuthButton } from '../buttons/header/AuthButton'
-import UserMenuButton from '../buttons/header/UserMenuButton'
-import { Button } from '../ui/Button'
 
 export function Header() {
 	const { user } = useUser()
@@ -19,43 +18,40 @@ export function Header() {
 			<div className='flex items-center gap-4 md:pr-4 max-w-[250px]'>
 				{role === 'admin' && (
 					<div className='flex items-center justify-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
-						<UserMenuButton
-							label='Open Admin Panel'
+						<Link
 							href='/admin'
+							title='Open Admin Panel'
+							aria-label='Open Admin Panel'
+							className='rounded-full outline-offset-10'
 						>
 							<Grid />
-						</UserMenuButton>
+						</Link>
 					</div>
 				)}
 				<SignedIn>
-					<div className='flex items-center justify-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
-						<UserMenuButton
-							label='Open List of Favorites'
-							href='/user/favorites'
-							// count={favoritesCount}
-						>
-							<Heart />
-						</UserMenuButton>
-					</div>
-				</SignedIn>
-				<div className='flex items-center justify-center rounded-full border-2  border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
-					<UserMenuButton
-						label='Open Shopping Cart'
-						href='/user/shopping-cart'
-						// count={cartCount}
+					<Link
+						href='/user/favorites'
+						title='Open List of Favorites'
+						aria-label='Open List of Favorites'
+						className='content-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent'
 					>
-						<ShoppingBag />
-					</UserMenuButton>
-				</div>
-				<div className='flex items-center justify-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent transition-discrete'>
+						<Heart className='m-auto' />
+					</Link>
+				</SignedIn>
+				<Link
+					href='/user/shopping-cart'
+					title='Open Shopping Cart'
+					aria-label='Open Shopping Cart'
+					className='rounded-full content-center border-2  border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent'
+				>
+					<ShoppingBag className='m-auto' />
+				</Link>
+				<div className='flex justify-center items-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent'>
 					<SignedIn>
-						<Button
-							aria-label='Open Profile'
-							title='Open Profile'
-							variant='transparent-rounded'
-						>
-							<UserButton />
-						</Button>
+						<UserButton
+							title='Open User Menu'
+							aria-label='Open User Menu'
+						/>
 					</SignedIn>
 					<SignedOut>
 						<AuthButton />
