@@ -1,11 +1,17 @@
 import Link from 'next/link'
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { Grid, Heart, ShoppingBag } from 'react-feather'
+import { useFavorites } from '@/providers/FavoritesProvider'
 import { AuthButton } from '../buttons/header/AuthButton'
 
 export function Header() {
 	const { user } = useUser()
 	const role = user?.publicMetadata?.role
+
+	const { favorites, loading } = useFavorites()
+
+	if (loading) return null
+
 	return (
 		<section className='flex justify-between items-center h-20 lg:h-30 border-b border-border mx-4'>
 			<div className='w-1/2 sm:1/3'>
@@ -33,9 +39,13 @@ export function Header() {
 						href='/user/favorites'
 						title='Open List of Favorites'
 						aria-label='Open List of Favorites'
-						className='content-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent'
+						className='relative content-center rounded-full border-2 border-accentSecondary hover:border-accent w-10 h-10 text-accentSecondary hover:text-accent'
 					>
 						<Heart className='m-auto' />
+
+						<span className='absolute rounded-full -bottom-1.5 -right-1.5 w-5 h-5 bg-accent content-center text-center text-black text-xs font-semibold '>
+							{favorites?.length}
+						</span>
 					</Link>
 				</SignedIn>
 				<Link

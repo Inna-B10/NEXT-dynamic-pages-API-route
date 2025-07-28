@@ -1,11 +1,11 @@
-'use client'
-
 import { useState } from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { LazyMotion, domAnimation } from 'framer-motion'
 import { Toaster } from 'react-hot-toast'
+import { FavoritesProvider } from './FavoritesProvider'
+// import { ShoppingBugProvider } from './ShoppingBugProvider'
 import { SidebarProvider } from './SidebarProvider'
 
 export function Providers({ children }) {
@@ -29,14 +29,18 @@ export function Providers({ children }) {
 				baseTheme: dark,
 				variables: {
 					colorBackground: '#161A1D',
-					colorPrimary: '#7CBAFD',
+					colorPrimary: '#00CADB',
 					colorTextOnPrimaryBackground: 'black'
 				}
 			}}
 		>
 			<QueryClientProvider client={queryClient}>
 				<LazyMotion features={domAnimation}>
-					<SidebarProvider>{children}</SidebarProvider>
+					<SidebarProvider>
+						{/* <ShoppingBugProvider> */}
+						<FavoritesProvider>{children}</FavoritesProvider>
+						{/* </ShoppingBugProvider> */}
+					</SidebarProvider>
 					<Toaster
 						toastOptions={{
 							style: {
