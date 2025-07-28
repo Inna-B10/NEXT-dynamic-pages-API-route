@@ -10,15 +10,13 @@ export function SidebarMenu({ menu, isCollapsed }) {
 		<nav className='overflow-hidden'>
 			<ul className='p-4'>
 				{menu.map(menuItem => {
-					const props = {
-						item: menuItem,
-						isActive: !!match(menuItem.link)(pathname),
-						isCollapsed: isCollapsed
-					}
+					const isActive = !!match(menuItem.link, { end: false })(pathname)
 					return (
 						<MenuItem
 							key={menuItem.label}
-							{...props}
+							item={menuItem}
+							isActive={isActive}
+							isCollapsed={isCollapsed}
 						/>
 					)
 				})}
