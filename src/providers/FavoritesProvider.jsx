@@ -8,16 +8,17 @@ import { favoritesService } from '@/services/client/favorites.service'
 const FavoritesContext = createContext()
 
 export function FavoritesProvider({ children }) {
-	const { isLoaded, isSignedIn, user } = useUser()
+	const { isLoaded, user } = useUser()
 	const [favorites, setFavorites] = useState([])
-	const [loading, setLoading] = useState(true)
+	const [loadingFav, setLoadingFav] = useState(false)
 
 	const userId = user?.id
 
 	useEffect(() => {
-		if (!isLoaded || !userId) return
+		if (!isLoaded) return
 
 		const fetchFavorites = async () => {
+			setLoadingFav(true)
 			try {
 				const { data } = await favoritesService.getAllFavorites(userId)
 				if (!data) return
@@ -26,7 +27,7 @@ export function FavoritesProvider({ children }) {
 			} catch (error) {
 				console.error('Error fetching favorites:', error)
 			} finally {
-				setLoading(false)
+				setLoadingFav(false)
 			}
 		}
 		fetchFavorites()
@@ -62,7 +63,7 @@ export function FavoritesProvider({ children }) {
 	}
 
 	return (
-		<FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, loading }}>
+		<FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, loadingFav }}>
 			{children}
 		</FavoritesContext.Provider>
 	)

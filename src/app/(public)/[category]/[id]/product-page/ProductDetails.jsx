@@ -43,7 +43,10 @@ export function ProductDetails({ title, src, id, modelData, ratingData, filtered
 
 						{/*//# ---------------------------------- Price block  */}
 						<div className='bg-bgSecondary rounded-md p-4 lg:py-8 lg:px-6 w-full flex lg:flex-row gap-4 justify-between items-center'>
-							<PriceShoppingButtonBlock price={price} />
+							<PriceShoppingButtonBlock
+								price={price}
+								itemId={id}
+							/>
 							<ShareFavoritesBlock
 								variant='bigScreen'
 								title={title}
