@@ -1,0 +1,38 @@
+import Link from 'next/link'
+
+export function UserMenuButton({
+	href,
+	title,
+	ariaLabel,
+	icon,
+	badgeCount,
+	asDiv = false,
+	children
+}) {
+	const content = (
+		<div
+			className='relative flex items-center justify-center rounded-full bp520:border-2 border-accentSecondary hover:border-accent text-accentSecondary hover:text-accent transition-all'
+			style={{
+				width: 'clamp(28px, 6vw, 40px)',
+				height: 'clamp(28px, 6vw, 40px)'
+			}}
+			title={title}
+			aria-label={ariaLabel}
+		>
+			{icon}
+			{badgeCount && badgeCount > 0 ? (
+				<span className='absolute rounded-full -bottom-1.5 -right-1.5 w-5 h-5 bg-accent content-center text-center text-black text-xs font-semibold'>
+					{badgeCount}
+				</span>
+			) : (
+				''
+			)}
+			{children}
+		</div>
+	)
+
+	// return without Link if asDiv === true
+	if (asDiv || !href) return content
+
+	return <Link href={href}>{content}</Link>
+}

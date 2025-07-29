@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
-const DynamicHeader = dynamic(() => import('./Header').then(mod => mod.Header), {
+const DynamicHeader = dynamic(() => import('./header/Header').then(mod => mod.Header), {
 	ssr: false
 })
 
