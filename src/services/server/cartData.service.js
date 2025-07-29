@@ -8,11 +8,11 @@ export async function getAllCartItemsData(userId) {
 	return data
 }
 
-export async function addCartItemData(userId, productId) {
+export async function addCartItemData(userId, productId, categorySlug) {
 	const db = await connectToDatabase()
 	const data = await db
 		.collection(COLLECTION_NAME)
-		.insertOne({ userId, productId, addedAt: new Date() })
+		.insertOne({ userId, productId, categorySlug, addedAt: new Date() })
 	return data
 }
 

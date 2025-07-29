@@ -6,7 +6,7 @@ import { ShoppingCart } from 'react-feather'
 import { Button } from '@/components/ui/Button'
 import { useCart } from '@/providers/CartProvider'
 
-export function PriceShoppingButtonBlock({ price = '5995,-', itemId }) {
+export function PriceShoppingButtonBlock({ price = '5995,-', itemId, category }) {
 	const { isSignedIn } = useUser()
 	const { isInCart, toggleCartItem } = useCart()
 
@@ -20,7 +20,7 @@ export function PriceShoppingButtonBlock({ price = '5995,-', itemId }) {
 				aria-label={isAdded ? 'Remove from cart' : 'Add to shopping cart'}
 				className='w-full sm:w-1/2 md:w-full'
 				disabled={!isSignedIn}
-				onClick={isSignedIn ? () => toggleCartItem(itemId) : undefined}
+				onClick={isSignedIn ? () => toggleCartItem(itemId, category) : undefined}
 			>
 				<ShoppingCart
 					fillOpacity='0.7'

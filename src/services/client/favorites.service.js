@@ -12,10 +12,11 @@ class FavoritesService {
 		return data
 	}
 
-	async addFavorite(userId, productId) {
+	async addFavorite(userId, productId, category) {
 		await axiosClient.post(this._FAVORITES, {
 			userId,
-			productId
+			productId,
+			category
 		})
 	}
 

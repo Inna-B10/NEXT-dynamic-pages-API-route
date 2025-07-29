@@ -24,9 +24,9 @@ export async function GET(request) {
 
 export async function POST(request) {
 	try {
-		const { userId, productId } = await request.json()
+		const { userId, productId, category } = await request.json()
 
-		const data = await addCartItemData(userId, productId)
+		const data = await addCartItemData(userId, productId, category)
 		return NextResponse.json({ data })
 	} catch (error) {
 		if (isDev()) {

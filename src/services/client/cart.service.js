@@ -12,10 +12,11 @@ class CartService {
 		return data
 	}
 
-	async addCartItem(userId, productId) {
+	async addCartItem(userId, productId, category) {
 		await axiosClient.post(this._CART, {
 			userId,
-			productId
+			productId,
+			category
 		})
 	}
 

@@ -1,3 +1,5 @@
+'use client'
+
 import { usePathname } from 'next/navigation'
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { Grid, Heart, ShoppingBag, User } from 'react-feather'
@@ -13,8 +15,6 @@ export function UserMenu() {
 	const { favorites, loadingFav } = useFavorites()
 	const { cartItems, loadingCart } = useCart()
 
-	if (loadingFav || loadingCart) return null
-
 	return (
 		<div className='flex items-center gap-4 md:pr-4 max-w-[250px]'>
 			{role === 'admin' && (
@@ -25,23 +25,24 @@ export function UserMenu() {
 					icon={<Grid className='w-2/3 h-2/3' />}
 				/>
 			)}
-
-			<UserMenuButton
-				href='/user/favorites'
-				title='Open List of Favorites'
-				ariaLabel='Open List of Favorites'
-				icon={<Heart className='w-2/3 h-2/3' />}
-				badgeCount={favorites?.length}
-			/>
-
-			<UserMenuButton
-				href='/user/shopping-cart'
-				title='Open Shopping Cart'
-				ariaLabel='Open Shopping Cart'
-				icon={<ShoppingBag className='w-2/3 h-2/3' />}
-				badgeCount={cartItems?.length}
-			/>
-
+			{!loadingFav && (
+				<UserMenuButton
+					href='/user/favorites'
+					title='Open List of Favorites'
+					ariaLabel='Open List of Favorites'
+					icon={<Heart className='w-2/3 h-2/3' />}
+					badgeCount={favorites?.length}
+				/>
+			)}
+			{!loadingCart && (
+				<UserMenuButton
+					href='/user/shopping-cart'
+					title='Open Shopping Cart'
+					ariaLabel='Open Shopping Cart'
+					icon={<ShoppingBag className='w-2/3 h-2/3' />}
+					badgeCount={cartItems?.length}
+				/>
+			)}
 			<SignedIn>
 				<UserMenuButton
 					title='Open User Menu'

@@ -35,7 +35,7 @@ export function FavoritesProvider({ children }) {
 		fetchFavorites()
 	}, [isLoaded, userId])
 
-	const toggleFavorite = async productId => {
+	const toggleFavorite = async (productId, category) => {
 		if (!isLoaded || !userId) return
 
 		const isInFavorites = favorites.includes(productId)
@@ -45,7 +45,7 @@ export function FavoritesProvider({ children }) {
 				await favoritesService.deleteFavorite(userId, productId)
 				setFavorites(prevFavorites => prevFavorites.filter(id => id !== productId))
 			} else {
-				await favoritesService.addFavorite(userId, productId)
+				await favoritesService.addFavorite(userId, productId, category)
 				setFavorites(prevFavorites => [...prevFavorites, productId])
 			}
 		} catch (error) {

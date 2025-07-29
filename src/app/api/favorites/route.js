@@ -24,9 +24,9 @@ export async function GET(request) {
 
 export async function POST(request) {
 	try {
-		const { userId, productId } = await request.json()
+		const { userId, productId, category } = await request.json()
 
-		const data = await addFavoriteData(userId, productId)
+		const data = await addFavoriteData(userId, productId, category)
 		return NextResponse.json({ data })
 	} catch (error) {
 		if (isDev()) {

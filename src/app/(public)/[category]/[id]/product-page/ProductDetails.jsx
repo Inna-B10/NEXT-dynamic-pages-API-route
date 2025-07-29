@@ -5,7 +5,16 @@ import { PriceShoppingButtonBlock } from './blocks/PriceShoppingButtonBlock'
 import RatingBlock from './blocks/RatingBlock'
 import { ShareFavoritesBlock } from './blocks/ShareFavoritesBlock'
 
-export function ProductDetails({ title, src, id, modelData, ratingData, filteredData, price }) {
+export function ProductDetails({
+	title,
+	src,
+	id,
+	modelData,
+	ratingData,
+	filteredData,
+	price,
+	category
+}) {
 	return (
 		<>
 			<h1>{title}</h1>
@@ -43,11 +52,13 @@ export function ProductDetails({ title, src, id, modelData, ratingData, filtered
 							<PriceShoppingButtonBlock
 								price={price}
 								itemId={id}
+								category={category}
 							/>
 							<ShareFavoritesBlock
 								variant='bigScreen'
 								title={title}
 								id={id}
+								category={category}
 							/>
 						</div>
 					</div>
@@ -59,6 +70,7 @@ export function ProductDetails({ title, src, id, modelData, ratingData, filtered
 					<ShareFavoritesBlock
 						title={title}
 						id={id}
+						category={category}
 					/>
 				</div>
 

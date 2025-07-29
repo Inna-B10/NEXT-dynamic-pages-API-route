@@ -6,7 +6,7 @@ import { Heart } from 'react-feather'
 import { useFavorites } from '@/providers/FavoritesProvider'
 import { Button } from '../ui/Button'
 
-export function AddToFavoritesButton({ itemId }) {
+export function AddToFavoritesButton({ itemId, category }) {
 	const { isSignedIn } = useUser()
 	const { isFavorite, toggleFavorite } = useFavorites()
 
@@ -18,7 +18,7 @@ export function AddToFavoritesButton({ itemId }) {
 			aria-label={isInFav ? 'Remove from favorites' : 'Add to favorites'}
 			className='w-full'
 			disabled={!isSignedIn}
-			onClick={isSignedIn ? () => toggleFavorite(itemId) : undefined}
+			onClick={isSignedIn ? () => toggleFavorite(itemId, category) : undefined}
 		>
 			<Heart
 				fillOpacity='0.7'

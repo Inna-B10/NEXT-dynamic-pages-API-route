@@ -72,6 +72,7 @@ export default async function ProductPage(props) {
 				filteredData={filteredData}
 				price={price}
 				id={id}
+				category={category}
 			/>
 			<ScrollToTopButton />
 		</>

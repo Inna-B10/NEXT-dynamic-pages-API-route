@@ -36,7 +36,7 @@ export function CartProvider({ children }) {
 		fetchCart()
 	}, [isLoaded, userId])
 
-	const toggleCartItem = async productId => {
+	const toggleCartItem = async (productId, category) => {
 		if (!isLoaded || !userId) return
 
 		const isExist = cartItems.includes(productId)
@@ -45,7 +45,7 @@ export function CartProvider({ children }) {
 				await cartService.deleteCartItem(userId, productId)
 				setCartItems(prev => prev.filter(id => id !== productId))
 			} else {
-				await cartService.addCartItem(userId, productId)
+				await cartService.addCartItem(userId, productId, category)
 				setCartItems(prev => [...prev, productId])
 			}
 		} catch (error) {
