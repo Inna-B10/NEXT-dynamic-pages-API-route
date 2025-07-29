@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { LIMIT } from '@/constants/constants'
+import { isDev } from '@/lib/utils/isDev'
 import { getPreviewProductsData } from '@/services/server/productsData.service'
 
 export async function GET(request, { params }) {
@@ -18,6 +19,9 @@ export async function GET(request, { params }) {
 
 		return NextResponse.json({ items })
 	} catch (error) {
+		if (isDev()) {
+			console.error('GET products ERROR:', error)
+		}
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
 }

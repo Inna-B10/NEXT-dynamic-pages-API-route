@@ -1,9 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { connectToDatabase } from '@/lib/db/mongoDBconnector'
-
-function isDev() {
-	return process.env.NODE_ENV === 'development'
-}
+import { isDev } from '@/lib/utils/isDev'
 
 export async function getAllProductsData(category) {
 	if (!category) {

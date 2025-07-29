@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { isDev } from '@/lib/utils/isDev'
 import {
 	addFavoriteData,
 	deleteFavoriteData,
@@ -14,6 +15,9 @@ export async function GET(request) {
 
 		return NextResponse.json({ data })
 	} catch (error) {
+		if (isDev()) {
+			console.error('GET all favorites ERROR:', error)
+		}
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
 }
@@ -25,6 +29,9 @@ export async function POST(request) {
 		const data = await addFavoriteData(userId, productId)
 		return NextResponse.json({ data })
 	} catch (error) {
+		if (isDev()) {
+			console.error('ADD favorite ERROR:', error)
+		}
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
 }
@@ -41,8 +48,8 @@ export async function DELETE(request) {
 		const data = await deleteFavoriteData(userId, productId)
 		return NextResponse.json({ deletedCount: data.deletedCount })
 	} catch (error) {
-		if (env.NODE_ENV === 'development') {
-			console.error('DELETE FAVORITE ERROR:', error)
+		if (isDev()) {
+			console.error('DELETE favorite ERROR:', error)
 		}
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}

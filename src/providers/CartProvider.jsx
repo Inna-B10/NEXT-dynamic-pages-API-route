@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import toast from 'react-hot-toast'
+import { isDev } from '@/lib/utils/isDev'
 import { cartService } from '@/services/client/cart.service'
 
 const CartContext = createContext()
@@ -26,7 +27,9 @@ export function CartProvider({ children }) {
 				const productIds = data.map(item => item.productId)
 				setCartItems(productIds)
 			} catch (error) {
-				console.error('Error fetching cart items:', error)
+				if (isDev()) {
+					console.error('Error fetching cart items:', error)
+				}
 			} finally {
 				setLoadingCart(false)
 			}
@@ -54,7 +57,9 @@ export function CartProvider({ children }) {
 			})
 			toast.error('Failed to update cart items')
 
-			console.error('Error toggling cart item:', error)
+			if (isDev()) {
+				console.error('Error toggling cart item:', error)
+			}
 		}
 	}
 

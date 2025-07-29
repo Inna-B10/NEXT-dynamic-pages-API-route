@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
 import toast from 'react-hot-toast'
+import { isDev } from '@/lib/utils/isDev'
 
 export default function Onboarding() {
 	if (typeof window === 'undefined') return null
@@ -20,11 +21,15 @@ export default function Onboarding() {
 				if (res.ok) {
 					toast.success('Welcome! You are signed in')
 				} else {
-					console.log(res)
+					if (isDev()) {
+						console.error('Error authenticating:', res)
+					}
 					toast.error(`Error authenticating: ${res.status}`)
 				}
-			} catch (err) {
-				console.error(err)
+			} catch (error) {
+				if (isDev()) {
+					console.error('Error authenticating:', error)
+				}
 				toast.error('Error authenticating!')
 			} finally {
 				sessionStorage.setItem('userChecked', 'true')

@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import toast from 'react-hot-toast'
+import { isDev } from '@/lib/utils/isDev'
 import { favoritesService } from '@/services/client/favorites.service'
 
 const FavoritesContext = createContext()
@@ -25,7 +26,9 @@ export function FavoritesProvider({ children }) {
 				const productIds = data.map(fav => fav.productId)
 				setFavorites(productIds)
 			} catch (error) {
-				console.error('Error fetching favorites:', error)
+				if (isDev()) {
+					console.error('Error fetching favorites:', error)
+				}
 			} finally {
 				setLoadingFav(false)
 			}
@@ -54,7 +57,9 @@ export function FavoritesProvider({ children }) {
 			})
 			toast.error('Failed to update favorites')
 
-			console.error('Error toggling favorite:', error)
+			if (isDev()) {
+				console.error('Error toggling favorite:', error)
+			}
 		}
 	}
 

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { isDev } from '@/lib/utils/isDev'
 import {
 	addCartItemData,
 	deleteCartItemData,
@@ -14,6 +15,9 @@ export async function GET(request) {
 
 		return NextResponse.json({ data })
 	} catch (error) {
+		if (isDev()) {
+			console.error('GET cart items ERROR:', error)
+		}
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
 }
@@ -25,8 +29,8 @@ export async function POST(request) {
 		const data = await addCartItemData(userId, productId)
 		return NextResponse.json({ data })
 	} catch (error) {
-		if (env.NODE_ENV === 'development') {
-			console.error('Toggle cart item ERROR:', error)
+		if (isDev()) {
+			console.error('ADD cart item ERROR:', error)
 		}
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
@@ -44,8 +48,8 @@ export async function DELETE(request) {
 		const data = await deleteCartItemData(userId, productId)
 		return NextResponse.json({ deletedCount: data.deletedCount })
 	} catch (error) {
-		if (env.NODE_ENV === 'development') {
-			console.error('DELETE CART ITEM ERROR:', error)
+		if (isDev()) {
+			console.error('DELETE cart item ERROR:', error)
 		}
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
