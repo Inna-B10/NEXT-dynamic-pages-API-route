@@ -10,17 +10,21 @@ const FavoritesContext = createContext()
 
 export function FavoritesProvider({ children }) {
 	const { isLoaded, user } = useUser()
-	const [favorites, setFavorites] = useState([])
-	const [loadingFav, setLoadingFav] = useState(true)
-
 	const userId = user?.id
 
+	const [favorites, setFavorites] = useState([]) // only productId[]
+	const [loadingFav, setLoadingFav] = useState(true)
+
+	const [detailedFavorites, setDetailedFavorites] = useState([]) // favorites with details
+	const [detailedLoading, setDetailedLoading] = useState(false)
+
+	/* -------------------------- Light Mode (only Ids) ------------------------- */
 	useEffect(() => {
 		if (!isLoaded) return
 
 		const fetchFavorites = async () => {
 			try {
-				const { data } = await favoritesService.getAllFavorites(userId)
+				const { data } = await favoritesService.getFavoritesIds(userId)
 				if (!data) return
 				const productIds = data.map(fav => fav.productId)
 				setFavorites(productIds)
@@ -35,6 +39,29 @@ export function FavoritesProvider({ children }) {
 		fetchFavorites()
 	}, [isLoaded, userId])
 
+	/* --------------------------- Full Mode (details) -------------------------- */
+	const loadDetailedFavorites = async () => {
+		if (!isLoaded || !userId) return
+		setDetailedLoading(true)
+
+		try {
+			const { data } = await favoritesService.getDetailedFavorites(userId)
+			setDetailedFavorites(
+				data.map(item => ({
+					...item.product,
+					addedAt: item.addedAt,
+					categorySlug: item.product.categorySlug
+				})) || []
+			)
+		} catch (error) {
+			toast.error('Error loading favorites')
+			if (isDev()) console.error('Error fetching detailed favorites:', error)
+		} finally {
+			setDetailedLoading(false)
+		}
+	}
+
+	/* ---------------------------- Toggle Favorites ---------------------------- */
 	const toggleFavorite = async (productId, category) => {
 		if (!isLoaded || !userId) return
 
@@ -44,6 +71,7 @@ export function FavoritesProvider({ children }) {
 			if (isInFavorites) {
 				await favoritesService.deleteFavorite(userId, productId)
 				setFavorites(prevFavorites => prevFavorites.filter(id => id !== productId))
+				setDetailedFavorites(prev => prev.filter(item => item._id !== productId))
 			} else {
 				await favoritesService.addFavorite(userId, productId, category)
 				setFavorites(prevFavorites => [...prevFavorites, productId])
@@ -67,7 +95,17 @@ export function FavoritesProvider({ children }) {
 	}
 
 	return (
-		<FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, loadingFav }}>
+		<FavoritesContext.Provider
+			value={{
+				favorites,
+				toggleFavorite,
+				isFavorite,
+				loadingFav,
+				detailedFavorites,
+				loadDetailedFavorites,
+				detailedLoading
+			}}
+		>
 			{children}
 		</FavoritesContext.Provider>
 	)

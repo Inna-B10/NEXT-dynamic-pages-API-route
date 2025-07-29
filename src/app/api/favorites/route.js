@@ -3,7 +3,7 @@ import { isDev } from '@/lib/utils/isDev'
 import {
 	addFavoriteData,
 	deleteFavoriteData,
-	getAllFavoritesData
+	getFavoritesIdsData
 } from '@/services/server/favoritesData.service'
 
 export async function GET(request) {
@@ -11,7 +11,7 @@ export async function GET(request) {
 		const { searchParams } = new URL(request.url)
 		const userId = searchParams.get('userId')
 
-		const data = await getAllFavoritesData(userId)
+		const data = await getFavoritesIdsData(userId)
 
 		return NextResponse.json({ data })
 	} catch (error) {
