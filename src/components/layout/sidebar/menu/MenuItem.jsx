@@ -9,7 +9,6 @@ export function MenuItem({ item, isActive, isCollapsed }) {
 				title={`Open ${item.label} page`}
 				aria-label={`Open ${item.label} page`}
 				className={clsx('group flex gap-4 py-2', {
-					'hover: cursor-default': isActive,
 					'transition-all duration-200 hover:text-accentSecondary': !isActive
 				})}
 			>

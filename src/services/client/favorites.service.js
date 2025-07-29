@@ -1,5 +1,5 @@
-const { API_URL } = require('@/config/config')
-const { axiosClient } = require('@/lib/utils/axios')
+import { API_URL } from '@/config/config'
+import { axiosClient } from '@/lib/utils/axios'
 
 class FavoritesService {
 	_FAVORITES = `${API_URL}/favorites`
