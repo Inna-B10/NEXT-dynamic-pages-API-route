@@ -12,7 +12,7 @@ export function CartProvider({ children }) {
 	const { isLoaded, user } = useUser()
 	const [cartItems, setCartItems] = useState([])
 
-	const [loadingCart, setLoadingCart] = useState(false)
+	const [loadingCart, setLoadingCart] = useState(true)
 
 	const userId = user?.id
 
@@ -20,7 +20,6 @@ export function CartProvider({ children }) {
 		if (!isLoaded) return
 
 		const fetchCart = async () => {
-			setLoadingCart(true)
 			try {
 				const { data } = await cartService.getAllCartItems(userId)
 				if (!data) return

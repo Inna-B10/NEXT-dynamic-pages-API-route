@@ -8,12 +8,9 @@ import { ShareFavoritesBlock } from './blocks/ShareFavoritesBlock'
 export function ProductDetails({ title, src, id, modelData, ratingData, filteredData, price }) {
 	return (
 		<>
-			<div className='flex flex-col gap-8 lg:gap-10 xl:gap-16 w-full max-w-[1440px] mx-auto mt-4 sm:mt-6 lg:mt-12'>
-				{/* ---------------------------------- Title ---------------------------------- */}
-				<h1 className='text-xl bp520:text-2xl md:text-3xl font-bold text-accent text-center sm:mb-4 xl:mb-0'>
-					{title}
-				</h1>
+			<h1>{title}</h1>
 
+			<div className='flex flex-col gap-8 lg:gap-10 xl:gap-16 w-full max-w-[1440px] mx-auto'>
 				{/*//* --------------------------------- Main Block1 --------------------------------- */}
 				<div className='flex flex-col md:flex-row gap-8 lg:gap-10 justify-between w-full'>
 					{/*//# -------------------------------------------- Image */}

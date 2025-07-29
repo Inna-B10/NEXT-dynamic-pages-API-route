@@ -11,7 +11,7 @@ const FavoritesContext = createContext()
 export function FavoritesProvider({ children }) {
 	const { isLoaded, user } = useUser()
 	const [favorites, setFavorites] = useState([])
-	const [loadingFav, setLoadingFav] = useState(false)
+	const [loadingFav, setLoadingFav] = useState(true)
 
 	const userId = user?.id
 
@@ -19,7 +19,6 @@ export function FavoritesProvider({ children }) {
 		if (!isLoaded) return
 
 		const fetchFavorites = async () => {
-			setLoadingFav(true)
 			try {
 				const { data } = await favoritesService.getAllFavorites(userId)
 				if (!data) return

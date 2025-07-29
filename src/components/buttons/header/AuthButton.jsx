@@ -1,25 +1,25 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { User } from 'react-feather'
-import { Button } from '@/components/ui/Button'
 
 export function AuthButton() {
-	const router = useRouter()
 	const pathname = usePathname()
 
-	const handleClick = () => {
-		router.push(`/auth?mode=sign-in&redirect_url=${encodeURIComponent(pathname)}`)
-	}
-
 	return (
-		<Button
-			aria-label='Go to Authorization page'
+		<Link
+			href={`/auth?mode=sign-in&redirect_url=${encodeURIComponent(pathname)}`}
 			title='Go to Authorization page'
-			onClick={handleClick}
-			variant='transparent-rounded'
+			aria-label='Go to Authorization page'
+			className='content-center rounded-full border border-accentSecondary hover:border-accent text-accentSecondary hover:text-accent transition-all'
+			style={{
+				width: 'clamp(28px, 6vw, 40px)',
+				height: 'clamp(28px, 6vw, 40px)',
+				borderWidth: 'clamp(1px, 0.3vw, 2px)'
+			}}
 		>
-			<User />
-		</Button>
+			<User className='m-auto w-2/3 h-2/3' />
+		</Link>
 	)
 }

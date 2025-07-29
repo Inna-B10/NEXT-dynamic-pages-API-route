@@ -38,6 +38,7 @@ export async function generateMetadata(props) {
 		}
 	}
 }
+
 export async function generateStaticParams() {
 	return CATEGORIES.map(({ slug }) => ({ category: slug }))
 }
@@ -57,6 +58,7 @@ export default async function CategoryPage(props) {
 
 	return (
 		<>
+			<h1>{getCategoryLabel(category)}</h1>
 			<div className='grid-cols w-full relative'>
 				{firstItems?.map(item => {
 					const title = formatProductTitle(item)
