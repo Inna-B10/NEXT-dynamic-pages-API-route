@@ -15,7 +15,6 @@ export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) 
 							src={imageSrc}
 							alt={`Image of product: ${title}`}
 							fill
-							//[TODO] change sizes for adaptive layout
 							sizes='(max-width: 768px) 100vw, 268px'
 							className='object-contain rounded-t-lg transition'
 							priority

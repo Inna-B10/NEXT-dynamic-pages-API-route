@@ -17,10 +17,7 @@ export function Button({
 					className,
 					{
 						'px-4 py-2 h-9 lg:h-10 bg-accentSecondary-dark text-accent text-shadow-md hover:bg-accentSecondary hover:text-accent':
-							variant === 'primary',
-						'bg-transparent': variant === 'transparent',
-
-						'bg-transparent rounded-full': variant === 'transparent-rounded'
+							variant === 'primary'
 					}
 				)
 			)}
