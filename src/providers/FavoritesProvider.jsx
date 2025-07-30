@@ -30,7 +30,7 @@ export function FavoritesProvider({ children }) {
 	/* --------------------------- Full Mode (details) -------------------------- */
 	const {
 		data: detailedFavorites = [],
-		isLoading: detailedLoading,
+		isLoading: detailedFavLoading,
 		refetch: loadDetailedFavorites
 	} = useQuery({
 		queryKey: ['detailedFavorites', userId],
@@ -77,7 +77,7 @@ export function FavoritesProvider({ children }) {
 			return { previousFavorites }
 		},
 
-		onError: (error, variables, context) => {
+		onError: (error, context) => {
 			toast.error('Failed to update favorites')
 			if (isDev()) console.error('Error toggling favorite:', error)
 
@@ -96,6 +96,7 @@ export function FavoritesProvider({ children }) {
 		toggleFavoriteMutation.mutate({ productId, category })
 	}
 
+	/* ------------------------------- IsFavorite ------------------------------- */
 	const isFavorite = productId => {
 		return favorites.includes(productId)
 	}
@@ -109,7 +110,7 @@ export function FavoritesProvider({ children }) {
 				loadingFav,
 				detailedFavorites,
 				loadDetailedFavorites,
-				detailedLoading
+				detailedFavLoading
 			}}
 		>
 			{children}
