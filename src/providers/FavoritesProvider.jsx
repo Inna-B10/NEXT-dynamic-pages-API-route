@@ -53,6 +53,7 @@ export function FavoritesProvider({ children }) {
 
 	/* ---------------------------- Toggle Favorites ---------------------------- */
 	const toggleFavoriteMutation = useMutation({
+		mutationKey: ['toggleFavorite'],
 		mutationFn: async ({ productId, category }) => {
 			const isInFavorites = favorites.includes(productId)
 
