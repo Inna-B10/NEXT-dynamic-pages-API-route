@@ -48,8 +48,7 @@ export default function InfiniteList({ totalPages, currentPage, category }) {
 						key={item._id}
 						href={`/${category}/${item._id}`}
 						title={title}
-						//[TODO] change default image
-						imageSrc={item['Picture URL'] || '/images/default-no-product.webp'}
+						imageSrc={item['Picture URL'] || '/images/default-image.png'}
 						brand={item['Brand']}
 						price={item['Price']}
 					/>
