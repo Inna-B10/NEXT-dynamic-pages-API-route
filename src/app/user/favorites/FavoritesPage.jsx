@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
+import Spinner from '@/components/ui/Spinner'
 import { useFavorites } from '@/providers/FavoritesProvider'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 
@@ -12,9 +13,17 @@ export function FavoritesPage() {
 		if (isLoaded && user?.id) {
 			loadDetailedFavorites()
 		}
-	}, [isLoaded, user?.id])
+	}, [isLoaded, user?.id, loadDetailedFavorites])
 
-	if (detailedLoading) return <p>Загрузка...</p>
+	if (detailedLoading)
+		return (
+			<div className='z-10 absolute top-full left-1/2 translate-x-[-50%]'>
+				<Spinner
+					size={60}
+					message='Loading...'
+				/>
+			</div>
+		)
 
 	return (
 		<section>

@@ -1,7 +1,8 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext } from 'react'
 import { useUser } from '@clerk/nextjs'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { isDev } from '@/lib/utils/isDev'
 import { favoritesService } from '@/services/client/favorites.service'
@@ -12,82 +13,86 @@ export function FavoritesProvider({ children }) {
 	const { isLoaded, user } = useUser()
 	const userId = user?.id
 
-	const [favorites, setFavorites] = useState([]) // only productId[]
-	const [loadingFav, setLoadingFav] = useState(true)
-
-	const [detailedFavorites, setDetailedFavorites] = useState([]) // favorites with details
-	const [detailedLoading, setDetailedLoading] = useState(false)
+	const queryClient = useQueryClient()
 
 	/* -------------------------- Light Mode (only Ids) ------------------------- */
-	useEffect(() => {
-		if (!isLoaded) return
-
-		const fetchFavorites = async () => {
-			try {
-				const { data } = await favoritesService.getFavoritesIds(userId)
-				if (!data) return
-				const productIds = data.map(fav => fav.productId)
-				setFavorites(productIds)
-			} catch (error) {
-				if (isDev()) {
-					console.error('Error fetching favorites:', error)
-				}
-			} finally {
-				setLoadingFav(false)
-			}
+	const { data: favorites = [], isLoading: loadingFav } = useQuery({
+		queryKey: ['favorites', userId],
+		queryFn: () =>
+			favoritesService.getFavoritesIds(userId).then(res => res.data.map(f => f.productId)),
+		enabled: isLoaded && !!userId,
+		onError: error => {
+			toast.error('Error loading favorites')
+			if (isDev()) console.error('Error fetching favorites:', error)
 		}
-		fetchFavorites()
-	}, [isLoaded, userId])
+	})
 
 	/* --------------------------- Full Mode (details) -------------------------- */
-	const loadDetailedFavorites = async () => {
-		if (!isLoaded || !userId) return
-		setDetailedLoading(true)
-
-		try {
-			const { data } = await favoritesService.getDetailedFavorites(userId)
-			setDetailedFavorites(
-				data.map(item => ({
+	const {
+		data: detailedFavorites = [],
+		isLoading: detailedLoading,
+		refetch: loadDetailedFavorites
+	} = useQuery({
+		queryKey: ['detailedFavorites', userId],
+		queryFn: () => {
+			if (!userId) return []
+			return favoritesService.getDetailedFavorites(userId).then(res =>
+				res.data.map(item => ({
 					...item.product,
 					addedAt: item.addedAt,
 					categorySlug: item.product.categorySlug
-				})) || []
+				}))
 			)
-		} catch (error) {
+		},
+		enabled: isLoaded && !!userId,
+		onError: error => {
 			toast.error('Error loading favorites')
 			if (isDev()) console.error('Error fetching detailed favorites:', error)
-		} finally {
-			setDetailedLoading(false)
 		}
-	}
+	})
 
 	/* ---------------------------- Toggle Favorites ---------------------------- */
-	const toggleFavorite = async (productId, category) => {
-		if (!isLoaded || !userId) return
+	const toggleFavoriteMutation = useMutation({
+		mutationFn: async ({ productId, category }) => {
+			const isInFavorites = favorites.includes(productId)
 
-		const isInFavorites = favorites.includes(productId)
-
-		try {
 			if (isInFavorites) {
 				await favoritesService.deleteFavorite(userId, productId)
-				setFavorites(prevFavorites => prevFavorites.filter(id => id !== productId))
-				setDetailedFavorites(prev => prev.filter(item => item._id !== productId))
 			} else {
 				await favoritesService.addFavorite(userId, productId, category)
-				setFavorites(prevFavorites => [...prevFavorites, productId])
 			}
-		} catch (error) {
-			// Rollback the UI if the request fails
-			setFavorites(prev => {
-				if (isInFavorites) return [...prev, productId]
-				else return prev.filter(id => id !== productId)
-			})
-			toast.error('Failed to update favorites')
+		},
+		onMutate: async ({ productId }) => {
+			await queryClient.cancelQueries(['favorites', userId])
 
-			if (isDev()) {
-				console.error('Error toggling favorite:', error)
+			const previousFavorites = queryClient.getQueryData(['favorites', userId])
+
+			queryClient.setQueryData(['favorites', userId], oldFavorites => {
+				if (!oldFavorites) return []
+				if (oldFavorites.includes(productId)) return oldFavorites.filter(id => id !== productId)
+				else return [...oldFavorites, productId]
+			})
+
+			return { previousFavorites }
+		},
+
+		onError: (error, variables, context) => {
+			toast.error('Failed to update favorites')
+			if (isDev()) console.error('Error toggling favorite:', error)
+
+			if (context?.previousFavorites) {
+				queryClient.setQueryData(['favorites', userId], context.previousFavorites)
 			}
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['favorites', userId])
+			queryClient.invalidateQueries(['detailedFavorites', userId])
 		}
+	})
+	const toggleFavorite = (productId, category) => {
+		if (!isLoaded || !userId) return
+
+		toggleFavoriteMutation.mutate({ productId, category })
 	}
 
 	const isFavorite = productId => {

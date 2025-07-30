@@ -8,7 +8,8 @@ export async function GET(request) {
 		const userId = searchParams.get('userId')
 
 		if (!userId) {
-			return NextResponse.json({ error: 'Missing userId' }, { status: 400 })
+			if (isDev()) console.warn('Favorites API: Missing userId — probably early call')
+			return NextResponse.json({ data: [] })
 		}
 
 		const data = await getDetailedFavoritesData(userId)
