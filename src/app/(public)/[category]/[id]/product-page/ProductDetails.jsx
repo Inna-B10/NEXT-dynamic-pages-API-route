@@ -5,15 +5,21 @@ import { PriceShoppingButtonBlock } from './blocks/PriceShoppingButtonBlock'
 import RatingBlock from './blocks/RatingBlock'
 import { ShareFavoritesBlock } from './blocks/ShareFavoritesBlock'
 
-export function ProductDetails({ title, src, id, modelData, ratingData, filteredData, price }) {
+export function ProductDetails({
+	title,
+	src,
+	id,
+	modelData,
+	ratingData,
+	filteredData,
+	price,
+	category
+}) {
 	return (
 		<>
-			<div className='flex flex-col gap-8 lg:gap-10 xl:gap-16 w-full max-w-[1440px] mx-auto mt-4 sm:mt-6 lg:mt-12'>
-				{/* ---------------------------------- Title ---------------------------------- */}
-				<h1 className='text-xl bp520:text-2xl md:text-3xl font-bold text-accent text-center sm:mb-4 xl:mb-0'>
-					{title}
-				</h1>
+			<h1>{title}</h1>
 
+			<div className='flex flex-col gap-8 lg:gap-10 xl:gap-16 w-full max-w-[1440px] mx-auto'>
 				{/*//* --------------------------------- Main Block1 --------------------------------- */}
 				<div className='flex flex-col md:flex-row gap-8 lg:gap-10 justify-between w-full'>
 					{/*//# -------------------------------------------- Image */}
@@ -43,11 +49,16 @@ export function ProductDetails({ title, src, id, modelData, ratingData, filtered
 
 						{/*//# ---------------------------------- Price block  */}
 						<div className='bg-bgSecondary rounded-md p-4 lg:py-8 lg:px-6 w-full flex lg:flex-row gap-4 justify-between items-center'>
-							<PriceShoppingButtonBlock price={price} />
+							<PriceShoppingButtonBlock
+								price={price}
+								itemId={id}
+								category={category}
+							/>
 							<ShareFavoritesBlock
 								variant='bigScreen'
 								title={title}
 								id={id}
+								category={category}
 							/>
 						</div>
 					</div>
@@ -59,6 +70,7 @@ export function ProductDetails({ title, src, id, modelData, ratingData, filtered
 					<ShareFavoritesBlock
 						title={title}
 						id={id}
+						category={category}
 					/>
 				</div>
 

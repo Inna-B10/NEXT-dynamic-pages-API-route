@@ -1,28 +1,38 @@
 import Link from 'next/link'
-import { Button } from '../../ui/Button'
 
-export default function UserMenuButton({ children, label, href, count, ...props }) {
-	return (
-		<Link
-			href={href}
-			aria-label={label}
-			title={label}
-			className='focus:outline-none'
-			tabIndex={-1}
+export function UserMenuButton({
+	href,
+	title,
+	ariaLabel,
+	icon,
+	badgeCount,
+	asDiv = false,
+	children
+}) {
+	const content = (
+		<div
+			className='relative flex items-center justify-center rounded-full bp520:border-2 border-accentSecondary hover:border-accent text-accentSecondary hover:text-accent transition-all'
+			style={{
+				width: 'clamp(28px, 6vw, 40px)',
+				height: 'clamp(28px, 6vw, 40px)'
+			}}
+			title={title}
+			aria-label={ariaLabel}
 		>
-			<Button
-				aria-label={label}
-				className='relative'
-				variant='transparent-rounded'
-				{...props}
-			>
-				{children}
-				{/* {typeof count === 'number' && count > 0 && (
-				<Badge className='absolute -top-1 -right-1 text-xs px-1 py-0.5'>
-					{count}
-				</Badge>
-			)} */}
-			</Button>
-		</Link>
+			{icon}
+			{badgeCount && badgeCount > 0 ? (
+				<span className='absolute rounded-full -bottom-1.5 -right-1.5 w-5 h-5 bg-accent content-center text-center text-black text-xs font-semibold'>
+					{badgeCount}
+				</span>
+			) : (
+				''
+			)}
+			{children}
+		</div>
 	)
+
+	// return without Link if asDiv === true
+	if (asDiv || !href) return content
+
+	return <Link href={href}>{content}</Link>
 }

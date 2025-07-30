@@ -1,29 +1,30 @@
 'use client'
 
 import { useUser } from '@clerk/nextjs'
+import clsx from 'clsx'
 import { Heart } from 'react-feather'
+import { useFavorites } from '@/providers/FavoritesProvider'
 import { Button } from '../ui/Button'
 
-export function AddToFavoritesButton({ variant, itemId }) {
-	const { isLoaded, isSignedIn, user } = useUser()
-	// console.log(user.id)
-	// const userId = user.id
-	// const userFavorites = favoritesService.getAllFavorites(userId)
+export function AddToFavoritesButton({ itemId, category }) {
+	const { isSignedIn } = useUser()
+	const { isFavorite, toggleFavorite } = useFavorites()
 
-	// const isFavorite = userFavorites.filter(item)
+	const isInFav = isFavorite(itemId)
 
-	const toggleFavorite = () => {
-		console.log(itemId)
-	}
 	return (
 		<Button
-			title='Add to favorites'
-			aria-label='Add to favorites'
+			title={isInFav ? 'Remove from favorites' : 'Add to favorites'}
+			aria-label={isInFav ? 'Remove from favorites' : 'Add to favorites'}
 			className='w-full'
 			disabled={!isSignedIn}
-			onClick={isSignedIn ? toggleFavorite : undefined}
+			onClick={isSignedIn ? () => toggleFavorite(itemId, category) : undefined}
 		>
-			<Heart className='w-5 h-5 sm:w-6 sm:h-6' /> {variant === 'bigScreen' ? 'Favorites' : 'Save'}
+			<Heart
+				fillOpacity='0.7'
+				className={clsx('min-w-5 min-h-5 sm:min-w-6 sm:min-h-6', isInFav && 'fill-accent')}
+			/>{' '}
+			{isInFav ? 'Remove' : 'Add to Favorites'}
 		</Button>
 	)
 }

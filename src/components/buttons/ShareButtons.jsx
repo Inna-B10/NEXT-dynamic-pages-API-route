@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Share2 } from 'react-feather'
+import toast from 'react-hot-toast'
 import { SOCIAL_MEDIA } from '@/constants/social-media'
 import { SITE_URL } from '@/config/config'
+import { isDev } from '@/lib/utils/isDev'
 
 export function ShareButtons({ title }) {
 	const [canShare, setCanShare] = useState(false)
@@ -24,9 +26,12 @@ export function ShareButtons({ title }) {
 				title: title,
 				url: url
 			})
-			console.log('Successfully shared')
+			toast.success('Successfully shared')
 		} catch (error) {
-			console.error('Error sharing', error)
+			if (isDev()) {
+				console.error('Error sharing:', error)
+			}
+			toast.error('Error sharing content')
 		}
 	}
 

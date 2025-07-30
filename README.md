@@ -67,17 +67,22 @@ npm install dotenv #needs for seeding data
 
 - [x] pagination
 - [x] notFound page
+- [x] category page
+- [x] registration (clerk?)
 - [x] product page
+- [x] add/delete to shopping card
+- [x] add/delete to favorites
+- [x] change image sizes for adaptive layout
+- [x] ToTop button
 
 
 ## TODOs:
 
 #### *functional:*
-- [ ] registration (clerk?)
-- [ ] user's role
+- [?] user's role
 - [ ] add/delete product
-- [ ] shopping card
-- [ ] add/delete to shopping card
+- [ ] shopping card page
+- [ ] favorite page
 - [ ] imitation paying process
 - [ ] search
 - [ ] contact page + check options:
@@ -85,7 +90,10 @@ npm install dotenv #needs for seeding data
    - [ ] [Easy Contact Form to Email Service](https://web3forms.com/)
 
 #### *design:*
-- [ ] change image sizes for adaptive layout
-- [ ] metadata
+- [?] metadata
 - [ ] Logo
 - [ ] Skeleton/Loader
+- [ ] User's buttons break point 480 (menu)
+- [ ] Layout
+- [?] Sidebar
+- [ ] Footer
