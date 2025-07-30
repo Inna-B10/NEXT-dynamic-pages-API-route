@@ -3,7 +3,7 @@ import { isDev } from '@/lib/utils/isDev'
 import {
 	addCartItemData,
 	deleteCartItemData,
-	getAllCartItemsData
+	getCartItemsIdsData
 } from '@/services/server/cartData.service'
 
 export async function GET(request) {
@@ -11,7 +11,7 @@ export async function GET(request) {
 		const { searchParams } = new URL(request.url)
 		const userId = searchParams.get('userId')
 
-		const data = await getAllCartItemsData(userId)
+		const data = await getCartItemsIdsData(userId)
 
 		return NextResponse.json({ data })
 	} catch (error) {
