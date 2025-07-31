@@ -50,5 +50,17 @@ class CartService {
 		})
 		return data
 	}
+
+	/* ---------------------------- Clear Cart --------------------------- */
+	async clearCart(userId) {
+		if (!userId) {
+			if (isDev()) console.error('Missing userId')
+			return
+		}
+		const { data } = await axiosClient.delete(`${this._CART}/clear-cart`, {
+			params: { userId }
+		})
+		return data
+	}
 }
 export const cartService = new CartService()

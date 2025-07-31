@@ -83,3 +83,10 @@ export async function getDetailedFavoritesData(userId) {
 
 	return result
 }
+
+/* ----------------------------- Clear Favorites ---------------------------- */
+export async function clearFavoritesData(userId) {
+	const db = await connectToDatabase()
+	const data = await db.collection(COLLECTION_NAME).deleteMany({ userId })
+	return data
+}

@@ -1,22 +1,41 @@
 import { useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { Trash2 } from 'react-feather'
+import toast from 'react-hot-toast'
 import { ProductCardWide } from '@/components/ProductCardWide'
 import { ToggleCartButton } from '@/components/buttons/ToggleCartButton'
 import { ToggleFavoriteButton } from '@/components/buttons/ToggleFavoriteButton'
+import { Button } from '@/components/ui/Button'
+import { ConfirmToast } from '@/components/ui/ConfirmToast'
 import Spinner from '@/components/ui/Spinner'
 import { useFavorites } from '@/providers/FavoritesProvider'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 
 export function FavoritesPage() {
 	const { isLoaded, user } = useUser()
-	const { detailedFavorites, detailedFavLoading, loadDetailedFavorites } = useFavorites()
+	const { detailedFavorites, detailedFavLoading, loadDetailedFavorites, clearFavorites } =
+		useFavorites()
 
 	useEffect(() => {
 		if (isLoaded && user?.id) {
 			loadDetailedFavorites()
 		}
 	}, [isLoaded, user?.id, loadDetailedFavorites])
+
+	const handleClearFavorites = () => {
+		toast.custom(
+			t => (
+				<ConfirmToast
+					toastId={t.id}
+					message='Remove all favorites?'
+					onConfirm={clearFavorites}
+				/>
+			),
+			{ duration: Infinity }
+		)
+	}
+
+	const hasItems = detailedFavorites && detailedFavorites.length > 0
 
 	if (detailedFavLoading)
 		return (
@@ -29,15 +48,27 @@ export function FavoritesPage() {
 		)
 
 	return (
-		<section>
-			<h1>Favorites</h1>
+		<section className='w-full max-w-[980px]'>
+			<div className='flex flex-col sm:flex-row sm:items-center mb-4'>
+				<h1>Favorites</h1>
+				{hasItems && (
+					<Button
+						className='place-self-end sm:place-self-center'
+						onClick={isLoaded && user?.id ? handleClearFavorites : undefined}
+						variant='simple'
+					>
+						Remove all
+					</Button>
+				)}
+			</div>
+			{!hasItems && <p>You have no favorites</p>}
 
 			{detailedFavorites.map(product => {
 				const title = formatProductTitle(product)
 				return (
 					<div
 						key={product._id}
-						className='relative w-full lg:w-4/5 2xl:w-3/4 mb-8'
+						className='relative mb-8'
 					>
 						<ProductCardWide
 							href={`/${product.categorySlug}/${product._id}`}
@@ -58,9 +89,8 @@ export function FavoritesPage() {
 								variant='icon'
 								icon={
 									<Trash2
-										size={20}
 										fillOpacity={0.5}
-										className='hover:fill-red-500 stroke-red-500 lg:size-6 opacity-70 hover:opacity-100'
+										className='min-w-4 w-5 sm:min-w-6 hover:fill-red-500 stroke-red-500 opacity-70 hover:opacity-100'
 									/>
 								}
 							/>

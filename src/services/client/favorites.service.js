@@ -48,5 +48,17 @@ class FavoritesService {
 		})
 		return data
 	}
+
+	/* ----------------------------- Clear Favorites ---------------------------- */
+	async clearFavorites(userId) {
+		if (!userId) {
+			if (isDev()) console.error('Missing userId')
+			return
+		}
+		const { data } = await axiosClient.delete(`${this._FAVORITES}/clear-favorites`, {
+			params: { userId }
+		})
+		return data
+	}
 }
 export const favoritesService = new FavoritesService()

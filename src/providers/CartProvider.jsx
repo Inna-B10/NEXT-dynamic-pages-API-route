@@ -94,6 +94,29 @@ export function CartProvider({ children }) {
 
 		toggleCartItemMutation.mutate({ productId, category })
 	}
+
+	/* --------------------------- Delete All In Cart --------------------------- */
+	const clearCartMutation = useMutation({
+		mutationKey: ['clearCart'],
+		mutationFn: async () => await cartService.clearCart(userId),
+
+		onSuccess: () => {
+			toast.success('Shopping cart cleared')
+		},
+		onError: error => {
+			toast.error('Failed to clear cart')
+			if (isDev()) console.error('Error clearing cart:', error)
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['shoppingCart', userId])
+			queryClient.invalidateQueries(['detailedCart', userId])
+		}
+	})
+	const clearCart = () => {
+		if (!isLoaded || !userId) return
+
+		clearCartMutation.mutate()
+	}
 	/* -------------------------------- IsInCart -------------------------------- */
 	const isInCart = productId => {
 		return cartItems.includes(productId)
@@ -108,7 +131,8 @@ export function CartProvider({ children }) {
 				loadingCart,
 				detailedCart,
 				loadDetailedCart,
-				detailedCartLoading
+				detailedCartLoading,
+				clearCart
 			}}
 		>
 			{children}

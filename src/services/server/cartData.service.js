@@ -82,3 +82,10 @@ export async function getCartItemsDetailsData(userId) {
 
 	return result
 }
+
+/* ------------------------------- Clear Cart ------------------------------- */
+export async function clearCartData(userId) {
+	const db = await connectToDatabase()
+	const data = await db.collection(COLLECTION_NAME).deleteMany({ userId })
+	return data
+}

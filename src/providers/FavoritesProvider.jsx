@@ -96,6 +96,27 @@ export function FavoritesProvider({ children }) {
 		toggleFavoriteMutation.mutate({ productId, category })
 	}
 
+	/* -------------------------- Delete All Favorites -------------------------- */
+	const clearFavoritesMutation = useMutation({
+		mutationKey: ['clearFavorites'],
+		mutationFn: async () => await favoritesService.clearFavorites(userId),
+		onSuccess: () => {
+			toast.success('Favorites cleared')
+		},
+		onError: error => {
+			toast.error('Failed to clear favorites')
+			if (isDev()) console.error('Error clearing favorites:', error)
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['favorites', userId])
+			queryClient.invalidateQueries(['detailedFavorites', userId])
+		}
+	})
+
+	const clearFavorites = () => {
+		if (!isLoaded || !userId) return
+		clearFavoritesMutation.mutate()
+	}
 	/* ------------------------------- IsFavorite ------------------------------- */
 	const isFavorite = productId => {
 		return favorites.includes(productId)
@@ -110,7 +131,8 @@ export function FavoritesProvider({ children }) {
 				loadingFav,
 				detailedFavorites,
 				loadDetailedFavorites,
-				detailedFavLoading
+				detailedFavLoading,
+				clearFavorites
 			}}
 		>
 			{children}
