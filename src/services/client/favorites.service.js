@@ -7,18 +7,18 @@ class FavoritesService {
 
 	/* ------------------------------ FavoritesIds ------------------------------ */
 	async getFavoritesIds(userId) {
-		if (!userId) return
-		const { data } = await axiosClient.get(this._FAVORITES, {
-			params: { userId }
-		})
-
+		if (!userId) {
+			if (isDev()) console.error('Missing userId')
+			throw new Error('Missing params')
+		}
+		const { data } = await axiosClient.get(this._FAVORITES)
 		return data
 	}
 	/* ------------------------------- AddFavorite ------------------------------ */
 	async addFavorite(userId, productId, category) {
 		if (!userId || !productId || !category) {
 			if (isDev()) console.error('Missing params')
-			return
+			throw new Error('Missing params')
 		}
 		await axiosClient.post(this._FAVORITES, {
 			userId,
@@ -30,10 +30,10 @@ class FavoritesService {
 	async deleteFavorite(userId, productId) {
 		if (!userId || !productId) {
 			if (isDev()) console.error('Missing params')
-			return
+			throw new Error('Missing params')
 		}
 		await axiosClient.delete(this._FAVORITES, {
-			params: { userId, productId }
+			params: { productId }
 		})
 	}
 
@@ -41,11 +41,9 @@ class FavoritesService {
 	async getDetailedFavorites(userId) {
 		if (!userId) {
 			if (isDev()) console.error('Missing userId')
-			return { data: [] }
+			throw new Error('Missing params')
 		}
-		const { data } = await axiosClient.get(`${this._FAVORITES}/detailed`, {
-			params: { userId }
-		})
+		const { data } = await axiosClient.get(`${this._FAVORITES}/detailed`)
 		return data
 	}
 
@@ -53,11 +51,9 @@ class FavoritesService {
 	async clearFavorites(userId) {
 		if (!userId) {
 			if (isDev()) console.error('Missing userId')
-			return
+			throw new Error('Missing params')
 		}
-		const { data } = await axiosClient.delete(`${this._FAVORITES}/clear-favorites`, {
-			params: { userId }
-		})
+		const { data } = await axiosClient.delete(`${this._FAVORITES}/clear-favorites`)
 		return data
 	}
 }

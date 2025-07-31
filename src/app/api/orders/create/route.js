@@ -8,7 +8,7 @@ export async function POST(req) {
 
 	if (!userId) {
 		if (isDev()) console.error('Unauthorized! Missing userId')
-		return new Response('Unauthorized', { status: 401 })
+		return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 	}
 
 	try {

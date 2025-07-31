@@ -1,6 +1,6 @@
 import { getProductDataById } from '@/services/server/productsData.service'
 
-export async function GET(req, { params }) {
+export async function GET({ params }) {
 	const param = await params
 	const id = param.id
 

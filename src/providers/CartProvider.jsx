@@ -1,5 +1,3 @@
-'use client'
-
 import { createContext, useContext } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'

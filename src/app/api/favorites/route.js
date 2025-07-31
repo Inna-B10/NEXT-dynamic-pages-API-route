@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { auth } from '@clerk/nextjs/server'
 import { isDev } from '@/lib/utils/isDev'
 import {
 	addFavoriteData,
@@ -6,11 +7,15 @@ import {
 	getFavoritesIdsData
 } from '@/services/server/favoritesData.service'
 
-export async function GET(request) {
-	try {
-		const { searchParams } = new URL(request.url)
-		const userId = searchParams.get('userId')
+export async function GET() {
+	const { userId } = await auth()
 
+	if (!userId) {
+		if (isDev()) console.error('Unauthorized! Missing userId')
+		return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+	}
+
+	try {
 		const data = await getFavoritesIdsData(userId)
 
 		return NextResponse.json({ data })
@@ -23,8 +28,18 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
+	const { userId } = await auth()
+
+	if (!userId) {
+		if (isDev()) console.error('Unauthorized! Missing userId')
+		return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+	}
 	try {
-		const { userId, productId, category } = await request.json()
+		const { productId, category } = await request.json()
+		if (!productId || !category) {
+			if (isDev()) console.error('Missing params')
+			return NextResponse.json({ error: 'Missing params' }, { status: 400 })
+		}
 
 		const data = await addFavoriteData(userId, productId, category)
 		return NextResponse.json({ data })
@@ -37,12 +52,19 @@ export async function POST(request) {
 }
 
 export async function DELETE(request) {
+	const { userId } = await auth()
+
+	if (!userId) {
+		if (isDev()) console.error('Unauthorized! Missing userId')
+		return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+	}
+
 	try {
 		const { searchParams } = new URL(request.url)
-		const userId = searchParams.get('userId')
 		const productId = searchParams.get('productId')
 
-		if (!userId || !productId) {
+		if (!productId) {
+			if (isDev()) console.error('Missing productId')
 			return NextResponse.json({ error: 'Missing params' }, { status: 400 })
 		}
 		const data = await deleteFavoriteData(userId, productId)

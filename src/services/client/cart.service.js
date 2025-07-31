@@ -7,11 +7,11 @@ class CartService {
 
 	/* ----------------------------- Cart Items Ids ----------------------------- */
 	async getCartItemsIds(userId) {
-		if (!userId) return
-		const { data } = await axiosClient.get(this._CART, {
-			params: { userId }
-		})
-
+		if (!userId) {
+			if (isDev()) console.error('Missing userId')
+			throw new Error('Missing params')
+		}
+		const { data } = await axiosClient.get(this._CART)
 		return data
 	}
 
@@ -19,10 +19,9 @@ class CartService {
 	async addCartItem(userId, productId, category) {
 		if (!userId || !productId || !category) {
 			if (isDev()) console.error('Missing params')
-			return
+			throw new Error('Missing params')
 		}
 		await axiosClient.post(this._CART, {
-			userId,
 			productId,
 			category
 		})
@@ -32,10 +31,10 @@ class CartService {
 	async deleteCartItem(userId, productId) {
 		if (!userId || !productId) {
 			if (isDev()) console.error('Missing params')
-			return
+			throw new Error('Missing params')
 		}
 		await axiosClient.delete(this._CART, {
-			params: { userId, productId }
+			params: { productId }
 		})
 	}
 
@@ -43,11 +42,9 @@ class CartService {
 	async getCartItemsDetails(userId) {
 		if (!userId) {
 			if (isDev()) console.error('Missing userId')
-			return { data: [] }
+			throw new Error('Missing params')
 		}
-		const { data } = await axiosClient.get(`${this._CART}/detailed`, {
-			params: { userId }
-		})
+		const { data } = await axiosClient.get(`${this._CART}/detailed`)
 		return data
 	}
 
@@ -55,11 +52,9 @@ class CartService {
 	async clearCart(userId) {
 		if (!userId) {
 			if (isDev()) console.error('Missing userId')
-			return
+			throw new Error('Missing params')
 		}
-		const { data } = await axiosClient.delete(`${this._CART}/clear-cart`, {
-			params: { userId }
-		})
+		const { data } = await axiosClient.delete(`${this._CART}/clear-cart`)
 		return data
 	}
 }
