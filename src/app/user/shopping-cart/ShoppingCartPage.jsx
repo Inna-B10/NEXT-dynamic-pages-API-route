@@ -3,6 +3,7 @@ import { useUser } from '@clerk/nextjs'
 import { Trash2 } from 'react-feather'
 import toast from 'react-hot-toast'
 import { ProductCardWide } from '@/components/ProductCardWide'
+import PlaceOrderButton from '@/components/buttons/PlaceOrderButton'
 import { ToggleCartButton } from '@/components/buttons/ToggleCartButton'
 import { ToggleFavoriteButton } from '@/components/buttons/ToggleFavoriteButton'
 import { Button } from '@/components/ui/Button'
@@ -98,6 +99,14 @@ export function ShoppingCartPage() {
 					</div>
 				)
 			})}
+			{hasItems && (
+				<PlaceOrderButton
+					detailedCart={detailedCart}
+					loadDetailedCart={loadDetailedCart}
+					clearCart={clearCart}
+					userId={user?.id}
+				/>
+			)}
 		</section>
 	)
 }

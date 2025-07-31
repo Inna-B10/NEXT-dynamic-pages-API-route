@@ -100,9 +100,6 @@ export function CartProvider({ children }) {
 		mutationKey: ['clearCart'],
 		mutationFn: async () => await cartService.clearCart(userId),
 
-		onSuccess: () => {
-			toast.success('Shopping cart cleared')
-		},
 		onError: error => {
 			toast.error('Failed to clear cart')
 			if (isDev()) console.error('Error clearing cart:', error)
