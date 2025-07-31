@@ -1,5 +1,5 @@
-import { AddToFavoritesButton } from '@/components/buttons/AddToFavoritesButton'
-import { ShareButtons } from '../../../../../../components/buttons/ShareButtons'
+import { ShareButtons } from '@/components/buttons/ShareButtons'
+import { ToggleFavoriteButton } from '@/components/buttons/ToggleFavoriteButton'
 
 export function ShareFavoritesBlock({ title, id, variant, category }) {
 	if (variant === 'bigScreen') {
@@ -8,9 +8,10 @@ export function ShareFavoritesBlock({ title, id, variant, category }) {
 			<div className='hidden lg:flex w-1/2 h-full flex-col gap-6 justify-between items-center'>
 				<ShareButtons title={title} />
 
-				<AddToFavoritesButton
+				<ToggleFavoriteButton
 					itemId={id}
 					category={category}
+					className={'w-full'}
 				/>
 			</div>
 		)
@@ -25,9 +26,10 @@ export function ShareFavoritesBlock({ title, id, variant, category }) {
 				<div>
 					<h3 className='text-xl sm:text-lg md:text-xl font-bold text-accent mb-4'>Favorites:</h3>
 
-					<AddToFavoritesButton
+					<ToggleFavoriteButton
 						itemId={id}
 						category={category}
+						className={'w-full'}
 					/>
 				</div>
 			</div>

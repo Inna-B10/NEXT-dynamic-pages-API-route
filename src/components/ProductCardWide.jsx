@@ -21,14 +21,14 @@ export function ProductCardWide({ href, title, imageSrc, brand, price = '5995,-'
 					<div className='absolute inset-0 pointer-events-none rounded-l-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-none'></div>
 				</div>
 				<div className='flex flex-col justify-evenly w-full p-4 gap-4'>
-					<div className='flex justify-between'>
+					<div className='flex justify-between sm:text-base'>
 						{brand && (
-							<p className='text-dark-gray group-hover:text-foreground'>
+							<p>
 								Brand:
 								<br /> {brand}
 							</p>
 						)}
-						<p className='text-dark-gray group-hover:text-foreground'>
+						<p>
 							Price:
 							<br /> <span className='font-nanum font-bold'>{price}</span>
 						</p>

@@ -2,14 +2,15 @@ import { useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { Trash2 } from 'react-feather'
 import { ProductCardWide } from '@/components/ProductCardWide'
+import { ToggleCartButton } from '@/components/buttons/ToggleCartButton'
+import { ToggleFavoriteButton } from '@/components/buttons/ToggleFavoriteButton'
 import Spinner from '@/components/ui/Spinner'
 import { useFavorites } from '@/providers/FavoritesProvider'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 
 export function FavoritesPage() {
 	const { isLoaded, user } = useUser()
-	const { detailedFavorites, detailedFavLoading, loadDetailedFavorites, toggleFavorite } =
-		useFavorites()
+	const { detailedFavorites, detailedFavLoading, loadDetailedFavorites } = useFavorites()
 
 	useEffect(() => {
 		if (isLoaded && user?.id) {
@@ -45,18 +46,25 @@ export function FavoritesPage() {
 							brand={product['Brand']}
 							price={product['Price']}
 						/>
-						<button
-							title='Remove from favorites'
-							aria-label='Remove from favorites'
-							onClick={() => toggleFavorite(product._id, product.categorySlug)}
-							className='absolute bottom-2 right-2 opacity-70 hover:cursor-pointer  hover:opacity-100 transition-all duration-300 ease-in-out'
-						>
-							<Trash2
-								size={20}
-								fillOpacity={0.5}
-								className='hover:fill-red-500 hover:stroke-red-500 lg:size-6'
+						<div className='absolute bottom-2 right-2 flex gap-2'>
+							<ToggleCartButton
+								itemId={product._id}
+								category={product.categorySlug}
+								variant='icon'
 							/>
-						</button>
+							<ToggleFavoriteButton
+								itemId={product._id}
+								category={product.categorySlug}
+								variant='icon'
+								icon={
+									<Trash2
+										size={20}
+										fillOpacity={0.5}
+										className='hover:fill-red-500 stroke-red-500 lg:size-6 opacity-70 hover:opacity-100'
+									/>
+								}
+							/>
+						</div>
 					</div>
 				)
 			})}
