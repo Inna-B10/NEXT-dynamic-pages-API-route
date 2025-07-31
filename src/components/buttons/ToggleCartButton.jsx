@@ -26,7 +26,7 @@ export function ToggleCartButton({ itemId, category, className, variant, icon })
 			) : (
 				<ShoppingCart
 					fillOpacity='0.7'
-					className={clsx('min-w-5 min-h-5 sm:min-w-6 sm:min-h-6 text-accent hover:opacity-100', {
+					className={clsx('min-w-4 w-5 sm:min-w-6 text-accent hover:opacity-100', {
 						'fill-accent': isAdded,
 						'opacity-70': !isAdded && variant === 'icon'
 					})}

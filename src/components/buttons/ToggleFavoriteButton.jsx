@@ -26,7 +26,7 @@ export function ToggleFavoriteButton({ itemId, category, className, variant, ico
 			) : (
 				<Heart
 					fillOpacity='0.7'
-					className={clsx('min-w-5 min-h-5 sm:min-w-6 sm:min-h-6 text-accent hover:opacity-100', {
+					className={clsx('min-w-4 w-5 sm:min-w-6 text-accent hover:opacity-100', {
 						'fill-accent': isInFav,
 						'opacity-70': !isInFav && variant === 'icon'
 					})}

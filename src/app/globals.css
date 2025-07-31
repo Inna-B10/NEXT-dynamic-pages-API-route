@@ -23,7 +23,7 @@
   }
 
   h1 {
-    @apply text-xl bp520:text-2xl md:text-3xl font-bold text-accent text-center mt-2 sm:mt-4 lg:mt-8 mb-6 sm:mb-8 lg:mb-12
+    @apply w-full text-xl bp520:text-2xl md:text-3xl font-bold text-accent text-center mt-2 sm:mt-4 lg:mt-8 mb-6 sm:mb-8 lg:mb-12
   }
 }
 

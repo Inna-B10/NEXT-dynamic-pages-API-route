@@ -47,7 +47,7 @@ export function Providers({ children }) {
 								backgroundColor: '#3f3f46',
 								color: 'white'
 							},
-							className: 'border border-white/20  shadow-lg'
+							className: 'border border-white/20 shadow-lg'
 						}}
 					/>
 				</LazyMotion>
