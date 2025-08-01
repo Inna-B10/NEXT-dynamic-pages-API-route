@@ -55,7 +55,7 @@ export function FavoritesPage() {
 					<Button
 						className='place-self-end sm:place-self-center'
 						onClick={isLoaded && user?.id ? handleClearFavorites : undefined}
-						variant='simple'
+						variant='warn'
 					>
 						Remove all
 					</Button>

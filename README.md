@@ -58,6 +58,7 @@ npm install @clerk/themes
 npm install tailwind-merge
 npm install react-hot-toast
 npm install dotenv #needs for seeding data
+npm install @headlessui/react #modal form
 ```
 <br />
 <br />

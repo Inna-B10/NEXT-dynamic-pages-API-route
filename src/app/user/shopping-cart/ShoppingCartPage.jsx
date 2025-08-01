@@ -55,7 +55,7 @@ export function ShoppingCartPage() {
 					<Button
 						className='place-self-end sm:place-self-center'
 						onClick={isLoaded && user?.id ? handleClearCart : undefined}
-						variant='simple'
+						variant='warn'
 					>
 						Remove all
 					</Button>
