@@ -1,5 +1,3 @@
-'use client'
-
 import { createContext, useContext } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -18,8 +16,7 @@ export function FavoritesProvider({ children }) {
 	/* -------------------------- Light Mode (only Ids) ------------------------- */
 	const { data: favorites = [], isLoading: loadingFav } = useQuery({
 		queryKey: ['favorites', userId],
-		queryFn: () =>
-			favoritesService.getFavoritesIds(userId).then(res => res.data.map(f => f.productId)),
+		queryFn: () => favoritesService.getFavoritesIds().then(res => res.data.map(f => f.productId)),
 		enabled: isLoaded && !!userId,
 		onError: error => {
 			toast.error('Error loading favorites')
@@ -36,7 +33,7 @@ export function FavoritesProvider({ children }) {
 		queryKey: ['detailedFavorites', userId],
 		queryFn: () => {
 			if (!userId) return []
-			return favoritesService.getDetailedFavorites(userId).then(res =>
+			return favoritesService.getDetailedFavorites().then(res =>
 				res.data.map(item => ({
 					...item.product,
 					addedAt: item.addedAt,
@@ -58,9 +55,9 @@ export function FavoritesProvider({ children }) {
 			const isInFavorites = favorites.includes(productId)
 
 			if (isInFavorites) {
-				await favoritesService.deleteFavorite(userId, productId)
+				await favoritesService.deleteFavorite(productId)
 			} else {
-				await favoritesService.addFavorite(userId, productId, category)
+				await favoritesService.addFavorite(productId, category)
 			}
 		},
 		onMutate: async ({ productId }) => {
@@ -99,7 +96,7 @@ export function FavoritesProvider({ children }) {
 	/* -------------------------- Delete All Favorites -------------------------- */
 	const clearFavoritesMutation = useMutation({
 		mutationKey: ['clearFavorites'],
-		mutationFn: async () => await favoritesService.clearFavorites(userId),
+		mutationFn: async () => await favoritesService.clearFavorites(),
 		onSuccess: () => {
 			toast.success('Favorites cleared')
 		},

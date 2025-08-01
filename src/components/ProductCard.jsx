@@ -7,6 +7,7 @@ export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) 
 			href={href}
 			title={title}
 			aria-label={`${title} - open product's page`}
+			className='inline-block'
 		>
 			<div className='group flex flex-col h-full justify-between rounded-md border border-border bg-bgSecondary font-semibold bp480:text-sm tracking-wide md:text-base lg:text-lg lg:tracking-normal hover:scale-[1.02] transition-transform duration-300 ease-in-out transform-gpu hover:[transform:scale(1.02)] hover:[will-change:transform]'>
 				<div>

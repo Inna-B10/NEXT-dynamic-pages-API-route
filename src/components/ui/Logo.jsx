@@ -14,6 +14,7 @@ export function Logo({ isSidebar = true }) {
 				href={PUB_PAGES.HOME}
 				title={`${SITE_NAME} - homepage`}
 				aria-label={`${SITE_NAME} - homepage`}
+				className='inline-block'
 			>
 				<h2 className='text-2xl'>SiteLogo</h2>
 			</Link>

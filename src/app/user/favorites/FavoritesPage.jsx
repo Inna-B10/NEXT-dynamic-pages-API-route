@@ -1,12 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { Trash2 } from 'react-feather'
-import toast from 'react-hot-toast'
 import { ProductCardWide } from '@/components/ProductCardWide'
 import { ToggleCartButton } from '@/components/buttons/ToggleCartButton'
 import { ToggleFavoriteButton } from '@/components/buttons/ToggleFavoriteButton'
 import { Button } from '@/components/ui/Button'
-import { ConfirmToast } from '@/components/ui/ConfirmToast'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
 import { useFavorites } from '@/providers/FavoritesProvider'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'
@@ -15,6 +14,7 @@ export function FavoritesPage() {
 	const { isLoaded, user } = useUser()
 	const { detailedFavorites, detailedFavLoading, loadDetailedFavorites, clearFavorites } =
 		useFavorites()
+	const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
 	useEffect(() => {
 		if (isLoaded && user?.id) {
@@ -23,16 +23,7 @@ export function FavoritesPage() {
 	}, [isLoaded, user?.id, loadDetailedFavorites])
 
 	const handleClearFavorites = () => {
-		toast.custom(
-			t => (
-				<ConfirmToast
-					toastId={t.id}
-					message='Remove all favorites?'
-					onConfirm={clearFavorites}
-				/>
-			),
-			{ duration: Infinity }
-		)
+		setIsConfirmOpen(true)
 	}
 
 	const hasItems = detailedFavorites && detailedFavorites.length > 0
@@ -55,11 +46,17 @@ export function FavoritesPage() {
 					<Button
 						className='place-self-end sm:place-self-center'
 						onClick={isLoaded && user?.id ? handleClearFavorites : undefined}
-						variant='simple'
+						variant='warn'
 					>
 						Remove all
 					</Button>
 				)}
+				<ConfirmDialog
+					open={isConfirmOpen}
+					onClose={() => setIsConfirmOpen(false)}
+					onConfirm={clearFavorites}
+					message='Remove all favorites?'
+				/>
 			</div>
 			{!hasItems && <p>You have no favorites</p>}
 
@@ -77,7 +74,7 @@ export function FavoritesPage() {
 							brand={product['Brand']}
 							price={product['Price']}
 						/>
-						<div className='absolute bottom-2 right-2 flex gap-2'>
+						<div className='absolute bottom-4 right-2 flex gap-2'>
 							<ToggleCartButton
 								itemId={product._id}
 								category={product.categorySlug}

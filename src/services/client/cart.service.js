@@ -6,60 +6,43 @@ class CartService {
 	_CART = `${API_URL}/cart`
 
 	/* ----------------------------- Cart Items Ids ----------------------------- */
-	async getCartItemsIds(userId) {
-		if (!userId) return
-		const { data } = await axiosClient.get(this._CART, {
-			params: { userId }
-		})
-
+	async getCartItemsIds() {
+		const { data } = await axiosClient.get(this._CART)
 		return data
 	}
 
 	/* --------------------------- Add Product To Cart -------------------------- */
-	async addCartItem(userId, productId, category) {
-		if (!userId || !productId || !category) {
+	async addCartItem(productId, category) {
+		if (!productId || !category) {
 			if (isDev()) console.error('Missing params')
-			return
+			throw new Error('Missing params')
 		}
 		await axiosClient.post(this._CART, {
-			userId,
 			productId,
 			category
 		})
 	}
 
 	/* ------------------------ Delete Product From Cart ------------------------ */
-	async deleteCartItem(userId, productId) {
-		if (!userId || !productId) {
+	async deleteCartItem(productId) {
+		if (!productId) {
 			if (isDev()) console.error('Missing params')
-			return
+			throw new Error('Missing params')
 		}
 		await axiosClient.delete(this._CART, {
-			params: { userId, productId }
+			params: { productId }
 		})
 	}
 
 	/* ---------------------------- Cart Items Details --------------------------- */
-	async getCartItemsDetails(userId) {
-		if (!userId) {
-			if (isDev()) console.error('Missing userId')
-			return { data: [] }
-		}
-		const { data } = await axiosClient.get(`${this._CART}/detailed`, {
-			params: { userId }
-		})
+	async getCartItemsDetails() {
+		const { data } = await axiosClient.get(`${this._CART}/detailed`)
 		return data
 	}
 
 	/* ---------------------------- Clear Cart --------------------------- */
-	async clearCart(userId) {
-		if (!userId) {
-			if (isDev()) console.error('Missing userId')
-			return
-		}
-		const { data } = await axiosClient.delete(`${this._CART}/clear-cart`, {
-			params: { userId }
-		})
+	async clearCart() {
+		const { data } = await axiosClient.delete(`${this._CART}/clear-cart`)
 		return data
 	}
 }
