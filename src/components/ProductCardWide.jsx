@@ -7,6 +7,7 @@ export function ProductCardWide({ href, title, imageSrc, brand, price = '5995,-'
 			href={href}
 			title={`${title} - open product's page`}
 			aria-label={`${title} - open product's page`}
+			className='inline-block w-full'
 		>
 			<div className='flex group w-full rounded-md border border-border bg-bgSecondary font-semibold text-sm md:text-base lg:text-lg lg:tracking-normal'>
 				<div className='relative min-w-1/3 sm:min-w-[150px]  bg-white rounded-l-md'>

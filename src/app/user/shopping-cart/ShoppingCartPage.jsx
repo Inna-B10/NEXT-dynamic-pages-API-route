@@ -1,13 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { Trash2 } from 'react-feather'
-import toast from 'react-hot-toast'
 import { ProductCardWide } from '@/components/ProductCardWide'
 import PlaceOrderButton from '@/components/buttons/PlaceOrderButton'
 import { ToggleCartButton } from '@/components/buttons/ToggleCartButton'
 import { ToggleFavoriteButton } from '@/components/buttons/ToggleFavoriteButton'
 import { Button } from '@/components/ui/Button'
-import { ConfirmToast } from '@/components/ui/ConfirmToast'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
 import { useCart } from '@/providers/CartProvider'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'
@@ -15,6 +14,7 @@ import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 export function ShoppingCartPage() {
 	const { isLoaded, user } = useUser()
 	const { detailedCart, detailedCartLoading, loadDetailedCart, clearCart } = useCart()
+	const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
 	useEffect(() => {
 		if (isLoaded && user?.id) {
@@ -23,16 +23,7 @@ export function ShoppingCartPage() {
 	}, [isLoaded, user?.id, loadDetailedCart])
 
 	const handleClearCart = () => {
-		toast.custom(
-			t => (
-				<ConfirmToast
-					toastId={t.id}
-					message='Remove all products from cart?'
-					onConfirm={clearCart}
-				/>
-			),
-			{ duration: Infinity }
-		)
+		setIsConfirmOpen(true)
 	}
 
 	const hasItems = detailedCart && detailedCart.length > 0
@@ -60,6 +51,12 @@ export function ShoppingCartPage() {
 						Remove all
 					</Button>
 				)}
+				<ConfirmDialog
+					open={isConfirmOpen}
+					onClose={() => setIsConfirmOpen(false)}
+					onConfirm={clearCart}
+					message='Remove all products from cart?'
+				/>
 			</div>
 
 			{!hasItems && <p>Your cart is empty.</p>}
@@ -78,7 +75,7 @@ export function ShoppingCartPage() {
 							brand={product['Brand']}
 							price={product['Price']}
 						/>
-						<div className='absolute bottom-2 right-2 flex gap-2'>
+						<div className='absolute bottom-4 right-2 flex gap-2'>
 							<ToggleFavoriteButton
 								itemId={product._id}
 								category={product.categorySlug}
