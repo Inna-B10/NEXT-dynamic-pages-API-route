@@ -104,7 +104,6 @@ export function ShoppingCartPage() {
 					detailedCart={detailedCart}
 					loadDetailedCart={loadDetailedCart}
 					clearCart={clearCart}
-					userId={user?.id}
 				/>
 			)}
 		</section>

@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import CheckoutForm from '../CheckoutForm'
 import { ordersService } from '@/services/client/orders.service'
 
-export default function PlaceOrderButton({ detailedCart, loadDetailedCart, userId, clearCart }) {
+export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clearCart }) {
 	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	const { mutate: placeOrder } = useMutation({
@@ -20,7 +20,7 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, userI
 				0
 			)
 
-			await ordersService.createNewOrder(userId, items, totalPrice, address)
+			await ordersService.createNewOrder(items, totalPrice, address)
 		},
 		onSuccess: () => {
 			toast.success('Order placed successfully!')

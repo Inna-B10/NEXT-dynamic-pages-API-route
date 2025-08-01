@@ -16,8 +16,8 @@ class OrdersService {
 	// }
 
 	/* ---------------------------- Create New Order ---------------------------- */
-	async createNewOrder(userId, items, totalPrice, address) {
-		if (!userId || !address || !items?.length || !totalPrice) {
+	async createNewOrder(items, totalPrice, address) {
+		if (!address || !items?.length || !totalPrice) {
 			if (isDev()) console.error('Missing params')
 			throw new Error('Missing order data')
 		}

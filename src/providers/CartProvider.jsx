@@ -16,7 +16,7 @@ export function CartProvider({ children }) {
 	/* -------------------------- Light Mode (only Ids) ------------------------- */
 	const { data: cartItems = [], isLoading: loadingCart } = useQuery({
 		queryKey: ['shoppingCart', userId],
-		queryFn: () => cartService.getCartItemsIds(userId).then(res => res.data.map(i => i.productId)),
+		queryFn: () => cartService.getCartItemsIds().then(res => res.data.map(i => i.productId)),
 		enabled: isLoaded && !!userId,
 		onError: error => {
 			toast.error('Error loading shopping cart')
@@ -33,7 +33,7 @@ export function CartProvider({ children }) {
 		queryKey: ['detailedCart', userId],
 		queryFn: () => {
 			if (!userId) return []
-			return cartService.getCartItemsDetails(userId).then(res =>
+			return cartService.getCartItemsDetails().then(res =>
 				res.data.map(item => ({
 					...item.product,
 					addedAt: item.addedAt,
@@ -55,9 +55,9 @@ export function CartProvider({ children }) {
 			const isAdded = cartItems.includes(productId)
 
 			if (isAdded) {
-				await cartService.deleteCartItem(userId, productId)
+				await cartService.deleteCartItem(productId)
 			} else {
-				await cartService.addCartItem(userId, productId, category)
+				await cartService.addCartItem(productId, category)
 			}
 		},
 		onMutate: async ({ productId }) => {
@@ -96,7 +96,7 @@ export function CartProvider({ children }) {
 	/* --------------------------- Delete All In Cart --------------------------- */
 	const clearCartMutation = useMutation({
 		mutationKey: ['clearCart'],
-		mutationFn: async () => await cartService.clearCart(userId),
+		mutationFn: async () => await cartService.clearCart(),
 
 		onError: error => {
 			toast.error('Failed to clear cart')
