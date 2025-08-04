@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { Trash2 } from 'react-feather'
 import { ProductCardWide } from '@/components/ProductCardWide'
+import { DynamicToggleCartButton } from '@/components/buttons/DynamicToggleCartButton'
+import { DynamicToggleFavoriteButton } from '@/components/buttons/DynamicToggleFavoriteButton'
 import PlaceOrderButton from '@/components/buttons/PlaceOrderButton'
-import { ToggleCartButton } from '@/components/buttons/ToggleCartButton'
-import { ToggleFavoriteButton } from '@/components/buttons/ToggleFavoriteButton'
 import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
@@ -76,12 +76,12 @@ export function ShoppingCartPage() {
 							price={product['Price']}
 						/>
 						<div className='absolute bottom-4 right-2 flex gap-2'>
-							<ToggleFavoriteButton
+							<DynamicToggleFavoriteButton
 								itemId={product._id}
 								category={product.categorySlug}
 								variant='icon'
 							/>
-							<ToggleCartButton
+							<DynamicToggleCartButton
 								itemId={product._id}
 								category={product.categorySlug}
 								variant='icon'

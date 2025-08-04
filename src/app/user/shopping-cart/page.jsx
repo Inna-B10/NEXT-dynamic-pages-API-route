@@ -1,10 +1,10 @@
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
-import { ShoppingCartDynPage } from './ShoppingCartDynPage'
+import { DynamicShoppingCartPage } from './DynamicShoppingCartPage'
 
 export const metadata = {
 	title: 'Shopping Cart',
 	...NO_INDEX_PAGE
 }
 export default function ShoppingCart() {
-	return <ShoppingCartDynPage />
+	return <DynamicShoppingCartPage />
 }

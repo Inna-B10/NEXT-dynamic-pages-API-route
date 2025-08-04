@@ -18,7 +18,6 @@ export function Rating({ ratings }) {
 							{Array.from({ length: 5 }).map((_, i) => (
 								<Star
 									key={i}
-									// size={20}
 									className={clsx(
 										'w-4 h-4 md:w-5 md:h-5',
 										i < stars ? 'text-emerald-500' : 'text-gray-300'

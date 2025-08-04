@@ -3,8 +3,8 @@
 import dynamic from 'next/dynamic'
 import Spinner from '@/components/ui/Spinner'
 
-const DynamicShoppingCartPage = dynamic(
-	() => import('./ShoppingCartPage').then(mod => mod.ShoppingCartPage),
+export const DynamicFavoritesPage = dynamic(
+	() => import('./FavoritesPage').then(mod => mod.FavoritesPage),
 	{
 		ssr: false,
 		loading: () => (
@@ -17,6 +17,3 @@ const DynamicShoppingCartPage = dynamic(
 		)
 	}
 )
-export function ShoppingCartDynPage() {
-	return <DynamicShoppingCartPage />
-}
