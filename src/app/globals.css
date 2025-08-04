@@ -41,8 +41,12 @@ button:disabled {
   cursor: default;
 }
 
-:focus-visible {
+:focus-visible:not(input[type="search"]) {
   outline: 2px solid #f3ac40;
   outline-offset: 2px;
   border-radius: 0.25rem;
+}
+
+input[type="search"]:focus-visible {
+  outline: none;
 }
