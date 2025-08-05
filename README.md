@@ -1,47 +1,91 @@
-# Intro-dynamic-routing-api
+
 ### Goal:
 
-Legg til en ny api route, hent informasjonen derifra og vis den i en ny dynamisk underside
+ Vise forståelse hvordan man bygger dynamiske nettsider med brukertilgang, datalagring, og API-kommunikasjon.
+
+ **🎯 Minimumskrav:**
+- Bruke Next.js App Router
+- Bruke Clerk for autentisering
+- Inneholde minst én API-route
+- Implementere CRUD-funksjonalitet
+- Bruke asynkron datainnhenting
+- Dynamisk routing
+
+*i tillegg:*
 - Metadata i layout.jsx,
 - Bruk Image komponenten fra next for bilder,
 - Sjekk lighthouse observability tool for å sjekke hvor høy score dere får   
+<br />
+<br />
+
+# **Project 🛒 Webstore:**
+
+En enkel nettbutikk med produkter, produktdetaljer og søke funksjon.
+
+Innloggede brukere kan 
+- legge til og fjerne produkter i Shopping cart og Favorites
+- simulere et kjøp
+
+
 
 ### [Deployed on Vercel](https://next-intro-sandy.vercel.app/)
+<br />
 
+## ⚙️ Preparing:
 
+**1. Define admin:**  
+- Go to [Clerk dashboard](https://dashboard.clerk.com/) of your application and create the first user manually.
+- Then copy this user's **Clerk User ID** and **Primary Email**, and add them to your `.env.local` file as:  `SUPERUSER_CLERK_ID` and  `SUPERUSER_EMAIL`
+<br />
+<br />
 
-## Start project:
-
-**1. define admin:**  
-create the first user in Clerk dashboard and use its id and email in the .env file as SUPERUSER_CLERK_ID and SUPERUSER_EMAIL
-
-**2. required environments:**
-```bash
+**2. Required environment variables:**
+Create a `.env.local` file in the root of the project add the following:
+```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-MONGODB_URI= 
-MONGODB_NAME=
 
-#admin
-SUPERUSER_CLERK_ID= #from clerk User ID
-SUPERUSER_EMAIL= #from clerk Primary email
+# MongoDB
+MONGODB_URI= # e.g. mongodb+srv://...
+MONGODB_NAME= # your database name
 
+# Admin credentials
+SUPERUSER_CLERK_ID= # from Clerk User ID
+SUPERUSER_EMAIL= # from Clerk Primary email
+
+# Clerk configuration
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 
+# Custom auth routes
 NEXT_PUBLIC_CLERK_SIGN_IN_URL='/auth?mode=sign-in'
 NEXT_PUBLIC_CLERK_SIGN_UP_URL='/auth?mode=sign-up'
 ```
+💡 add .env.local to .gitignore - don’t commit!
 
 
-**3. after first start of the project**  
-- go to http://localhost:3000/api/init-db   
-for initiate DB and create collections, indexes  and admin user in DB 
-- then run in the terminal ./src/scripts/seed.js   
-for seeding data in the DB
+
+
+## 🚀 Start project:
+**1.The first run of the project:** 
+```bash
+npm run dev
+```
+
+**2.After the first run:**
+
+- Open your app in the browser at [http://localhost:3000/api/init-db](http://localhost:3000/api/init-db)
+  This will:
+  - create required MongoDB collections and indexes
+  - create the admin user in the database (using `SUPERUSER_CLERK_ID` and `SUPERUSER_EMAIL`)
+   
+- Then run the seed script to populate the database with sample data from .json files:
+```bash
+./src/scripts/seed.js 
+```  
 ---
 <br />
 
-**used libraries:**
+**📦 used libraries:**
 
 ```bash
 npm install -D @trivago/prettier-plugin-sort-imports prettier
@@ -75,26 +119,38 @@ npm install @headlessui/react #modal form
 - [x] add/delete to favorites
 - [x] change image sizes for adaptive layout
 - [x] ToTop button
+- [x] favorite page
+- [x] search
 
 
 ## TODOs:
 
 #### *functional:*
-- [?] user's role
-- [ ] add/delete product
-- [ ] shopping card page
-- [ ] favorite page
-- [ ] imitation paying process
-- [ ] search
+- [ ] form validation (Zod)
+- [ ] ? quantity on Product page
 - [ ] contact page + check options:
    - [ ] [Send emails with Next.js - Resend](https://resend.com/docs/send-with-nextjs)
    - [ ] [Easy Contact Form to Email Service](https://web3forms.com/)
 
+admin:
+- [ ] dashboard page:
+   - [ ] ? add/delete product
+   - [ ] ? user's role
+   - [ ] ? orders
+
+user:
+- [ ] shopping card page:
+   - [ ] ? quantity
+- [ ] imitation paying process
+- [ ] order confirmation(email)
+- [ ] orders page
+
 #### *design:*
-- [?] metadata
+- [ ] metadata
+- [ ] home page
 - [ ] Logo
 - [ ] Skeleton/Loader
 - [ ] User's buttons break point 480 (menu)
-- [ ] Layout
-- [?] Sidebar
-- [ ] Footer
+- [ ] Layout:
+  - [ ] Sidebar
+  - [ ] Footer
