@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
+import { UserButton, useUser } from '@clerk/nextjs'
 import { match } from 'path-to-regexp'
 import { Grid, Heart, ShoppingBag, User } from 'react-feather'
 import { UserMenuButton } from '@/components/buttons/header/UserMenuButton'
@@ -10,6 +10,8 @@ import { useFavorites } from '@/providers/FavoritesProvider'
 
 export function UserMenu() {
 	const pathname = usePathname()
+	const isProtected = pathname.startsWith('/user')
+
 	const { user } = useUser()
 	const role = user?.publicMetadata?.role
 
@@ -28,17 +30,13 @@ export function UserMenu() {
 					isActiveIcon={isActiveIcon('/admin')}
 				/>
 			)}
-			{!loadingFav && (
+			{loadingCart ? (
 				<UserMenuButton
-					href='/user/favorites'
-					title='Open List of Favorites'
-					ariaLabel='Open List of Favorites'
-					icon={<Heart className='w-2/3 h-2/3' />}
-					badgeCount={favorites?.length}
-					isActiveIcon={isActiveIcon('/user/favorites')}
+					icon={<ShoppingBag className='w-2/3 h-2/3' />}
+					asDiv
+					title='Shopping Cart'
 				/>
-			)}
-			{!loadingCart && (
+			) : (
 				<UserMenuButton
 					href='/user/shopping-cart'
 					title='Open Shopping Cart'
@@ -48,13 +46,30 @@ export function UserMenu() {
 					isActiveIcon={isActiveIcon('/user/shopping-cart')}
 				/>
 			)}
-			<SignedIn>
+			{loadingFav ? (
+				<UserMenuButton
+					icon={<Heart className='w-2/3 h-2/3' />}
+					asDiv
+					title='Favorites'
+				/>
+			) : (
+				<UserMenuButton
+					href='/user/favorites'
+					title='Open List of Favorites'
+					ariaLabel='Open List of Favorites'
+					icon={<Heart className='w-2/3 h-2/3' />}
+					badgeCount={favorites?.length}
+					isActiveIcon={isActiveIcon('/user/favorites')}
+				/>
+			)}
+			{user ? (
 				<UserMenuButton
 					title='Open User Menu'
 					ariaLabel='Open User Menu'
 					asDiv
 					icon={
 						<UserButton
+							afterSignOutUrl={isProtected ? '/' : pathname}
 							appearance={{
 								elements: {
 									avatarImage: 'p-[2px] sm:p-0 rounded-full bg-bg'
@@ -63,16 +78,14 @@ export function UserMenu() {
 						/>
 					}
 				/>
-			</SignedIn>
-
-			<SignedOut>
+			) : (
 				<UserMenuButton
 					href={`/auth?mode=sign-in&redirect_url=${encodeURIComponent(pathname)}`}
 					title='Go to Authorization page'
 					ariaLabel='Go to Authorization page'
 					icon={<User className='w-2/3 h-2/3' />}
 				/>
-			</SignedOut>
+			)}
 		</div>
 	)
 }

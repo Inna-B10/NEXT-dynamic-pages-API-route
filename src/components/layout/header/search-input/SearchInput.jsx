@@ -5,23 +5,28 @@ export function SearchInput() {
 	const [value, setValue] = useState('')
 	const router = useRouter()
 
-	const handleKeyDown = e => {
-		if (e.key === 'Enter' && value.trim()) {
+	const handleSubmit = e => {
+		e.preventDefault()
+		if (value.trim()) {
 			router.push(`/search?query=${encodeURIComponent(value.trim())}`)
 			setValue('')
 		}
 	}
 	return (
-		<label htmlFor='search'>
-			<input
-				type='search'
-				id='search'
-				placeholder='Search'
-				value={value}
-				onChange={e => setValue(e.target.value)}
-				onKeyDown={handleKeyDown}
-				className='w-full min-w-40 border border-accentSecondary text-xs italic p-1.5 sm:p-2 rounded md:ml-4'
-			/>
-		</label>
+		<form
+			onSubmit={handleSubmit}
+			className='w-full'
+		>
+			<label htmlFor='search'>
+				<input
+					type='search'
+					id='search'
+					placeholder='Search'
+					value={value}
+					onChange={e => setValue(e.target.value)}
+					className='w-full min-w-40 border border-accentSecondary text-xs italic p-1.5 sm:p-2 rounded md:ml-4'
+				/>
+			</label>
+		</form>
 	)
 }

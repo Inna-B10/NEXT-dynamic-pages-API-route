@@ -8,17 +8,6 @@ const DynamicToggleFavoriteBtn = dynamic(
 	{ ssr: false, loading: () => <SkeletonLoader /> }
 )
 
-// const DynamicToggleFavoriteBtn = dynamic(
-// 	() =>
-// 		new Promise(resolve => setTimeout(() => resolve(import('./ToggleFavoriteButton')), 10000)).then(
-// 			mod => mod.ToggleFavoriteButton
-// 		),
-// 	{
-// 		ssr: false,
-// 		loading: () => <SkeletonLoader />
-// 	}
-// )
-
 export function DynamicToggleFavoriteButton({ itemId, category, className, variant, icon }) {
 	return (
 		<DynamicToggleFavoriteBtn

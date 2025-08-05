@@ -14,8 +14,21 @@ export function ToggleFavoriteButton({ itemId, category, className, variant, ico
 
 	return (
 		<Button
-			title={isInFav ? 'Remove from favorites' : 'Add to favorites'}
-			aria-label={isInFav ? 'Remove from favorites' : 'Add to favorites'}
+			title={
+				isSignedIn
+					? isInFav
+						? 'Remove from favorites'
+						: 'Add to favorites'
+					: 'Sign in to add to favorites'
+			}
+			aria-label={
+				isSignedIn
+					? isInFav
+						? 'Remove from favorites'
+						: 'Add to favorites'
+					: 'Sign in to add to favorites'
+			}
+			aria-pressed={isInFav}
 			className={className}
 			variant={variant}
 			disabled={!isSignedIn}

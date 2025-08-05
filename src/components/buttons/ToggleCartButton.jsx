@@ -13,8 +13,20 @@ export function ToggleCartButton({ itemId, category, className, variant, icon })
 	const isAdded = isInCart(itemId)
 	return (
 		<Button
-			title={isAdded ? 'Remove from cart' : 'Add to shopping cart'}
-			aria-label={isAdded ? 'Remove from cart' : 'Add to shopping cart'}
+			title={
+				isSignedIn
+					? isAdded
+						? 'Remove from cart'
+						: 'Add to shopping cart'
+					: 'Sign in to add to cart'
+			}
+			aria-label={
+				isSignedIn
+					? isAdded
+						? 'Remove from cart'
+						: 'Add to shopping cart'
+					: 'Sign in to add to cart'
+			}
 			aria-pressed={isAdded}
 			className={className}
 			variant={variant}
