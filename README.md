@@ -103,6 +103,8 @@ npm install tailwind-merge
 npm install react-hot-toast
 npm install dotenv #needs for seeding data
 npm install @headlessui/react #modal form
+npm install zod #validation
+npm install react-hook-form @hookform/resolvers
 ```
 <br />
 <br />

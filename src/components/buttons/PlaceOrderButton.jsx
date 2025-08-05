@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
-import CheckoutForm from '../checkoutForm/CheckoutForm'
-import { MockPaymentForm } from '../checkoutForm/MockPaymentForm'
+import AddressForm from '../orderForm/AddressForm'
+import { MockPaymentForm } from '../orderForm/MockPaymentForm'
 import { Button } from '../ui/Button'
 import { ordersService } from '@/services/client/orders.service'
 
@@ -86,7 +86,7 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clear
 							{step === 'address' ? 'Delivery Address' : 'Mock Payment'}
 						</DialogTitle>
 						{step === 'address' && (
-							<CheckoutForm
+							<AddressForm
 								onSubmit={handleAddressSubmit}
 								isSubmitting={isSubmitting}
 								onClose={handleClose}
