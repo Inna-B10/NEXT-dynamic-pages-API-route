@@ -1,15 +1,21 @@
 export default function CheckoutFormInput({
 	setFormData,
+	onChange,
 	value,
 	label,
+	placeholder = '',
 	name,
 	required = true,
 	disabled = false,
 	type = 'text'
 }) {
 	const handleChange = e => {
-		const { name, value } = e.target
-		setFormData(prev => ({ ...prev, [name]: value }))
+		if (onChange) {
+			onChange(e)
+		} else if (setFormData) {
+			const { name, value } = e.target
+			setFormData(prev => ({ ...prev, [name]: value }))
+		}
 	}
 
 	return (
@@ -22,6 +28,8 @@ export default function CheckoutFormInput({
 			</label>
 			<input
 				name={name}
+				id={name}
+				placeholder={placeholder}
 				type={type}
 				value={value}
 				onChange={handleChange}

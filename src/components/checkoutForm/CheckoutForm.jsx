@@ -27,6 +27,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting, onClose }) {
 				value={formData.fullName}
 				label='Full Name:'
 				name='fullName'
+				id='fullName'
 			/>
 
 			<CheckoutFormInput
@@ -34,6 +35,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting, onClose }) {
 				value={formData.phone}
 				label='Phone:'
 				name='phone'
+				id='phone'
 				type='number'
 			/>
 
@@ -42,6 +44,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting, onClose }) {
 				value={formData.street}
 				label='Street:'
 				name='street'
+				id='street'
 			/>
 
 			<CheckoutFormInput
@@ -49,6 +52,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting, onClose }) {
 				value={formData.city}
 				label='City:'
 				name='city'
+				id='city'
 			/>
 
 			<CheckoutFormInput
@@ -56,6 +60,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting, onClose }) {
 				value={formData.zip}
 				label='ZIP Code:'
 				name='zip'
+				id='zip'
 				type='number'
 			/>
 
@@ -64,6 +69,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting, onClose }) {
 				value={formData.country}
 				label='Country:'
 				name='country'
+				id='country'
 				disabled={true}
 			/>
 			<div className='flex flex-col gap-2 w-fit mx-auto'>
