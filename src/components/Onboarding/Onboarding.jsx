@@ -11,6 +11,9 @@ export default function Onboarding() {
 	useEffect(() => {
 		if (!isLoaded || !isSignedIn || !user) return
 
+		// if already shown welcome in this tab
+		if (sessionStorage.getItem('welcome-shown') === 'true') return
+
 		const alreadyChecked = sessionStorage.getItem('userChecked')
 		if (alreadyChecked === 'true') return
 
@@ -20,6 +23,7 @@ export default function Onboarding() {
 
 				if (res.ok) {
 					toast.success('Welcome! You are signed in')
+					sessionStorage.setItem('welcome-shown', 'true')
 				} else {
 					if (isDev()) {
 						console.error('Error authenticating:', res)
@@ -47,8 +51,9 @@ export default function Onboarding() {
 
 		if (!isSignedIn) {
 			sessionStorage.removeItem('userChecked')
+			sessionStorage.removeItem('welcome-shown')
 		}
-	}, [isSignedIn])
+	}, [isSignedIn, isLoaded])
 
 	return null
 }
