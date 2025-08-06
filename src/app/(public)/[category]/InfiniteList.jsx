@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { LIMIT } from '@/constants/constants'
 import { ProductCard } from '../../../components/ProductCard'
 import Spinner from '../../../components/ui/Spinner'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 export default function InfiniteList({ totalPages, currentPage, category }) {
 	const [page, setPage] = useState(currentPage + 1)

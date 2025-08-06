@@ -5,8 +5,8 @@ import { LIMIT } from '@/constants/constants'
 import { CategoryClientPage } from '@/app/(public)/[category]/CategoryClientPage'
 import NotFoundPage from '@/app/not-found'
 import { PUB_PAGES } from '@/lib/routes/public-pages'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 import { getCategoryLabel } from '@/lib/utils/getCategoryLabel'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 import { getPreviewProductsData } from '@/services/server/productsData.service'
 
 export const revalidate = 60 //ISR

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
 import { useCart } from '@/providers/CartProvider'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 export function ShoppingCartPage() {
 	const { isLoaded, user } = useUser()

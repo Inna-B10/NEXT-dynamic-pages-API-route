@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
 import { useFavorites } from '@/providers/FavoritesProvider'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 export function FavoritesPage() {
 	const { isLoaded, user } = useUser()

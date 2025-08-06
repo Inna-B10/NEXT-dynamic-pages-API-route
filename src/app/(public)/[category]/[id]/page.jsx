@@ -3,8 +3,8 @@ import { CATEGORIES } from '@/constants/categories'
 import { SITE_NAME } from '@/constants/seo.constants'
 import { ProductDetails } from '@/app/(public)/[category]/[id]/product-page/ProductDetails'
 import NotFoundPage from '@/app/not-found'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
-import { prepareProductInfo } from '@/lib/utils/prepareProductInfo'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
+import { prepareProductInfo } from '@/lib/utils/product/prepareProductInfo'
 import { getPreviewProductsData, getProductDataById } from '@/services/server/productsData.service'
 
 export const revalidate = 60 //ISR

@@ -1,4 +1,4 @@
-import { formatLabel } from '@/lib/utils/orderFormFormatters'
+import { formatLabel } from '@/lib/utils/orderForm/orderFormFormatters'
 
 export default function OrderFormInput({ field, register, handleOnchange, onBlur, errors }) {
 	return (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ProductCard } from '@/components/ProductCard'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 import { searchService } from '@/services/client/search.service'
 
 export function SearchPage() {
