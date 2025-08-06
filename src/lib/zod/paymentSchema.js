@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const paymentSchema = z.object({
-	card_number: z.string().regex(/^(\d{4}-){3}\d{4}$/, 'Card number must be xxxx-xxxx-xxxx-xxxx'),
+	card_number: z.string().regex(/^(\d{4} ){3}\d{4}$/, 'Card number must be xxxx-xxxx-xxxx-xxxx'),
 	expiry: z
 		.string()
 		.regex(/^\d{2}\/\d{2}$/, 'Use MM/YY format')
@@ -15,6 +15,6 @@ export const paymentSchema = z.object({
 
 			// date later than current?
 			return yy > currentYear || (yy === currentYear && mm >= currentMonth)
-		}, 'Card expired'),
+		}, 'Invalid or expired date'),
 	cvc: z.string().regex(/^\d{3}$/, 'CVC must be 3 digits')
 })

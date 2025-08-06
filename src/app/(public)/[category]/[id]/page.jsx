@@ -1,6 +1,6 @@
 import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
 import { CATEGORIES } from '@/constants/categories'
-import { SITE_NAME } from '@/constants/constants'
+import { SITE_NAME } from '@/constants/seo.constants'
 import { ProductDetails } from '@/app/(public)/[category]/[id]/product-page/ProductDetails'
 import NotFoundPage from '@/app/not-found'
 import { formatProductTitle } from '@/lib/utils/formatProductTitle'

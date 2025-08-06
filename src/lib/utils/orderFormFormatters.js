@@ -11,7 +11,7 @@ export const formatZip = val => val.replace(/\D/g, '').slice(0, 4)
 
 export const formatCardNumber = val => {
 	const digits = val.replace(/\D/g, '').slice(0, 16)
-	return digits.replace(/(.{4})(?=.)/g, '$1-').replace(/-$/, '')
+	return digits.replace(/(.{4})(?=.)/g, '$1 ').replace(/ $/, '')
 }
 
 export const formatExpiry = val => {

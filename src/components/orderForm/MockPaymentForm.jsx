@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { PAYMENT_FIELDS } from '@/constants/constants'
 import { Button } from '../ui/Button'
 import OrderFormInput from './OrderFormInput'
 import { formatCardNumber, formatCvc, formatExpiry } from '@/lib/utils/orderFormFormatters'
@@ -21,23 +22,18 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 		}
 	})
 
-	const handleCardChange = e => {
-		const formatted = formatCardNumber(e.target.value)
-		setValue('card_number', formatted)
+	//visual formatting of inputs
+	const formatters = {
+		card_number: formatCardNumber,
+		expiry: formatExpiry,
+		cvc: formatCvc
 	}
-	const handleExpiryChange = e => {
-		const formatted = formatExpiry(e.target.value)
-		setValue('expiry', formatted)
-	}
-	const handleCvcChange = e => {
-		const formatted = formatCvc(e.target.value)
-		setValue('cvc', formatted)
-	}
-	const handleOnchange = field => e => {
-		if (field === 'card_number') handleCardChange(e)
-		if (field === 'expiry') handleExpiryChange(e)
-		if (field === 'cvc') handleCvcChange(e)
-		return
+
+	const handleChange = field => e => {
+		const rawValue = e.target.value
+		const formatterFunction = formatters[field]
+		const formattedValue = formatterFunction ? formatterFunction(rawValue) : rawValue
+		setValue(field, formattedValue)
 	}
 
 	return (
@@ -45,7 +41,7 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 			onSubmit={handleSubmit(onSubmit)}
 			className='flex flex-col space-y-4'
 		>
-			{['card_number', 'expiry', 'cvc'].map(field => (
+			{PAYMENT_FIELDS.map(field => (
 				<div
 					key={field}
 					className='mb-6'
@@ -53,7 +49,7 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 					<OrderFormInput
 						field={field}
 						register={register}
-						handleOnchange={handleOnchange}
+						handleOnchange={handleChange}
 						errors={errors}
 					/>
 				</div>

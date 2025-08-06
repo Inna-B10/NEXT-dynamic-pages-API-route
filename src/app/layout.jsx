@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono, Nanum_Myeongjo } from 'next/font/google'
 import OnboardingDynWrapper from '@/components/Onboarding/OnboardingDynWrapper'
 import ProvidersDynWrapper from '@/providers/ProvidersDynWrapper'
-import { SITE_NAME } from '@/constants/constants'
+import { SITE_NAME } from '@/constants/seo.constants'
 import './globals.css'
 
 export const fetchCache = 'default-cache'

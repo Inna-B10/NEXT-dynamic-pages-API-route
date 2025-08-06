@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { ADDRESS_FIELDS } from '@/constants/constants'
 import { Button } from '../ui/Button'
 import OrderFormInput from './OrderFormInput'
 import { formatPhone, formatZip } from '@/lib/utils/orderFormFormatters'
@@ -25,20 +26,17 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 		}
 	})
 
-	const handlePhoneChange = e => {
-		const formatted = formatPhone(e.target.value)
-		setValue('phone', formatted)
+	//visual formatting of inputs
+	const formatters = {
+		phone: formatPhone,
+		zip: formatZip
 	}
 
-	const handleZipChange = e => {
-		const formatted = formatZip(e.target.value)
-		setValue('zip', formatted)
-	}
-
-	const handleOnchange = field => e => {
-		if (field === 'phone') handlePhoneChange(e)
-		if (field === 'zip') handleZipChange(e)
-		return
+	const handleChange = field => e => {
+		const rawValue = e.target.value
+		const formatterFunction = formatters[field]
+		const formattedValue = formatterFunction ? formatterFunction(rawValue) : rawValue
+		setValue(field, formattedValue)
 	}
 
 	return (
@@ -46,7 +44,7 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 			onSubmit={handleSubmit(onSubmit)}
 			className='flex flex-col space-y-4'
 		>
-			{['first_name', 'last_name', 'phone', 'street', 'city', 'zip', 'country'].map(field => (
+			{ADDRESS_FIELDS.map(field => (
 				<div
 					key={field}
 					className='mb-6'
@@ -54,7 +52,7 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 					<OrderFormInput
 						field={field}
 						register={register}
-						handleOnchange={handleOnchange}
+						handleOnchange={handleChange}
 						errors={errors}
 					/>
 				</div>

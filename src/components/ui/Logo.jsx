@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import clsx from 'clsx'
-import { SITE_NAME } from '@/constants/constants'
+import { SITE_NAME } from '@/constants/seo.constants'
 import { PUB_PAGES } from '@/lib/routes/public-pages'
 
 export function Logo({ isSidebar = true }) {

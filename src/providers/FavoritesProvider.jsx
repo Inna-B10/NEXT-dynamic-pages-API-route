@@ -97,9 +97,6 @@ export function FavoritesProvider({ children }) {
 	const clearFavoritesMutation = useMutation({
 		mutationKey: ['clearFavorites'],
 		mutationFn: async () => await favoritesService.clearFavorites(),
-		onSuccess: () => {
-			toast.success('Favorites cleared')
-		},
 		onError: error => {
 			toast.error('Failed to clear favorites')
 			if (isDev()) console.error('Error clearing favorites:', error)
