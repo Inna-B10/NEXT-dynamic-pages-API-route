@@ -39,6 +39,11 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 		setValue(field, formattedValue)
 	}
 
+	const cleanedValue = value => e => {
+		const rawValue = e.target.value.trim().replace(/\s+/g, ' ')
+		setValue(value, rawValue)
+	}
+
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
@@ -54,6 +59,7 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 						register={register}
 						handleOnchange={handleChange}
 						errors={errors}
+						onBlur={() => cleanedValue(field)}
 					/>
 				</div>
 			))}

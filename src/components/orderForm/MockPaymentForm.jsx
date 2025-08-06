@@ -35,6 +35,10 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 		const formattedValue = formatterFunction ? formatterFunction(rawValue) : rawValue
 		setValue(field, formattedValue)
 	}
+	const cleanedValue = value => e => {
+		const rawValue = e.target.value.trim().replace(/\s+/g, ' ')
+		setValue(value, rawValue)
+	}
 
 	return (
 		<form
@@ -51,6 +55,7 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 						register={register}
 						handleOnchange={handleChange}
 						errors={errors}
+						onBlur={() => cleanedValue(field)}
 					/>
 				</div>
 			))}
