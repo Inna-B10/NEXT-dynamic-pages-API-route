@@ -51,6 +51,7 @@ next-env.d.ts
 *.sw?
 
 # user's files/folders
+structure.txt
 seed.js
 # clerk configuration (can include secrets)
 /.clerk/

@@ -5,6 +5,7 @@ import { isDev } from '@/lib/utils/isDev'
 export function withAuthHandler(handler) {
 	return async function (req) {
 		const { userId } = getAuth(req)
+
 		if (!userId) {
 			if (isDev()) console.error('Unauthorized! Missing userId')
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
