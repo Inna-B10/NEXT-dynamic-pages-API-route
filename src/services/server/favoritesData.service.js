@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { connectToDatabase } from '@/lib/db/mongoDBconnector'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 const COLLECTION_NAME = 'favorites'
 
@@ -63,15 +64,19 @@ export async function getDetailedFavoritesData(userId) {
 			})
 			.toArray()
 
-		// add products to result
+		// add formatted products to result
 		for (const { productId, addedAt } of grouped[categorySlug]) {
 			const product = products.find(p => p._id.equals(new ObjectId(productId)))
 			if (product) {
 				result.push({
 					addedAt,
 					product: {
-						...product,
-						categorySlug
+						_id: product._id,
+						brand: product.Brand,
+						price: product.Price,
+						categorySlug,
+						imageUrl: product['Picture URL'],
+						productName: formatProductTitle(product)
 					}
 				})
 			}

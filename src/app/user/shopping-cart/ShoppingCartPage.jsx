@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
 import { useCart } from '@/providers/CartProvider'
-import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 export function ShoppingCartPage() {
 	const { isLoaded, user } = useUser()
@@ -22,6 +21,7 @@ export function ShoppingCartPage() {
 		}
 	}, [isLoaded, user?.id, loadDetailedCart])
 
+	console.log('detailedCart', detailedCart)
 	const handleClearCart = () => {
 		setIsConfirmOpen(true)
 	}
@@ -62,7 +62,6 @@ export function ShoppingCartPage() {
 			{!hasItems && <p>Your cart is empty.</p>}
 
 			{detailedCart.map(product => {
-				const title = formatProductTitle(product)
 				return (
 					<div
 						key={product._id}
@@ -70,10 +69,10 @@ export function ShoppingCartPage() {
 					>
 						<ProductCardWide
 							href={`/${product.categorySlug}/${product._id}`}
-							title={title}
-							imageSrc={product['Picture URL'] || '/images/default-image.png'}
-							brand={product['Brand']}
-							price={product['Price']}
+							title={product.productName}
+							imageSrc={product.imageUrl || '/images/default-image.png'}
+							brand={product.brand}
+							price={product.price}
 						/>
 						<div className='absolute bottom-4 right-2 flex gap-2'>
 							<DynamicToggleFavoriteButton

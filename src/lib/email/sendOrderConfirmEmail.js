@@ -2,6 +2,7 @@ import { Resend } from 'resend'
 import { getUserEmail } from '@/lib/api/clerk/getUserEmail'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+//[TODO] remove in production
 const resendEmail = process.env.RESEND_EMAIL
 
 export async function sendOrderConfirmEmail({ userId, items, totalPrice, address, orderId }) {
@@ -12,7 +13,7 @@ export async function sendOrderConfirmEmail({ userId, items, totalPrice, address
 	}
 
 	const itemsList = items
-		.map(item => `• ${item.name} — ${item.quantity} x ${item.price} kr`)
+		.map(item => `• ${item.productName} — ${item.quantity} x ${item.price} kr`)
 		.join('\n')
 
 	const result = await resend.emails.send({

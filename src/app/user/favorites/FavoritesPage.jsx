@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
 import { useFavorites } from '@/providers/FavoritesProvider'
-import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 export function FavoritesPage() {
 	const { isLoaded, user } = useUser()
@@ -61,7 +60,6 @@ export function FavoritesPage() {
 			{!hasItems && <p>You have no favorites</p>}
 
 			{detailedFavorites.map(product => {
-				const title = formatProductTitle(product)
 				return (
 					<div
 						key={product._id}
@@ -69,10 +67,10 @@ export function FavoritesPage() {
 					>
 						<ProductCardWide
 							href={`/${product.categorySlug}/${product._id}`}
-							title={title}
-							imageSrc={product['Picture URL'] || '/images/default-image.png'}
-							brand={product['Brand']}
-							price={product['Price']}
+							title={product.productName}
+							imageSrc={product.imageUrl || '/images/default-image.png'}
+							brand={product.brand}
+							price={product.price}
 						/>
 						<div className='absolute bottom-4 right-2 flex gap-2'>
 							<DynamicToggleCartButton

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ProductCard } from '@/components/ProductCard'
-import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 import { searchService } from '@/services/client/search.service'
 
 export function SearchPage() {
@@ -28,15 +27,14 @@ export function SearchPage() {
 			) : (
 				<div className='grid-cols w-full relative'>
 					{results.map(item => {
-						const title = formatProductTitle(item)
 						return (
 							<ProductCard
 								key={item._id}
 								href={`/${item.category}/${item._id}`}
-								title={title}
-								imageSrc={item['Picture URL'] || '/images/default-image.png'}
-								brand={item['Brand']}
-								price={item['Price']}
+								title={item.productName}
+								imageSrc={item.imageUrl || '/images/default-image.png'}
+								brand={item.brand}
+								price={item.price}
 							/>
 						)
 					})}

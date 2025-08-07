@@ -17,6 +17,7 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clear
 		mutationFn: async () => {
 			const items = detailedCart.map(item => ({
 				productId: item._id,
+				productName: item.productName,
 				quantity: 1, //[TODO] so far no change in quantity
 				price: item.price ? item.price : 5995,
 				categorySlug: item.categorySlug
