@@ -41,7 +41,7 @@ export const metadata = {
 		template: `%s | ${SITE_NAME}`
 	},
 	description:
-		'A modern Next.js application featuring dynamic routing, API integration, and a scalable architecture.',
+		'Next-level electronics and accessories. Shop now and get the best deals on the latest products in electronics and accessories.',
 	openGraph: {
 		type: 'website',
 		siteName: `${SITE_NAME}`,
@@ -57,11 +57,11 @@ export const metadata = {
 		],
 		title: `${SITE_NAME}`,
 		description:
-			'A modern Next.js application featuring dynamic routing, API integration, and a scalable architecture.',
-		url: 'https://next-intro-sandy.vercel.app/'
+			'Next-level electronics and accessories. Shop now and get the best deals on the latest products in electronics and accessories.',
+		url: 'https://nextron-eight.vercel.app/'
 	}
 	// manifest: '/manifest.json',
-	// metadataBase: new URL('https://next-intro-sandy.vercel.app/'),
+	// metadataBase: new URL('https://nextron-eight.vercel.app/'),
 	// applicationName: `${SITE_NAME}`,
 	// formatDetection: {
 	// 	telephone: false

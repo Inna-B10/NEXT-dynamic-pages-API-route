@@ -1,5 +1,10 @@
 {
-  "name": "next-dynamic-pages-api-route",
+  "name": "Nextron-webstore",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Inna-B10/Nextron-webstore"
+  },
+  "homepage": "https://nextron-eight.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "type": "module",

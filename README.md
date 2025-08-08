@@ -18,7 +18,7 @@
 <br />
 <br />
 
-# **Project 🛒 Webstore:**
+# **Project 🛒 Nextron-webstore:**
 
 En enkel nettbutikk med produkter, produktdetaljer og søke funksjon.
 
@@ -28,7 +28,7 @@ Innloggede brukere kan
 
 
 
-### [Deployed on Vercel](https://next-intro-sandy.vercel.app/)
+### [Deployed on Vercel](https://nextron-eight.vercel.app/)
 <br />
 
 ## ⚙️ Preparing:

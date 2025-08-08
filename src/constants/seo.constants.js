@@ -1,3 +1,3 @@
-export const SITE_NAME = 'NEXT intro'
+export const SITE_NAME = 'Nextron'
 
 export const NO_INDEX_PAGE = { robots: { index: false, follow: false } }
