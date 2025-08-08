@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { LIMIT } from '@/constants/constants'
 import { ProductCard } from '../../../components/ProductCard'
 import Spinner from '../../../components/ui/Spinner'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 
 export default function InfiniteList({ totalPages, currentPage, category }) {
 	const [page, setPage] = useState(currentPage + 1)
@@ -42,15 +41,14 @@ export default function InfiniteList({ totalPages, currentPage, category }) {
 	return (
 		<>
 			{items?.map(item => {
-				const title = formatProductTitle(item)
 				return (
 					<ProductCard
 						key={item._id}
 						href={`/${category}/${item._id}`}
-						title={title}
-						imageSrc={item['Picture URL'] || '/images/default-image.png'}
-						brand={item['Brand']}
-						price={item['Price']}
+						title={item.productName}
+						imageSrc={item.imageUrl || '/images/default-image.png'}
+						brand={item.brand}
+						price={item.price}
 					/>
 				)
 			})}

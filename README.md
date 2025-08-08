@@ -103,6 +103,10 @@ npm install tailwind-merge
 npm install react-hot-toast
 npm install dotenv #needs for seeding data
 npm install @headlessui/react #modal form
+npm install zod #validation
+npm install react-hook-form @hookform/resolvers
+npm install resend #emails
+npm install @clerk/backend #to get user data on the server
 ```
 <br />
 <br />
@@ -121,12 +125,14 @@ npm install @headlessui/react #modal form
 - [x] ToTop button
 - [x] favorite page
 - [x] search
+- [x] form validation (Zod)
+- [x] order confirmation(email)
 
 
 ## TODOs:
 
 #### *functional:*
-- [ ] form validation (Zod)
+- [ ] user provider
 - [ ] ? quantity on Product page
 - [ ] contact page + check options:
    - [ ] [Send emails with Next.js - Resend](https://resend.com/docs/send-with-nextjs)
@@ -142,7 +148,6 @@ user:
 - [ ] shopping card page:
    - [ ] ? quantity
 - [ ] imitation paying process
-- [ ] order confirmation(email)
 - [ ] orders page
 
 #### *design:*
@@ -154,3 +159,5 @@ user:
 - [ ] Layout:
   - [ ] Sidebar
   - [ ] Footer
+
+#### *file structure of project*

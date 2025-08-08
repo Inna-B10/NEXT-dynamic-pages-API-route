@@ -1,5 +1,6 @@
 import { CATEGORIES } from '@/constants/categories'
 import { connectToDatabase } from '@/lib/db/mongoDBconnector'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 export async function getDetailedSearchData(query) {
 	const collections = CATEGORIES.map(({ slug }) => slug)
@@ -33,9 +34,17 @@ export async function getDetailedSearchData(query) {
 			})
 			.toArray()
 
-		const withCategory = items.map(item => ({ ...item, category: slug }))
+		// formatted product data
+		const formatted = items.map(product => ({
+			_id: product._id,
+			brand: product.Brand,
+			price: product.Price,
+			imageUrl: product['Picture URL'],
+			productName: formatProductTitle(product)
+		}))
+
+		const withCategory = formatted.map(item => ({ ...item, category: slug }))
 		result.push(...withCategory)
-		console.log(result)
 	}
 	return result
 }

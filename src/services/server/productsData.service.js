@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { connectToDatabase } from '@/lib/db/mongoDBconnector'
 import { isDev } from '@/lib/utils/isDev'
+import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 export async function getAllProductsData(category) {
 	if (!category) {
@@ -40,7 +41,17 @@ export async function getPreviewProductsData(category) {
 				}
 			)
 			.toArray()
-		return data
+
+		// formatted product data
+		const formatted = data.map(product => ({
+			_id: product._id,
+			brand: product.Brand,
+			price: product.Price,
+			imageUrl: product['Picture URL'],
+			productName: formatProductTitle(product)
+		}))
+
+		return formatted
 	} catch (e) {
 		if (isDev()) console.error(`getPreviewProductsData error: ${e.message}`)
 		return []

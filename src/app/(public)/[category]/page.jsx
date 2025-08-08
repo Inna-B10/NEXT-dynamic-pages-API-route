@@ -5,7 +5,6 @@ import { LIMIT } from '@/constants/constants'
 import { CategoryClientPage } from '@/app/(public)/[category]/CategoryClientPage'
 import NotFoundPage from '@/app/not-found'
 import { PUB_PAGES } from '@/lib/routes/public-pages'
-import { formatProductTitle } from '@/lib/utils/formatProductTitle'
 import { getCategoryLabel } from '@/lib/utils/getCategoryLabel'
 import { getPreviewProductsData } from '@/services/server/productsData.service'
 
@@ -61,15 +60,14 @@ export default async function CategoryPage(props) {
 			<h1>{getCategoryLabel(category)}</h1>
 			<div className='grid-cols w-full relative'>
 				{firstItems?.map(item => {
-					const title = formatProductTitle(item)
 					return (
 						<ProductCard
 							key={item._id}
 							href={`/${category}/${item._id}`}
-							title={title}
-							imageSrc={item['Picture URL'] || '/images/default-image.png'}
-							brand={item['Brand']}
-							price={item['Price']}
+							title={item.productName}
+							imageSrc={item.imageUrl || '/images/default-image.png'}
+							brand={item.brand}
+							price={item.price}
 						/>
 					)
 				})}

@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react'
+import { Button } from './Button'
 
 export function ConfirmDialog({ open, onClose, onConfirm, message }) {
 	return (
@@ -26,23 +27,25 @@ export function ConfirmDialog({ open, onClose, onConfirm, message }) {
 
 				<div className='fixed inset-0 flex items-center justify-center'>
 					<DialogPanel className='bg-[#3f3f46] border border-white/20 p-4 rounded w-64'>
-						<DialogTitle className='text-sm text-center'>{message}</DialogTitle>
+						<DialogTitle className='text-center text-sm lg:text-base lg:tracking-wider'>
+							{message}
+						</DialogTitle>
 						<div className='mt-4 flex justify-center gap-3'>
-							<button
+							<Button
 								onClick={() => {
 									onConfirm()
 									onClose()
 								}}
-								className='px-3 py-1 text-white bg-red-600 hover:bg-red-700 rounded'
+								variant='red'
 							>
 								OK
-							</button>
-							<button
+							</Button>
+							<Button
 								onClick={onClose}
-								className='px-3 py-1 text-gray-700 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200 rounded'
+								variant='simple'
 							>
 								Cancel
-							</button>
+							</Button>
 						</div>
 					</DialogPanel>
 				</div>
