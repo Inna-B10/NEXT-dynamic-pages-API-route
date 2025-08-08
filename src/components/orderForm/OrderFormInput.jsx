@@ -7,6 +7,8 @@ export default function OrderFormInput({ field, register, handleOnchange, onBlur
 				<label htmlFor={field}>{formatLabel(field)}:</label>
 				<input
 					{...register(field)}
+					id={field}
+					autoComplete='true'
 					onChange={handleOnchange(field)}
 					onBlur={onBlur(field)}
 					disabled={field === 'country'}

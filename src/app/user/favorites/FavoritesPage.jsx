@@ -13,7 +13,7 @@ export function FavoritesPage() {
 	const { isLoaded, user } = useUser()
 	const { detailedFavorites, detailedFavLoading, loadDetailedFavorites, clearFavorites } =
 		useFavorites()
-	const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+	const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
 	useEffect(() => {
 		if (isLoaded && user?.id) {
@@ -22,7 +22,7 @@ export function FavoritesPage() {
 	}, [isLoaded, user?.id, loadDetailedFavorites])
 
 	const handleClearFavorites = () => {
-		setIsConfirmOpen(true)
+		setShowConfirmDelete(true)
 	}
 
 	const hasItems = detailedFavorites && detailedFavorites.length > 0
@@ -51,8 +51,8 @@ export function FavoritesPage() {
 					</Button>
 				)}
 				<ConfirmDialog
-					open={isConfirmOpen}
-					onClose={() => setIsConfirmOpen(false)}
+					open={showConfirmDelete}
+					onClose={() => setShowConfirmDelete(false)}
 					onConfirm={clearFavorites}
 					message='Remove all favorites?'
 				/>

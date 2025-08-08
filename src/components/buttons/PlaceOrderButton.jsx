@@ -4,11 +4,20 @@ import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import AddressForm from '../orderForm/AddressForm'
 import { MockPaymentForm } from '../orderForm/MockPaymentForm'
+import { OrderSuccessMessage } from '../orderForm/OrderSuccessMessage'
+import PaymentStatusOverlay from '../orderForm/PaymentStatusOverlay'
 import { Button } from '../ui/Button'
 import { ordersService } from '@/services/client/orders.service'
 
-export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clearCart }) {
-	const [isOpen, setIsOpen] = useState(false)
+export default function PlaceOrderButton({
+	detailedCart,
+	loadDetailedCart,
+	clearCart,
+	onOrderSuccess
+}) {
+	const [showOverlay, setShowOverlay] = useState(false)
+	const [isFormOpen, setIsFormOpen] = useState(false)
+	const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 	const [step, setStep] = useState('address') // 'address' | 'payment'
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const [addressData, setAddressData] = useState(null)
@@ -30,12 +39,11 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clear
 			await ordersService.createNewOrder(items, totalPrice, addressData)
 		},
 		onSuccess: () => {
-			//[TODO] change toast to headless ui +confirm email
-			toast.success('Order placed successfully!')
-			loadDetailedCart()
 			clearCart()
-			setIsOpen(false)
+			setIsFormOpen(false)
 			setStep('address')
+			loadDetailedCart()
+			setTimeout(() => onOrderSuccess(), 800)
 		},
 		onError: () => {
 			toast.error('Error placing order!')
@@ -50,15 +58,12 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clear
 
 	const handlePaymentSubmit = async () => {
 		setIsSubmitting(true)
-		toast.loading('Processing payment...', { id: 'payment' })
-		await new Promise(resolve => setTimeout(resolve, 2000))
-		toast.success('Payment successful!', { id: 'payment' })
-		placeOrder()
+		setShowOverlay(true)
 	}
 
 	const handleClose = () => {
 		if (!isSubmitting) {
-			setIsOpen(false)
+			setIsFormOpen(false)
 			setStep('address')
 		}
 	}
@@ -66,14 +71,14 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clear
 	return (
 		<>
 			<Button
-				onClick={() => setIsOpen(true)}
+				onClick={() => setIsFormOpen(true)}
 				className='float-right'
 			>
 				Place Order
 			</Button>
 
 			<Dialog
-				open={isOpen}
+				open={isFormOpen && !isSubmitting}
 				onClose={handleClose}
 				className='relative z-50'
 			>
@@ -93,7 +98,7 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clear
 								onClose={handleClose}
 							/>
 						)}
-						{step === 'payment' && (
+						{step === 'payment' && !isSubmitting && (
 							<MockPaymentForm
 								onSubmit={handlePaymentSubmit}
 								isSubmitting={isSubmitting}
@@ -103,6 +108,15 @@ export default function PlaceOrderButton({ detailedCart, loadDetailedCart, clear
 					</DialogPanel>
 				</div>
 			</Dialog>
+			<PaymentStatusOverlay
+				isOverlayOpen={showOverlay}
+				onSuccess={() => placeOrder()}
+				onClose={() => setShowOverlay(false)}
+			/>
+			<OrderSuccessMessage
+				isMessageOpen={showSuccessMessage}
+				onClose={() => setShowSuccessMessage(false)}
+			/>
 		</>
 	)
 }

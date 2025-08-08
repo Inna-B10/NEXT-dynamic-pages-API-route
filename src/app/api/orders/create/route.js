@@ -13,18 +13,20 @@ export const POST = withAuthHandler(async (userId, req) => {
 
 	const order = await createNewOrderData(userId, items, totalPrice, address)
 
-	try {
-		await sendOrderConfirmEmail({
-			userId,
-			items,
-			totalPrice,
-			address,
-			orderId: order.insertedId
-		})
-	} catch (err) {
-		//not abort order if email is not sent
-		if (isDev()) {
-			console.error('Failed to send confirmation email:', err)
+	if (order?.insertedId) {
+		try {
+			await sendOrderConfirmEmail({
+				userId,
+				items,
+				totalPrice,
+				address,
+				orderId: order.insertedId
+			})
+		} catch (err) {
+			//not abort order if email is not sent
+			if (isDev()) {
+				console.error('Failed to send confirmation email:', err)
+			}
 		}
 	}
 

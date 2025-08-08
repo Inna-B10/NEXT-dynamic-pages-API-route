@@ -5,6 +5,7 @@ import { ProductCardWide } from '@/components/ProductCardWide'
 import { DynamicToggleCartButton } from '@/components/buttons/DynamicToggleCartButton'
 import { DynamicToggleFavoriteButton } from '@/components/buttons/DynamicToggleFavoriteButton'
 import PlaceOrderButton from '@/components/buttons/PlaceOrderButton'
+import { OrderSuccessMessage } from '@/components/orderForm/OrderSuccessMessage'
 import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import Spinner from '@/components/ui/Spinner'
@@ -13,7 +14,8 @@ import { useCart } from '@/providers/CartProvider'
 export function ShoppingCartPage() {
 	const { isLoaded, user } = useUser()
 	const { detailedCart, detailedCartLoading, loadDetailedCart, clearCart } = useCart()
-	const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+	const [showConfirmDelete, setShowConfirmDelete] = useState(false)
+	const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
 	useEffect(() => {
 		if (isLoaded && user?.id) {
@@ -21,9 +23,8 @@ export function ShoppingCartPage() {
 		}
 	}, [isLoaded, user?.id, loadDetailedCart])
 
-	console.log('detailedCart', detailedCart)
 	const handleClearCart = () => {
-		setIsConfirmOpen(true)
+		setShowConfirmDelete(true)
 	}
 
 	const hasItems = detailedCart && detailedCart.length > 0
@@ -51,9 +52,11 @@ export function ShoppingCartPage() {
 						Remove all
 					</Button>
 				)}
+
+				{/* confirm dialog - delete all products from cart */}
 				<ConfirmDialog
-					open={isConfirmOpen}
-					onClose={() => setIsConfirmOpen(false)}
+					open={showConfirmDelete}
+					onClose={() => setShowConfirmDelete(false)}
 					onConfirm={clearCart}
 					message='Remove all products from cart?'
 				/>
@@ -95,11 +98,19 @@ export function ShoppingCartPage() {
 					</div>
 				)
 			})}
+
+			{/* show order success message */}
+			<OrderSuccessMessage
+				isMessageOpen={showSuccessMessage}
+				onClose={() => setShowSuccessMessage(false)}
+			/>
+
 			{hasItems && (
 				<PlaceOrderButton
 					detailedCart={detailedCart}
 					loadDetailedCart={loadDetailedCart}
 					clearCart={clearCart}
+					onOrderSuccess={() => setShowSuccessMessage(true)}
 				/>
 			)}
 		</section>
