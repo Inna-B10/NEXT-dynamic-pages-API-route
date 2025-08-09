@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react'
+import { usePathname } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
@@ -8,6 +9,8 @@ import { favoritesService } from '@/services/client/favorites.service'
 const FavoritesContext = createContext()
 
 export function FavoritesProvider({ children }) {
+	const pathname = usePathname()
+
 	const { isLoaded, user } = useUser()
 	const userId = user?.id
 
@@ -41,7 +44,7 @@ export function FavoritesProvider({ children }) {
 				}))
 			)
 		},
-		enabled: isLoaded && !!userId,
+		enabled: isLoaded && !!userId && pathname.startsWith('/user/favorites'),
 		onError: error => {
 			toast.error('Error loading favorites')
 			if (isDev()) console.error('Error fetching detailed favorites:', error)
