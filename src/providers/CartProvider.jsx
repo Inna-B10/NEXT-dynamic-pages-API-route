@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react'
+import { usePathname } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
@@ -8,6 +9,8 @@ import { cartService } from '@/services/client/cart.service'
 const CartContext = createContext()
 
 export function CartProvider({ children }) {
+	const pathname = usePathname()
+
 	const { isLoaded, user } = useUser()
 	const userId = user?.id
 
@@ -41,7 +44,7 @@ export function CartProvider({ children }) {
 				}))
 			)
 		},
-		enabled: isLoaded && !!userId,
+		enabled: isLoaded && !!userId && pathname === '/user/shopping-cart',
 		onError: error => {
 			toast.error('Error loading shopping cart')
 			if (isDev()) console.error('Error fetching detailed shopping cart:', error)
