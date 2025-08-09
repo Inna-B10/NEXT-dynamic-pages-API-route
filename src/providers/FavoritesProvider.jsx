@@ -44,7 +44,7 @@ export function FavoritesProvider({ children }) {
 				}))
 			)
 		},
-		enabled: isLoaded && !!userId && pathname === '/user/favorites',
+		enabled: isLoaded && !!userId && pathname.startsWith('/user/favorites'),
 		onError: error => {
 			toast.error('Error loading favorites')
 			if (isDev()) console.error('Error fetching detailed favorites:', error)

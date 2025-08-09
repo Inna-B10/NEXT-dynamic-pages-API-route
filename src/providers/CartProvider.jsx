@@ -44,7 +44,7 @@ export function CartProvider({ children }) {
 				}))
 			)
 		},
-		enabled: isLoaded && !!userId && pathname === '/user/shopping-cart',
+		enabled: isLoaded && !!userId && pathname.startsWith('/user/shopping-cart'),
 		onError: error => {
 			toast.error('Error loading shopping cart')
 			if (isDev()) console.error('Error fetching detailed shopping cart:', error)
