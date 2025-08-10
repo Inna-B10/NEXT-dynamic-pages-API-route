@@ -128,12 +128,14 @@ npm install @clerk/backend #to get user data on the server
 - [x] form validation (Zod)
 - [x] order confirmation(email Mailgun)
 - [x] imitation paying process
+- [x]  save order address and autofill form
 
 
 ## TODOs:
 
 #### *functional:*
 - [ ] user provider
+- [ ] Zod validation DB schemas
 - [ ] ? quantity on Product page
 - [ ] contact page + check options:
    - [ ] [Send emails with Next.js - Resend](https://resend.com/docs/send-with-nextjs)
@@ -154,6 +156,7 @@ user:
 - [ ] metadata
 - [ ] home page
 - [ ] Logo
+- [ ] font color (hover does not work on mobile!)
 - [ ] Skeleton/Loader
 - [ ] User's buttons break point 480 (menu)
 - [ ] Layout:
