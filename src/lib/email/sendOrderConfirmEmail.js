@@ -1,38 +1,32 @@
-import { Resend } from 'resend'
-import { getUserEmail } from '@/lib/api/clerk/getUserEmail'
+import formData from 'form-data'
+import Mailgun from 'mailgun.js'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-//[TODO] remove in production
-const resendEmail = process.env.RESEND_EMAIL
-
-export async function sendOrderConfirmEmail({ userId, items, totalPrice, address, orderId }) {
-	const email = await getUserEmail(userId)
-	if (!email) {
-		console.warn('Email not found. Skipping confirmation email.')
-		return
-	}
-
+const mailgun = new Mailgun(formData)
+const mg = mailgun.client({
+	username: 'api',
+	key: process.env.MAILGUN_API_KEY
+})
+export async function sendOrderConfirmEmail({ toEmail, orderId, items, totalPrice, address }) {
 	const itemsList = items
-		.map(item => `• ${item.productName} — ${item.quantity} x ${item.price} kr`)
-		.join('\n')
+		.map(item => `<li> ${item.productName} — ${item.quantity} x ${item.price} kr</li>`)
+		.join('')
 
-	const result = await resend.emails.send({
-		from: 'Webstore <onboarding@resend.dev>',
-		//[TODO] change for production
-		// to: email,
-		to: resendEmail,
-		subject: `Order Confirmation: ${orderId}`,
-		html: `
+	const html = `
 			<h1>Thank you for your order!</h1>
 		  <h2>Here's your order summary:</h2>
 			<p><strong>Order ID:</strong> ${orderId}</p>
-		  <pre>${itemsList}</pre>
+		  <ul>${itemsList}</ul>
 			<p><strong>Total:</strong> ${totalPrice} kr</p>
 			<p><strong>Shipping to:</strong> ${address.first_name} ${address.last_name}, ${address.street}, ${address.city}, ${address.zip}, ${address.country}</p>
 		`
-	})
-
-	if (result.error) {
-		if (isDev()) console.error('Failed to send confirmation email:', result.error)
+	try {
+		await mg.messages.create(process.env.MAILGUN_DOMAIN, {
+			from: `Nextron-webstore <${process.env.MAILGUN_SAND_EMAIL}>`,
+			to: [toEmail],
+			subject: `Order Confirmation: ${orderId}`,
+			html
+		})
+	} catch (error) {
+		if (isDev()) console.error('Failed to send confirmation email:', error)
 	}
 }
