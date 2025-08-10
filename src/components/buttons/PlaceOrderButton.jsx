@@ -43,7 +43,7 @@ export default function PlaceOrderButton({
 			setIsFormOpen(false)
 			setStep('address')
 			loadDetailedCart()
-			setTimeout(() => onOrderSuccess(), 800)
+			setTimeout(() => onOrderSuccess(), 1000)
 		},
 		onError: () => {
 			toast.error('Error placing order!')
@@ -79,7 +79,7 @@ export default function PlaceOrderButton({
 
 			<Dialog
 				open={isFormOpen && !isSubmitting}
-				onClose={handleClose}
+				onClose={() => {}}
 				className='relative z-50'
 			>
 				<div
