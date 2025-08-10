@@ -8,10 +8,11 @@ import {
 	formatCvc,
 	formatExpiry
 } from '@/lib/utils/orderForm/orderFormFormatters'
-import { createCleanedValue, createHandleChange } from '@/lib/utils/orderForm/orderInputHandlers'
+import { createCleanedValue, formatOrderFormData } from '@/lib/utils/orderForm/orderInputHandlers'
 import { paymentSchema } from '@/lib/zod/paymentSchema'
 
 export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
+	//register data with react-hook-form
 	const {
 		register,
 		handleSubmit,
@@ -28,13 +29,15 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 	})
 
 	//visual formatting of inputs
-	const formatters = {
+	const paymentFormatters = {
 		card_number: formatCardNumber,
 		expiry: formatExpiry,
 		cvc: formatCvc
 	}
 
-	const handleChange = createHandleChange(setValue, formatters)
+	const handleChange = field => e => {
+		setValue(field, formatOrderFormData(field, e.target.value, paymentFormatters))
+	}
 	const cleanedValue = createCleanedValue(setValue)
 
 	return (
