@@ -105,7 +105,7 @@ npm install dotenv #needs for seeding data
 npm install @headlessui/react #modal form
 npm install zod #validation
 npm install react-hook-form @hookform/resolvers
-npm install resend #emails
+npm install mailgun.js form-data #emails
 npm install @clerk/backend #to get user data on the server
 ```
 <br />
@@ -126,7 +126,8 @@ npm install @clerk/backend #to get user data on the server
 - [x] favorite page
 - [x] search
 - [x] form validation (Zod)
-- [x] order confirmation(email)
+- [x] order confirmation(email Mailgun)
+- [x] imitation paying process
 
 
 ## TODOs:
@@ -147,8 +148,7 @@ admin:
 user:
 - [ ] shopping card page:
    - [ ] ? quantity
-- [ ] imitation paying process
-- [ ] orders page
+- [ ] orders page(status,history?)
 
 #### *design:*
 - [ ] metadata

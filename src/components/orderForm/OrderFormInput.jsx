@@ -1,14 +1,30 @@
+import { useEffect, useRef } from 'react'
 import { formatLabel } from '@/lib/utils/orderForm/orderFormFormatters'
 
 export default function OrderFormInput({ field, register, handleOnchange, onBlur, errors }) {
+	const inputRef = useRef(null)
+
+	//autofocus on first input of each form
+	useEffect(() => {
+		if (field === 'first_name' || field === 'card_number') {
+			inputRef.current?.focus()
+		}
+	}, [field])
+
+	const { ref, ...rest } = register(field) //get ref from react-hook-form
+
 	return (
 		<>
 			<span className='w-full flex justify-between items-center gap-x-2'>
 				<label htmlFor={field}>{formatLabel(field)}:</label>
 				<input
-					{...register(field)}
+					{...rest}
 					id={field}
 					autoComplete='true'
+					ref={el => {
+						ref(el) // send to react-hook-form
+						inputRef.current = el // and to our ref
+					}}
 					onChange={handleOnchange(field)}
 					onBlur={onBlur(field)}
 					disabled={field === 'country'}

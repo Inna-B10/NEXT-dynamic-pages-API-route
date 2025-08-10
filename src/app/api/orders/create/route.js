@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { getUserEmail } from '@/lib/api/clerk/getUserEmail'
 import { withAuthHandler } from '@/lib/api/withAuthHandler'
 import { sendOrderConfirmEmail } from '@/lib/email/sendOrderConfirmEmail'
 import { isDev } from '@/lib/utils/isDev'
@@ -10,23 +11,24 @@ export const POST = withAuthHandler(async (userId, req) => {
 	if (!items?.length || !address || !totalPrice) {
 		return NextResponse.json({ error: 'Missing params' }, { status: 400 })
 	}
-
 	const order = await createNewOrderData(userId, items, totalPrice, address)
 
 	if (order?.insertedId) {
-		try {
-			await sendOrderConfirmEmail({
-				userId,
+		const toEmail = await getUserEmail(userId)
+
+		if (!toEmail) {
+			if (isDev()) console.error('Email not found. Skipping confirmation email.')
+		} else {
+			sendOrderConfirmEmail({
+				toEmail,
 				items,
 				totalPrice,
 				address,
 				orderId: order.insertedId
+			}).catch(err => {
+				//not abort order if email is not sent
+				if (isDev()) console.error('Failed to send confirmation email:', err)
 			})
-		} catch (err) {
-			//not abort order if email is not sent
-			if (isDev()) {
-				console.error('Failed to send confirmation email:', err)
-			}
 		}
 	}
 
