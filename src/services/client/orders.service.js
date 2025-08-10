@@ -28,5 +28,11 @@ class OrdersService {
 		})
 		return data
 	}
+
+	/* ------------------------ Get Last Order Address ----------------------- */
+	async getLastOrderAddress() {
+		const { data } = await axiosClient.get(`${this._ORDERS}/last-address`)
+		return data
+	}
 }
 export const ordersService = new OrdersService()
