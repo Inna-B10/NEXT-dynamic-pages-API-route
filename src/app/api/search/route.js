@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { isDev } from '@/lib/utils/isDev'
 import { getDetailedSearchData } from '@/services/server/searchData.service'
 
+/* ---------------------------- Get Search Result ---------------------------- */
 export async function GET(req) {
 	const { searchParams } = new URL(req.url)
 	const query = searchParams.get('query')

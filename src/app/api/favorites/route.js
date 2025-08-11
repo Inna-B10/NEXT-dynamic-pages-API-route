@@ -6,11 +6,13 @@ import {
 	getFavoritesIdsData
 } from '@/services/server/favoritesData.service'
 
+/* ----------------------------- Get Favorites Ids ---------------------------- */
 export const GET = withAuthHandler(async (userId, req) => {
 	const data = await getFavoritesIdsData(userId)
 	return NextResponse.json({ data })
 })
 
+/* ----------------------------- Add Favorite ---------------------------- */
 export const POST = withAuthHandler(async (userId, req) => {
 	const { productId, category } = await req.json()
 
@@ -22,6 +24,7 @@ export const POST = withAuthHandler(async (userId, req) => {
 	return NextResponse.json({ data })
 })
 
+/* ----------------------------- Delete Favorite ---------------------------- */
 export const DELETE = withAuthHandler(async (userId, req) => {
 	const { searchParams } = new URL(req.url)
 	const productId = searchParams.get('productId')

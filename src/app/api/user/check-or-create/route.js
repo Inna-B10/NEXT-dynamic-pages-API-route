@@ -2,6 +2,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { isDev } from '@/lib/utils/isDev'
 import { checkOrCreateUser } from '@/services/server/userDataService'
 
+/* ---------------------------- Check Or Create User ---------------------------- */
 export async function POST() {
 	const user = await currentUser()
 	if (!user) {

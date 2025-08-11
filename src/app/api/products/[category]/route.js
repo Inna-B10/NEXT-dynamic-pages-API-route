@@ -3,6 +3,7 @@ import { LIMIT } from '@/constants/constants'
 import { isDev } from '@/lib/utils/isDev'
 import { getPreviewProductsData } from '@/services/server/productsData.service'
 
+/* ---------------------------- Get Category's Products - Light Mode ---------------------------- */
 export async function GET(request, { params }) {
 	try {
 		const { category } = params

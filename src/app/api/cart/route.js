@@ -6,11 +6,13 @@ import {
 	getCartItemsIdsData
 } from '@/services/server/cartData.service'
 
+/* ------------------------ Get Ids of Items In Cart ----------------------- */
 export const GET = withAuthHandler(async (userId, req) => {
 	const data = await getCartItemsIdsData(userId)
 	return NextResponse.json({ data })
 })
 
+/* -------------------------- Add Item To Cart -------------------------- */
 export const POST = withAuthHandler(async (userId, req) => {
 	const { productId, category } = await req.json()
 
@@ -22,6 +24,7 @@ export const POST = withAuthHandler(async (userId, req) => {
 	return NextResponse.json({ data })
 })
 
+/* -------------------------- Delete Item From Cart ------------------------- */
 export const DELETE = withAuthHandler(async (userId, req) => {
 	const { searchParams } = new URL(req.url)
 	const productId = searchParams.get('productId')

@@ -5,6 +5,7 @@ import { sendOrderConfirmEmail } from '@/lib/email/sendOrderConfirmEmail'
 import { isDev } from '@/lib/utils/isDev'
 import { createNewOrderData } from '@/services/server/ordersData.service'
 
+/* ---------------------------- Create New Order ---------------------------- */
 export const POST = withAuthHandler(async (userId, req) => {
 	const { items, totalPrice, address } = await req.json()
 
@@ -13,6 +14,7 @@ export const POST = withAuthHandler(async (userId, req) => {
 	}
 	const order = await createNewOrderData(userId, items, totalPrice, address)
 
+	//send confirmation email
 	if (order?.insertedId) {
 		const toEmail = await getUserEmail(userId)
 

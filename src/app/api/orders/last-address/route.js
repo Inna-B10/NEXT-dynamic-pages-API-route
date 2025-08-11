@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { withAuthHandler } from '@/lib/api-helpers/withAuthHandler'
 import { getLastOrderAddressData } from '@/services/server/ordersData.service'
 
+/* ---------------------------- Get Last Order Address ---------------------------- */
 export const GET = withAuthHandler(async (userId, req) => {
 	const data = await getLastOrderAddressData(userId)
 	return NextResponse.json({ data })

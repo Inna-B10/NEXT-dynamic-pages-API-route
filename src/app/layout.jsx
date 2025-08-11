@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Nanum_Myeongjo } from 'next/font/google'
+import { Geist, Nanum_Myeongjo } from 'next/font/google'
 import OnboardingDynWrapper from '@/components/Onboarding/OnboardingDynWrapper'
 import ProvidersDynWrapper from '@/providers/ProvidersDynWrapper'
 import { SITE_NAME } from '@/constants/seo.constants'
@@ -11,11 +11,6 @@ const geistSans = Geist({
 	subsets: ['latin']
 })
 
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
-	subsets: ['latin'],
-	preload: false
-})
 const nanum = Nanum_Myeongjo({
 	variable: '--font-nanum',
 	weight: ['400', '700'],
@@ -60,6 +55,7 @@ export const metadata = {
 			'Next-level electronics and accessories. Shop now and get the best deals on the latest products in electronics and accessories.',
 		url: 'https://nextron-eight.vercel.app/'
 	}
+	//[TODO] add manifest
 	// manifest: '/manifest.json',
 	// metadataBase: new URL('https://nextron-eight.vercel.app/'),
 	// applicationName: `${SITE_NAME}`,
@@ -75,7 +71,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
-			<body className={`${geistSans.variable} ${geistMono.variable} ${nanum.variable} antialiased`}>
+			<body className={`${geistSans.variable} antialiased`}>
 				<ProvidersDynWrapper>
 					{children}
 					<OnboardingDynWrapper />
