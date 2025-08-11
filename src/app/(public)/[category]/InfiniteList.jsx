@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { ProductCard } from '@/components/product/ProductCard'
+import Spinner from '@/components/ui/Spinner'
 import { LIMIT } from '@/constants/constants'
-import { ProductCard } from '../../../components/ProductCard'
-import Spinner from '../../../components/ui/Spinner'
 import { productsService } from '@/services/client/products.service'
 
 export default function InfiniteList({ totalPages, currentPage, category }) {

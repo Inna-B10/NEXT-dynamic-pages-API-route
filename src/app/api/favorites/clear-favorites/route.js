@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { withAuthHandler } from '@/lib/api/withAuthHandler'
+import { withAuthHandler } from '@/lib/api-helpers/withAuthHandler'
 import { clearFavoritesData } from '@/services/server/favoritesData.service'
 
 export const DELETE = withAuthHandler(async (userId, req) => {

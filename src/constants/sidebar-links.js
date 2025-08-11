@@ -1,6 +1,6 @@
 import { AtSign, Home } from 'react-feather'
 import { CATEGORIES } from './categories'
-import { PUB_PAGES } from '@/lib/routes/public-pages'
+import { PUB_PAGES } from '@/lib/routes-helpers/public-pages'
 
 export const NAV_LINKS = [
 	{

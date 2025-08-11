@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { getUserEmail } from '@/lib/api/clerk/getUserEmail'
-import { withAuthHandler } from '@/lib/api/withAuthHandler'
+import { getUserEmail } from '@/lib/api-helpers/clerk/getUserEmail'
+import { withAuthHandler } from '@/lib/api-helpers/withAuthHandler'
 import { sendOrderConfirmEmail } from '@/lib/email/sendOrderConfirmEmail'
 import { isDev } from '@/lib/utils/isDev'
 import { createNewOrderData } from '@/services/server/ordersData.service'

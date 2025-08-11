@@ -1,6 +1,6 @@
 import { Footer } from '@/components/layout/Footer'
 import { SITE_NAME } from '@/constants/seo.constants'
-import { PUB_PAGES } from '@/lib/routes/public-pages'
+import { PUB_PAGES } from '@/lib/routes-helpers/public-pages'
 
 export const metadata = {
 	title: 'Home',

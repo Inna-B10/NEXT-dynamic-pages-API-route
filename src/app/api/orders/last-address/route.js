@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { withAuthHandler } from '@/lib/api/withAuthHandler'
+import { withAuthHandler } from '@/lib/api-helpers/withAuthHandler'
 import { getLastOrderAddressData } from '@/services/server/ordersData.service'
 
 export const GET = withAuthHandler(async (userId, req) => {

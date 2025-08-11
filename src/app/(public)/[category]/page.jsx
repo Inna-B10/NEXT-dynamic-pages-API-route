@@ -1,10 +1,10 @@
-import { ProductCard } from '@/components/ProductCard'
 import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
+import { ProductCard } from '@/components/product/ProductCard'
 import { CATEGORIES } from '@/constants/categories'
 import { LIMIT } from '@/constants/constants'
 import { CategoryClientPage } from '@/app/(public)/[category]/CategoryClientPage'
 import NotFoundPage from '@/app/not-found'
-import { PUB_PAGES } from '@/lib/routes/public-pages'
+import { PUB_PAGES } from '@/lib/routes-helpers/public-pages'
 import { getCategoryLabel } from '@/lib/utils/getCategoryLabel'
 import { getPreviewProductsData } from '@/services/server/productsData.service'
 
