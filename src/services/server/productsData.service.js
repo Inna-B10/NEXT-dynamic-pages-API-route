@@ -3,20 +3,23 @@ import { connectToDatabase } from '@/lib/db/mongoDBconnector'
 import { isDev } from '@/lib/utils/isDev'
 import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
-export async function getAllProductsData(category) {
-	if (!category) {
-		if (isDev()) throw new Error('Category is required')
-		return
-	}
-	try {
-		const db = await connectToDatabase()
-		const data = await db.collection(category).find({}).toArray()
-		return data
-	} catch (e) {
-		if (isDev()) console.error(`getAllProductsData error: ${e.message}`)
-		return []
-	}
-}
+/* -------------------------- Get Products Data - Full mode ------------------------- */
+// export async function getAllProductsData(category) {
+// 	if (!category) {
+// 		if (isDev()) throw new Error('Category is required')
+// 		return
+// 	}
+// 	try {
+// 		const db = await connectToDatabase()
+// 		const data = await db.collection(category).find({}).toArray()
+// 		return data
+// 	} catch (e) {
+// 		if (isDev()) console.error(`getAllProductsData error: ${e.message}`)
+// 		return []
+// 	}
+// }
+
+/* ------------------------ Get Products Data - Light mode ------------------------- */
 export async function getPreviewProductsData(category) {
 	if (!category) {
 		if (isDev()) throw new Error('Category is required')
@@ -58,9 +61,10 @@ export async function getPreviewProductsData(category) {
 	}
 }
 
+/* ------------------------- Get Product Data By Id ------------------------- */
 export async function getProductDataById(id, category) {
-	if (!category) {
-		if (isDev()) throw new Error('Category is required')
+	if (!category || !id) {
+		if (isDev()) throw new Error('Missing params')
 		return null
 	}
 

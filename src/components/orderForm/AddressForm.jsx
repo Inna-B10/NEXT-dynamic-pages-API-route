@@ -4,8 +4,11 @@ import { useForm } from 'react-hook-form'
 import { ADDRESS_FIELDS } from '@/constants/constants'
 import { Button } from '../ui/Button'
 import OrderFormInput from './OrderFormInput'
-import { formatPhone, formatZip } from '@/lib/utils/orderForm/orderFormFormatters'
-import { createCleanedValue, formatOrderFormData } from '@/lib/utils/orderForm/orderInputHandlers'
+import { formatPhone, formatZip } from '@/lib/utils/orderForm/orderForm.formatters'
+import {
+	createCleanedValue,
+	formatOrderFormData
+} from '@/lib/utils/orderForm/orderForm.handlers.js'
 import { addressSchema } from '@/lib/zod/addressSchema'
 import { ordersService } from '@/services/client/orders.service'
 
@@ -29,7 +32,7 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 		zip: formatZip
 	}
 	const handleChange = field => e => {
-		setValue(field, formatOrderFormData(field, e.target.value, addressFormatters))
+		setValue(field, formatOrderFormData(field, addressFormatters, e.target.value))
 	}
 	const cleanedValue = createCleanedValue(setValue)
 

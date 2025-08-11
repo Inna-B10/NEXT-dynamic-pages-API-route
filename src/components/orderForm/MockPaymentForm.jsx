@@ -7,8 +7,11 @@ import {
 	formatCardNumber,
 	formatCvc,
 	formatExpiry
-} from '@/lib/utils/orderForm/orderFormFormatters'
-import { createCleanedValue, formatOrderFormData } from '@/lib/utils/orderForm/orderInputHandlers'
+} from '@/lib/utils/orderForm/orderForm.formatters'
+import {
+	createCleanedValue,
+	formatOrderFormData
+} from '@/lib/utils/orderForm/orderForm.handlers.js'
 import { paymentSchema } from '@/lib/zod/paymentSchema'
 
 export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
@@ -36,7 +39,7 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 	}
 
 	const handleChange = field => e => {
-		setValue(field, formatOrderFormData(field, e.target.value, paymentFormatters))
+		setValue(field, formatOrderFormData(field, paymentFormatters, e.target.value))
 	}
 	const cleanedValue = createCleanedValue(setValue)
 

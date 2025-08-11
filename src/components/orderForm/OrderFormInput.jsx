@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { formatLabel } from '@/lib/utils/orderForm/orderFormFormatters'
+import { formatLabel } from '@/lib/utils/orderForm/orderForm.formatters'
 
 export default function OrderFormInput({ field, register, handleOnchange, onBlur, errors }) {
 	const inputRef = useRef(null)
