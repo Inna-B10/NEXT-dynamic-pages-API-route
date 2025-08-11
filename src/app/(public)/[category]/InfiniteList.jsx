@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { LIMIT } from '@/constants/constants'
 import { ProductCard } from '../../../components/ProductCard'
 import Spinner from '../../../components/ui/Spinner'
+import { productsService } from '@/services/client/products.service'
 
 export default function InfiniteList({ totalPages, currentPage, category }) {
 	const [page, setPage] = useState(currentPage + 1)
@@ -12,8 +13,8 @@ export default function InfiniteList({ totalPages, currentPage, category }) {
 	const loadMore = async () => {
 		if (page > totalPages || isLoading) return
 		setIsLoading(true)
-		const res = await fetch(`/api/products/${category}?page=${page}&limit=${LIMIT}`)
-		const data = await res.json()
+		const data = await productsService.getPreviewProducts(category, page, LIMIT)
+
 		setItems(prev => [...prev, ...data.items])
 		setPage(p => p + 1)
 		setIsLoading(false)

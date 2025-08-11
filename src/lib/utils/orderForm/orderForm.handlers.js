@@ -1,4 +1,4 @@
-// Returns a blur handler that trims and normalizes spaces.
+// sends value to react-hook-form after trimming and normalizing spaces.
 export const createCleanedValue = setValue => field => e => {
 	const cleaned = e.target.value.replace(/\s+/g, ' ').trim()
 	setValue(field, cleaned)
