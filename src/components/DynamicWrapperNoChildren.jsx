@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import dynamic from 'next/dynamic'
 import Spinner from './ui/Spinner'
 
@@ -14,7 +15,8 @@ const componentImports = {
 	search: () => import('@/app/(public)/search/SearchPage'),
 	infiniteList: () => import('@/app/(public)/[category]/InfiniteList'),
 	'search-input': () => import('@/components/layout/header/SearchInput'),
-	onboarding: () => import('@/components/Onboarding/Onboarding')
+	onboarding: () => import('@/components/Onboarding/Onboarding'),
+	auth: () => import('@/app/auth/[[...auth]]/AuthPage')
 }
 
 /**
@@ -42,21 +44,23 @@ export function DynamicWrapperNoChildren({
 
 	if (!importFn) throw new Error(`Unknown page key: ${componentKey}`)
 
-	const PageComponent = dynamic(
-		() => importFn().then(mod => mod[exportName] ?? mod.default ?? Object.values(mod)[0]),
-		{
-			ssr: false,
-			loading:
-				page === 'true'
-					? () => (
-							<Spinner
-								size={60}
-								message='Loading...'
-							/>
-						)
-					: () => null
-		}
-	)
+	const PageComponent = useMemo(() => {
+		return dynamic(
+			() => importFn().then(mod => mod[exportName] ?? mod.default ?? Object.values(mod)[0]),
+			{
+				ssr: false,
+				loading:
+					page === 'true'
+						? () => (
+								<Spinner
+									size={60}
+									message='Loading...'
+								/>
+							)
+						: () => null
+			}
+		)
+	}, [componentKey, exportName, page])
 
 	return <PageComponent {...props} />
 }

@@ -13,7 +13,7 @@ const tabs = [
 	{ label: 'Sign Up', value: 'sign-up' }
 ]
 
-export function Auth() {
+export function AuthPage() {
 	const searchParams = useSearchParams()
 	const { mode, handleTabClick, initialRedirectUrl, isReady } = useAuthMode(searchParams)
 	const [hasClerkError, setHasClerkError] = useState(false)
