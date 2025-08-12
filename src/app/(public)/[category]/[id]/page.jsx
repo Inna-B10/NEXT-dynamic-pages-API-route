@@ -1,4 +1,4 @@
-import ScrollToTopButton from '@/components/buttons/ScrollToTopButton'
+import { DynamicButton } from '@/components/buttons/DynamicButton'
 import { CATEGORIES } from '@/constants/categories'
 import { SITE_NAME } from '@/constants/seo.constants'
 import { ProductDetails } from '@/app/(public)/[category]/[id]/product-page/ProductDetails'
@@ -74,7 +74,7 @@ export default async function ProductPage(props) {
 				id={id}
 				category={category}
 			/>
-			<ScrollToTopButton />
+			<DynamicButton btnName='ScrollToTopButton' />
 		</>
 	)
 }

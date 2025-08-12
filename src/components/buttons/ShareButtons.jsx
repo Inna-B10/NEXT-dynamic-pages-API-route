@@ -26,7 +26,6 @@ export function ShareButtons({ title }) {
 				title: title,
 				url: url
 			})
-			toast.success('Successfully shared')
 		} catch (error) {
 			if (isDev()) {
 				console.error('Error sharing:', error)
