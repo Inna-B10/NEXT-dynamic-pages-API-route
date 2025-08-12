@@ -1,8 +1,8 @@
+import { DynamicWrapperNoChildren } from '@/components/DynamicWrapperNoChildren'
 import { DynamicButton } from '@/components/buttons/DynamicButton'
 import { ProductCard } from '@/components/product/ProductCard'
 import { CATEGORIES } from '@/constants/categories'
 import { LIMIT } from '@/constants/constants'
-import { CategoryClientPage } from '@/app/(public)/[category]/CategoryClientPage'
 import NotFoundPage from '@/app/not-found'
 import { PUB_PAGES } from '@/lib/routes-helpers/public-pages'
 import { getCategoryLabel } from '@/lib/utils/getCategoryLabel'
@@ -73,7 +73,9 @@ export default async function CategoryPage(props) {
 				})}
 
 				{/* The client interactive component is loaded here */}
-				<CategoryClientPage
+				<DynamicWrapperNoChildren
+					componentKey='infiniteList'
+					exportName='InfiniteList'
 					totalPages={totalPages}
 					currentPage={1}
 					category={category}

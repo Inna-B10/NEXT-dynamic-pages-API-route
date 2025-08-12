@@ -1,5 +1,5 @@
 import { Geist, Nanum_Myeongjo } from 'next/font/google'
-import OnboardingDynWrapper from '@/components/Onboarding/OnboardingDynWrapper'
+import { DynamicWrapperNoChildren } from '@/components/DynamicWrapperNoChildren'
 import ProvidersDynWrapper from '@/providers/ProvidersDynWrapper'
 import { SITE_NAME } from '@/constants/seo.constants'
 import './globals.css'
@@ -74,7 +74,10 @@ export default function RootLayout({ children }) {
 			<body className={`${geistSans.variable} antialiased`}>
 				<ProvidersDynWrapper>
 					{children}
-					<OnboardingDynWrapper />
+					<DynamicWrapperNoChildren
+						componentKey='onboarding'
+						exportName='OnboardingPage'
+					/>
 				</ProvidersDynWrapper>
 			</body>
 		</html>
