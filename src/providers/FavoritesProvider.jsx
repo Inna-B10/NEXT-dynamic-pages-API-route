@@ -87,7 +87,9 @@ export function FavoritesProvider({ children }) {
 		},
 		onSettled: () => {
 			queryClient.invalidateQueries(['favorites', userId])
-			queryClient.invalidateQueries(['detailedFavorites', userId])
+			if (pathname.startsWith('/user/favorites')) {
+				queryClient.invalidateQueries(['detailedFavorites', userId])
+			}
 		}
 	})
 	const toggleFavorite = (productId, category) => {

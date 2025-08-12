@@ -10,7 +10,7 @@ export async function sendOrderConfirmEmail({ toEmail, orderId, items, totalPric
 	const itemsList = items
 		.map(item => `<li> ${item.productName} — ${item.quantity} x ${item.price} kr</li>`)
 		.join('')
-
+	//[TODO] ? react-email Checkout component
 	const html = `
 			<h1>Thank you for your order!</h1>
 		  <h2>Here's your order summary:</h2>

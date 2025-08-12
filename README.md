@@ -128,7 +128,8 @@ npm install @clerk/backend #to get user data on the server
 - [x] form validation (Zod)
 - [x] order confirmation(email Mailgun)
 - [x] imitation paying process
-- [x]  save order address and autofill form
+- [x] Skeleton/Loader
+- [x] get user's last order address and autofill form
 
 
 ## TODOs:
@@ -140,6 +141,7 @@ npm install @clerk/backend #to get user data on the server
 - [ ] contact page + check options:
    - [ ] [Send emails with Next.js - Resend](https://resend.com/docs/send-with-nextjs)
    - [ ] [Easy Contact Form to Email Service](https://web3forms.com/)
+- [ ] FIX BUG: no search result message before result
 
 admin:
 - [ ] dashboard page:
@@ -154,13 +156,19 @@ user:
 
 #### *design:*
 - [ ] metadata
-- [ ] home page
+- [ ] ? react-email Checkout component
 - [ ] Logo
 - [ ] font color (hover does not work on mobile!)
-- [ ] Skeleton/Loader
 - [ ] User's buttons break point 480 (menu)
 - [ ] Layout:
+- [ ] home page
   - [ ] Sidebar
   - [ ] Footer
 
-#### *file structure of project*
+#### *refactoring:*
+- [ ] refactor code:
+  - [ ] code lenth <=130 lines
+  - [ ] add useful comments
+  - [ ] delete unnecessary comments
+  - [ ] check if to keep or delete console.log
+- [ ] revision file structure of project

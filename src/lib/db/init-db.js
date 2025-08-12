@@ -3,25 +3,6 @@ import { dbCollections } from './db-schema'
 import { connectToDatabase } from './mongoDBconnector'
 
 export async function initDatabase() {
-	//   const db =await connectToDatabase()
-	//
-	//   const collections = await db.listCollections({}, {nameOnly: true}).toArray()
-	// const collectionsNames = collections.map((collection) => collection.name)
-	//
-	//   if (!collectionsNames.includes('users')) {
-	//     await db.createCollection('users')
-	//   }
-	//
-	//   const userCollection = db.collection('users')
-	// 	const indexes = await userCollection.indexes()
-	// 	const hasIndex = indexes.some(i => i.name === 'user_email_unique')
-	//   if (!hasIndex) {
-	//     await userCollection.createIndex(
-	// 			{ userId: 1, email: 1 },
-	// 			{ unique: true, name: 'user_email_unique' }
-	// 		)
-	//   }
-
 	/* ---------------- Initialization Of Collections And Indexes --------------- */
 	const db = await connectToDatabase()
 	const existingCollections = await db.listCollections({}, { nameOnly: true }).toArray()

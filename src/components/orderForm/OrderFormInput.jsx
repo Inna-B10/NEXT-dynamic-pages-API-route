@@ -4,7 +4,7 @@ import { formatLabel } from '@/lib/utils/orderForm/orderForm.formatters'
 export default function OrderFormInput({ field, register, handleOnchange, onBlur, errors }) {
 	const inputRef = useRef(null)
 
-	//autofocus on first input of each form
+	/* ------------------ Autofocus On First Input Of Each Form ----------------- */
 	useEffect(() => {
 		if (field === 'first_name' || field === 'card_number') {
 			inputRef.current?.focus()

@@ -13,7 +13,7 @@ import { addressSchema } from '@/lib/zod/addressSchema'
 import { ordersService } from '@/services/client/orders.service'
 
 export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
-	//register data with react-hook-form
+	/* ------------------- Register Data With React-hook-form ------------------- */
 	const {
 		reset,
 		register,
@@ -26,7 +26,7 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 		defaultValues: {}
 	})
 
-	//visual formatting of inputs
+	/* ----------------------- Visual Formatting Of Inputs ---------------------- */
 	const addressFormatters = {
 		phone: formatPhone,
 		zip: formatZip
@@ -36,7 +36,7 @@ export default function AddressForm({ onSubmit, isSubmitting, onClose }) {
 	}
 	const cleanedValue = createCleanedValue(setValue)
 
-	//get user's last order address if exists and set as default
+	/* ------- Get User's Last Order Address If Exists And Set As Default ------- */
 	useEffect(() => {
 		async function fetchAddress() {
 			try {

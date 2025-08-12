@@ -87,7 +87,9 @@ export function CartProvider({ children }) {
 		},
 		onSettled: () => {
 			queryClient.invalidateQueries(['shoppingCart', userId])
-			queryClient.invalidateQueries(['detailedCart', userId])
+			if (pathname.startsWith('/user/shopping-cart')) {
+				queryClient.invalidateQueries(['detailedCart', userId])
+			}
 		}
 	})
 	const toggleCartItem = (productId, category) => {

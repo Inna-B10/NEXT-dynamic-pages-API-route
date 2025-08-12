@@ -51,6 +51,7 @@ export default function PlaceOrderButton({
 		onSettled: () => setIsSubmitting(false)
 	})
 
+	/* ----------------------------- Handle Helpers ----------------------------- */
 	const handleAddressSubmit = form => {
 		setAddressData(form)
 		setStep('payment')
@@ -91,6 +92,7 @@ export default function PlaceOrderButton({
 						<DialogTitle className='text-xl text-accent text-center font-bold mb-4'>
 							{step === 'address' ? 'Delivery Address' : 'Mock Payment'}
 						</DialogTitle>
+						{/* ---------------------------------- Forms --------------------------------- */}
 						{step === 'address' && (
 							<AddressForm
 								onSubmit={handleAddressSubmit}
@@ -108,11 +110,13 @@ export default function PlaceOrderButton({
 					</DialogPanel>
 				</div>
 			</Dialog>
+			{/* -------------------------- Show Payment Process -------------------------- */}
 			<PaymentStatusOverlay
 				isOverlayOpen={showOverlay}
 				onSuccess={() => placeOrder()}
 				onClose={() => setShowOverlay(false)}
 			/>
+			{/* -------------------------- Show Success Message -------------------------- */}
 			<OrderSuccessMessage
 				isMessageOpen={showSuccessMessage}
 				onClose={() => setShowSuccessMessage(false)}

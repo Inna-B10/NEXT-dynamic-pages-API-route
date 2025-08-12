@@ -10,6 +10,7 @@ import { getPreviewProductsData } from '@/services/server/productsData.service'
 
 export const revalidate = 60 //ISR
 
+/* --------------------------------- Metadata -------------------------------- */
 export async function generateMetadata(props) {
 	const params = await props.params
 	const category = params.category
@@ -38,10 +39,12 @@ export async function generateMetadata(props) {
 	}
 }
 
+/* ------------------------------ StaticParams ------------------------------ */
 export async function generateStaticParams() {
 	return CATEGORIES.map(({ slug }) => ({ category: slug }))
 }
 
+/* ------------------------------ CategoryPage ------------------------------ */
 export default async function CategoryPage(props) {
 	const params = await props.params
 	const category = params.category
@@ -59,6 +62,7 @@ export default async function CategoryPage(props) {
 		<>
 			<h1>{getCategoryLabel(category)}</h1>
 			<div className='grid-cols w-full relative'>
+				{/* ------------------ First LIMIT-number Items Renders On Server ------------------ */}
 				{firstItems?.map(item => {
 					return (
 						<ProductCard
@@ -72,7 +76,7 @@ export default async function CategoryPage(props) {
 					)
 				})}
 
-				{/* The client interactive component is loaded here */}
+				{/* ---------------- Loads More Items On Scroll On Client Side --------------- */}
 				<DynamicWrapperNoChildren
 					componentKey='infiniteList'
 					exportName='InfiniteList'

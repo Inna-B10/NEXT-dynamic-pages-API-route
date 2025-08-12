@@ -15,7 +15,7 @@ import {
 import { paymentSchema } from '@/lib/zod/paymentSchema'
 
 export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
-	//register data with react-hook-form
+	/* ------------------- Register Data With React-hook-form ------------------- */
 	const {
 		register,
 		handleSubmit,
@@ -31,7 +31,7 @@ export function MockPaymentForm({ onSubmit, isSubmitting, onClose }) {
 		}
 	})
 
-	//visual formatting of inputs
+	/* ----------------------- Visual Formatting Of Inputs ---------------------- */
 	const paymentFormatters = {
 		card_number: formatCardNumber,
 		expiry: formatExpiry,

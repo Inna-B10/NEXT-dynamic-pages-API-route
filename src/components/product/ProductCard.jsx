@@ -5,7 +5,7 @@ export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) 
 	return (
 		<Link
 			href={href}
-			title={title}
+			title={`${title} - open product's page`}
 			aria-label={`${title} - open product's page`}
 			className='inline-block'
 		>
