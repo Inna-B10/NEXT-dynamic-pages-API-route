@@ -10,8 +10,8 @@ export function SidebarProvider({ children }) {
 	})
 	const pathname = usePathname()
 
-	//screen<1024px - fixed, z-50, auto-collapsed
-	//screen>=1024px - sticky, z-0, user controlled
+	//screen < 1024px -> fixed, z-50, auto-collapsed
+	//screen >= 1024px -> sticky, z-0, user controlled
 
 	// collapse panel after transition if width is less than 1024px
 	useEffect(() => {

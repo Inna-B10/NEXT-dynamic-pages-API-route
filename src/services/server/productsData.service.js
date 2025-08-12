@@ -51,7 +51,7 @@ export async function getPreviewProductsData(category) {
 			brand: product.Brand,
 			price: product.Price,
 			imageUrl: product['Picture URL'],
-			productName: formatProductTitle(product)
+			productName: formatProductTitle(product) //prepears product title
 		}))
 
 		return formatted

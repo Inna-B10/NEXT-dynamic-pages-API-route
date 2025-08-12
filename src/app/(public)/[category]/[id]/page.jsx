@@ -9,6 +9,7 @@ import { getPreviewProductsData, getProductDataById } from '@/services/server/pr
 
 export const revalidate = 60 //ISR
 
+/* -------------------------------- Metadata -------------------------------- */
 export async function generateMetadata(props) {
 	const params = await props.params
 	const { category, id } = params
@@ -36,6 +37,7 @@ export async function generateMetadata(props) {
 	}
 }
 
+/* ------------------------------ StaticParams ------------------------------ */
 export async function generateStaticParams() {
 	const allParams = []
 	for (const { slug } of CATEGORIES) {
@@ -53,6 +55,7 @@ export async function generateStaticParams() {
 	return allParams.flat()
 }
 
+/* ------------------------------- ProductPage ------------------------------ */
 export default async function ProductPage(props) {
 	const params = await props.params
 	const { category, id } = params

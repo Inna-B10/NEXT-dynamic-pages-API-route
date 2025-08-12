@@ -40,7 +40,7 @@ export async function getDetailedSearchData(query) {
 			brand: product.Brand,
 			price: product.Price,
 			imageUrl: product['Picture URL'],
-			productName: formatProductTitle(product)
+			productName: formatProductTitle(product) //prepears product title
 		}))
 
 		const withCategory = formatted.map(item => ({ ...item, category: slug }))

@@ -76,7 +76,7 @@ export async function getDetailedFavoritesData(userId) {
 						price: product.Price,
 						categorySlug,
 						imageUrl: product['Picture URL'],
-						productName: formatProductTitle(product)
+						productName: formatProductTitle(product) // prepears product title
 					}
 				})
 			}

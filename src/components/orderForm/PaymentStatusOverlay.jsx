@@ -12,7 +12,7 @@ export default function PaymentStatusOverlay({ isOverlayOpen, onSuccess, onClose
 		setProgress(0)
 		setStatus('loading')
 
-		// progress/ring animation
+		/* ------------------------- Progress/ring Animation ------------------------ */
 		let interval = setInterval(() => {
 			setProgress(prev => {
 				if (prev >= 100) {
@@ -27,7 +27,7 @@ export default function PaymentStatusOverlay({ isOverlayOpen, onSuccess, onClose
 		return () => clearInterval(interval)
 	}, [isOverlayOpen])
 
-	// checkmark animation
+	/* --------------------------- Checkmark Animation -------------------------- */
 	useEffect(() => {
 		if (status === 'success') {
 			onSuccess?.()
@@ -51,7 +51,7 @@ export default function PaymentStatusOverlay({ isOverlayOpen, onSuccess, onClose
 					exit={{ opacity: 0, scale: 0.9 }}
 					className='w-4/5 max-w-lg bg-[#3f3f46] border border-white/20 p-6 rounded shadow-lg flex flex-col items-center gap-4'
 				>
-					{/* ring animation */}
+					{/* ----------------------------- Ring Animation ----------------------------- */}
 					<div className='relative w-32 h-32 my-4'>
 						<svg className='absolute top-0 left-0 w-full h-full'>
 							<circle
@@ -76,7 +76,7 @@ export default function PaymentStatusOverlay({ isOverlayOpen, onSuccess, onClose
 							/>
 						</svg>
 
-						{/* checkmark animation */}
+						{/* --------------------------- Checkmark Animation -------------------------- */}
 						{status === 'success' && (
 							<motion.svg
 								initial={{ scale: 0 }}
@@ -93,7 +93,7 @@ export default function PaymentStatusOverlay({ isOverlayOpen, onSuccess, onClose
 						)}
 					</div>
 
-					{/* status message */}
+					{/* ----------------------------- Status Message ----------------------------- */}
 					{status === 'loading' && <p className='text-sm'>Processing payment...</p>}
 
 					{status === 'success' && (

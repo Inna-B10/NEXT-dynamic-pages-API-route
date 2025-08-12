@@ -17,7 +17,7 @@ const DEFAULT_COUNTRY = 'Norway'
  * @param {string} [fieldValue] - Value for the single field case.
  */
 export function formatOrderFormData(dataOrField, formatters, fieldValue) {
-	// mode: format the whole object
+	/* ---------------------- Format Mode: The Whole Object --------------------- */
 	if (typeof dataOrField === 'object') {
 		const data = { country: DEFAULT_COUNTRY, ...dataOrField }
 
@@ -31,7 +31,7 @@ export function formatOrderFormData(dataOrField, formatters, fieldValue) {
 		return data
 	}
 
-	// mode: format one field
+	/* ------------------------- Format Mode: One Field ------------------------- */
 	if (typeof dataOrField === 'string') {
 		const field = dataOrField
 

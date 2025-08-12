@@ -37,12 +37,5 @@ export const dbCollections = [
 			{ key: { userId: 1 }, options: { name: 'order_user' } },
 			{ key: { createdAt: -1 }, options: { name: 'order_createdAt_desc' } }
 		]
-	},
-	{
-		name: 'addresses',
-		indexes: [
-			{ key: { userId: 1 }, options: { name: 'address_user' } },
-			{ key: { createdAt: -1 }, options: { name: 'address_createdAt_desc' } }
-		]
 	}
 ]
