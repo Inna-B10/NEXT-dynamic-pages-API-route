@@ -1,50 +1,18 @@
 'use client'
 
-import { useUser } from '@clerk/nextjs'
-import clsx from 'clsx'
 import { ShoppingCart } from 'react-feather'
-import { Button } from '@/components/ui/Button'
 import { useCart } from '@/providers/CartProvider'
+import { ToggleItemButton } from './ToggleItemButton'
 
-export function ToggleCartButton({ itemId, category, className, variant, icon }) {
-	const { isSignedIn } = useUser()
-	const { isInCart, toggleCartItem } = useCart()
-
-	const isAdded = isInCart(itemId)
+export function ToggleCartButton(props) {
 	return (
-		<Button
-			title={
-				isSignedIn
-					? isAdded
-						? 'Remove from cart'
-						: 'Add to shopping cart'
-					: 'Sign in to add to cart'
-			}
-			aria-label={
-				isSignedIn
-					? isAdded
-						? 'Remove from cart'
-						: 'Add to shopping cart'
-					: 'Sign in to add to cart'
-			}
-			aria-pressed={isAdded}
-			className={className}
-			variant={variant}
-			disabled={!isSignedIn}
-			onClick={isSignedIn ? () => toggleCartItem(itemId, category) : undefined}
-		>
-			{icon ? (
-				icon
-			) : (
-				<ShoppingCart
-					fillOpacity='0.7'
-					className={clsx('min-w-4 w-5 sm:min-w-6 text-accent hover:opacity-100', {
-						'fill-accent': isAdded,
-						'opacity-70': !isAdded && variant === 'icon'
-					})}
-				/>
-			)}
-			{variant !== 'icon' && (isAdded ? 'Remove' : 'Add to cart')}
-		</Button>
+		<ToggleItemButton
+			{...props}
+			useHook={useCart}
+			checkFnName='isInCart'
+			toggleFnName='toggleCartItem'
+			defaultIcon={ShoppingCart}
+			text='Cart'
+		/>
 	)
 }
