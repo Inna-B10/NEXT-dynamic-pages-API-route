@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
-import { Trash2 } from 'react-feather'
-import { DynamicToggleCartButton } from '@/components/buttons/DynamicToggleCartButton'
-import { DynamicToggleFavoriteButton } from '@/components/buttons/DynamicToggleFavoriteButton'
 import PlaceOrderButton from '@/components/buttons/PlaceOrderButton'
+import { ProductActionButtons } from '@/components/buttons/ProductActionButtons'
 import { OrderSuccessMessage } from '@/components/orderForm/OrderSuccessMessage'
 import { ProductCardWide } from '@/components/product/ProductCardWide'
 import { Button } from '@/components/ui/Button'
@@ -43,6 +41,8 @@ export function ShoppingCartPage() {
 		<section className='w-full max-w-[980px]'>
 			<div className='flex flex-col sm:flex-row sm:items-center mb-4'>
 				<h1>Shopping Cart</h1>
+
+				{/* --------------------------- Button - Remove All -------------------------- */}
 				{hasItems && (
 					<Button
 						className='place-self-end sm:place-self-center'
@@ -53,7 +53,7 @@ export function ShoppingCartPage() {
 					</Button>
 				)}
 
-				{/* confirm dialog - delete all products from cart */}
+				{/* ----------------------- Confirm Dialog - Remove All ---------------------- */}
 				<ConfirmDialog
 					open={showConfirmDelete}
 					onClose={() => setShowConfirmDelete(false)}
@@ -64,6 +64,7 @@ export function ShoppingCartPage() {
 
 			{!hasItems && <p>Your cart is empty.</p>}
 
+			{/* ------------------------------- Product Cards ---------------------------------- */}
 			{detailedCart.map(product => {
 				return (
 					<div
@@ -77,34 +78,24 @@ export function ShoppingCartPage() {
 							brand={product.brand}
 							price={product.price}
 						/>
-						<div className='absolute bottom-4 right-2 flex gap-2'>
-							<DynamicToggleFavoriteButton
-								itemId={product._id}
-								category={product.categorySlug}
-								variant='icon'
-							/>
-							<DynamicToggleCartButton
-								itemId={product._id}
-								category={product.categorySlug}
-								variant='icon'
-								icon={
-									<Trash2
-										fillOpacity={0.5}
-										className='min-w-4 w-5 sm:min-w-6 hover:fill-red-500 stroke-red-500 opacity-70 hover:opacity-100'
-									/>
-								}
-							/>
-						</div>
+
+						{/* ---------------------- Toggle Favorites/Cart Buttons --------------------- */}
+						<ProductActionButtons
+							itemId={product._id}
+							category={product.categorySlug}
+							trashFor='cart'
+						/>
 					</div>
 				)
 			})}
 
-			{/* show order success message */}
+			{/* -------------------------- Order Success Message ------------------------- */}
 			<OrderSuccessMessage
 				isMessageOpen={showSuccessMessage}
 				onClose={() => setShowSuccessMessage(false)}
 			/>
 
+			{/* -------------------------- Place Order Button ---------------------------- */}
 			{hasItems && (
 				<PlaceOrderButton
 					detailedCart={detailedCart}
