@@ -14,8 +14,9 @@ export function usePlaceOrder({ detailedCart, clearCart, loadDetailedCart, onOrd
 				productId: item._id,
 				productName: item.productName,
 				quantity: 1, //[TODO] so far no change in quantity
-				price: item.price ? item.price : 5995,
-				categorySlug: item.categorySlug
+				price: item.price,
+				categorySlug: item.categorySlug,
+				imageUrl: item.imageUrl
 			}))
 			const totalPrice = items.reduce((sum, item) => sum + item.price, 0)
 

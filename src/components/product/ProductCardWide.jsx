@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export function ProductCardWide({ href, title, imageSrc, brand, price = '5995,-' }) {
+export function ProductCardWide({ href, title, imageSrc, brand, price }) {
 	return (
 		<Link
 			href={href}
@@ -31,7 +31,7 @@ export function ProductCardWide({ href, title, imageSrc, brand, price = '5995,-'
 						)}
 						<p>
 							Price:
-							<br /> <span className='font-nanum font-bold'>{price}</span>
+							<br /> <span className='font-nanum font-bold'>{price},-</span>
 						</p>
 					</div>
 					<p className='text-accentSecondary content-center pr-8 bg-bgSecondary'>{title}</p>

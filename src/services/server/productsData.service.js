@@ -44,12 +44,18 @@ export async function getPreviewProductsData(category) {
 				}
 			)
 			.toArray()
+		if (!data) return []
 
 		// formatted product data
 		const formatted = data.map(product => ({
 			_id: product._id,
 			brand: product.Brand,
-			price: product.Price,
+			//NB: validate price
+			/**
+			 * test DB does not contain 'Price' field
+			 * change it if uses another DB
+			 */
+			price: Number.isFinite(product.Price) && product.Price > 0 ? product.Price : 4995,
 			imageUrl: product['Picture URL'],
 			productName: formatProductTitle(product) //prepears product title
 		}))
@@ -79,8 +85,18 @@ export async function getProductDataById(id, category) {
 	try {
 		const db = await connectToDatabase()
 		const data = await db.collection(category).findOne({ _id: objectId })
+		//NB: validate price
+		/**
+		 * test DB does not contain 'Price' field
+		 * change it if uses another DB
+		 */
+		const priceNum = Number(data?.Price)
+		const validPrice = Number.isFinite(priceNum) && priceNum > 0 ? priceNum : 4995
 
-		return data
+		return {
+			...data,
+			Price: validPrice
+		}
 	} catch (e) {
 		if (isDev()) console.error(`getProductDataById error: ${e.message}`)
 		return null

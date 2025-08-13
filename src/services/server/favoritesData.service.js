@@ -4,14 +4,14 @@ import { formatProductTitle } from '@/lib/utils/product/formatProductTitle'
 
 const COLLECTION_NAME = 'favorites'
 
-/* ----------------------------- GetFavoritesIds ---------------------------- */
+/* ----------------------------- Get Favorites Ids ---------------------------- */
 export async function getFavoritesIdsData(userId) {
 	const db = await connectToDatabase()
 	const data = await db.collection(COLLECTION_NAME).find({ userId }).toArray()
 	return data
 }
 
-/* ------------------------------- AddFavorite ------------------------------ */
+/* ------------------------------- Add Favorite ------------------------------ */
 export async function addFavoriteData(userId, productId, categorySlug) {
 	const db = await connectToDatabase()
 	const data = await db
@@ -20,17 +20,17 @@ export async function addFavoriteData(userId, productId, categorySlug) {
 	return data
 }
 
-/* ----------------------------- DeleteFavorite ----------------------------- */
+/* ----------------------------- Delete Favorite ----------------------------- */
 export async function deleteFavoriteData(userId, productId) {
 	const db = await connectToDatabase()
 	const data = await db.collection(COLLECTION_NAME).deleteOne({ userId, productId })
 	return data
 }
 
-/* -------------------------- GetDetailedFavorites -------------------------- */
+/* -------------------------- Get Favorites Details ------------------------- */
 export async function getDetailedFavoritesData(userId) {
 	const db = await connectToDatabase()
-
+	//find all productIds with userId=userId
 	const favorites = await db
 		.collection(COLLECTION_NAME)
 		.find({ userId })
@@ -68,12 +68,19 @@ export async function getDetailedFavoritesData(userId) {
 		for (const { productId, addedAt } of grouped[categorySlug]) {
 			const product = products.find(p => p._id.equals(new ObjectId(productId)))
 			if (product) {
+				//NB: validate price
+				/**
+				 * test DB does not contain 'Price' field
+				 * change it if uses another DB
+				 */
+				const priceNum = Number(product?.Price)
+				const validPrice = Number.isFinite(priceNum) && priceNum > 0 ? priceNum : 4995
 				result.push({
 					addedAt,
 					product: {
 						_id: product._id,
 						brand: product.Brand,
-						price: product.Price,
+						price: validPrice,
 						categorySlug,
 						imageUrl: product['Picture URL'],
 						productName: formatProductTitle(product) // prepears product title

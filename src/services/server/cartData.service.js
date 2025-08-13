@@ -30,6 +30,7 @@ export async function deleteCartItemData(userId, productId) {
 /* ------------------------- Get Cart Items Details ------------------------- */
 export async function getCartItemsDetailsData(userId) {
 	const db = await connectToDatabase()
+	//find all productIds with userId=userId
 	const items = await db
 		.collection(COLLECTION_NAME)
 		.find({ userId })
@@ -67,12 +68,19 @@ export async function getCartItemsDetailsData(userId) {
 		for (const { productId, addedAt } of grouped[categorySlug]) {
 			const product = products.find(p => p._id.equals(new ObjectId(productId)))
 			if (product) {
+				//NB: validate price
+				/**
+				 * test DB does not contain 'Price' field
+				 * change it if uses another DB
+				 */
+				const priceNum = Number(product?.Price)
+				const validPrice = Number.isFinite(priceNum) && priceNum > 0 ? priceNum : 4995
 				result.push({
 					addedAt,
 					product: {
 						_id: product._id,
 						brand: product.Brand,
-						price: product.Price,
+						price: validPrice,
 						categorySlug,
 						imageUrl: product['Picture URL'],
 						productName: formatProductTitle(product) // prepears product title

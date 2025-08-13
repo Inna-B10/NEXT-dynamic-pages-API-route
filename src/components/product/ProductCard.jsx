@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) {
+export function ProductCard({ href, title, imageSrc, brand, price }) {
 	return (
 		<Link
 			href={href}
@@ -27,7 +27,7 @@ export function ProductCard({ href, title, imageSrc, brand, price = '5995,-' }) 
 				<div className='flex flex-col p-4 pt-0 bg-bgSecondary rounded-b-md'>
 					{brand && <p className='text-dark-gray group-hover:text-foreground'>Brand: {brand}</p>}
 					<p className='text-dark-gray group-hover:text-foreground'>
-						Price: <span className='font-nanum font-bold'>{price}</span>
+						Price: <span className='font-nanum font-bold'>{price},-</span>
 					</p>
 				</div>
 			</div>

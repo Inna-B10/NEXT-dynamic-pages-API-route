@@ -34,11 +34,17 @@ export async function getDetailedSearchData(query) {
 			})
 			.toArray()
 
+		if (!items) return []
 		// formatted product data
 		const formatted = items.map(product => ({
 			_id: product._id,
 			brand: product.Brand,
-			price: product.Price,
+			//NB: validate price
+			/**
+			 * test DB does not contain 'Price' field
+			 * change it if uses another DB
+			 */
+			price: Number.isFinite(product.Price) && product.Price > 0 ? product.Price : 4995,
 			imageUrl: product['Picture URL'],
 			productName: formatProductTitle(product) //prepears product title
 		}))
