@@ -1,13 +1,9 @@
 import { useState } from 'react'
-import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useMutation } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
-import AddressForm from '../orderForm/AddressForm'
-import { MockPaymentForm } from '../orderForm/MockPaymentForm'
+import { usePlaceOrder } from '@/hooks/usePlaceOrder'
 import { OrderSuccessMessage } from '../orderForm/OrderSuccessMessage'
 import PaymentStatusOverlay from '../orderForm/PaymentStatusOverlay'
+import { PlaceOrderDialog } from '../orderForm/PlaceOrderDialog'
 import { Button } from '../ui/Button'
-import { ordersService } from '@/services/client/orders.service'
 
 export default function PlaceOrderButton({
 	detailedCart,
@@ -18,56 +14,9 @@ export default function PlaceOrderButton({
 	const [showOverlay, setShowOverlay] = useState(false)
 	const [isFormOpen, setIsFormOpen] = useState(false)
 	const [showSuccessMessage, setShowSuccessMessage] = useState(false)
-	const [step, setStep] = useState('address') // 'address' | 'payment'
-	const [isSubmitting, setIsSubmitting] = useState(false)
-	const [addressData, setAddressData] = useState(null)
 
-	const { mutate: placeOrder } = useMutation({
-		mutationFn: async () => {
-			const items = detailedCart.map(item => ({
-				productId: item._id,
-				productName: item.productName,
-				quantity: 1, //[TODO] so far no change in quantity
-				price: item.price ? item.price : 5995,
-				categorySlug: item.categorySlug
-			}))
-			const totalPrice = detailedCart.reduce(
-				(sum, item) => sum + (item.price ? item.price : 5995),
-				0
-			)
-
-			await ordersService.createNewOrder(items, totalPrice, addressData)
-		},
-		onSuccess: () => {
-			clearCart()
-			setIsFormOpen(false)
-			setStep('address')
-			loadDetailedCart()
-			setTimeout(() => onOrderSuccess(), 1000)
-		},
-		onError: () => {
-			toast.error('Error placing order!')
-		},
-		onSettled: () => setIsSubmitting(false)
-	})
-
-	/* ----------------------------- Handle Helpers ----------------------------- */
-	const handleAddressSubmit = form => {
-		setAddressData(form)
-		setStep('payment')
-	}
-
-	const handlePaymentSubmit = async () => {
-		setIsSubmitting(true)
-		setShowOverlay(true)
-	}
-
-	const handleClose = () => {
-		if (!isSubmitting) {
-			setIsFormOpen(false)
-			setStep('address')
-		}
-	}
+	const { step, setStep, isSubmitting, setIsSubmitting, setAddressData, placeOrder } =
+		usePlaceOrder({ detailedCart, clearCart, loadDetailedCart, onOrderSuccess })
 
 	return (
 		<>
@@ -78,44 +27,37 @@ export default function PlaceOrderButton({
 				Place Order
 			</Button>
 
-			<Dialog
-				open={isFormOpen && !isSubmitting}
-				onClose={() => {}}
-				className='relative z-50'
-			>
-				<div
-					className='fixed inset-0 bg-black/50'
-					aria-hidden='true'
-				/>
-				<div className='fixed inset-0 flex items-center justify-center p-4'>
-					<DialogPanel className='w-full max-w-xl bg-[#3f3f46] border border-white/20 p-6 rounded shadow-lg'>
-						<DialogTitle className='text-xl text-accent text-center font-bold mb-4'>
-							{step === 'address' ? 'Delivery Address' : 'Mock Payment'}
-						</DialogTitle>
-						{/* ---------------------------------- Forms --------------------------------- */}
-						{step === 'address' && (
-							<AddressForm
-								onSubmit={handleAddressSubmit}
-								isSubmitting={isSubmitting}
-								onClose={handleClose}
-							/>
-						)}
-						{step === 'payment' && !isSubmitting && (
-							<MockPaymentForm
-								onSubmit={handlePaymentSubmit}
-								isSubmitting={isSubmitting}
-								onClose={handleClose}
-							/>
-						)}
-					</DialogPanel>
-				</div>
-			</Dialog>
+			{/* -------------------------- Show Order Dialog -------------------------- */}
+			<PlaceOrderDialog
+				isOpen={isFormOpen}
+				step={step}
+				isSubmitting={isSubmitting}
+				onAddressSubmit={form => {
+					setAddressData(form)
+					setStep('payment')
+				}}
+				onPaymentSubmit={() => {
+					setIsSubmitting(true)
+					setShowOverlay(true)
+				}}
+				onClose={() => {
+					if (!isSubmitting) {
+						setIsFormOpen(false)
+						setStep('address')
+					}
+				}}
+			/>
+
 			{/* -------------------------- Show Payment Process -------------------------- */}
 			<PaymentStatusOverlay
 				isOverlayOpen={showOverlay}
-				onSuccess={() => placeOrder()}
+				onSuccess={() => {
+					placeOrder()
+					setIsFormOpen(false)
+				}}
 				onClose={() => setShowOverlay(false)}
 			/>
+
 			{/* -------------------------- Show Success Message -------------------------- */}
 			<OrderSuccessMessage
 				isMessageOpen={showSuccessMessage}
