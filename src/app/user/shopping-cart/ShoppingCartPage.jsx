@@ -28,7 +28,7 @@ export function ShoppingCartPage() {
 
 	return (
 		!detailedCartLoading && (
-			<section className='w-full max-w-[980px]'>
+			<section className='w-full max-w-[980px] mb-20'>
 				<div className='flex flex-col sm:flex-row sm:items-center mb-4'>
 					<h1>Shopping Cart</h1>
 
@@ -85,14 +85,19 @@ export function ShoppingCartPage() {
 					onClose={() => setShowSuccessMessage(false)}
 				/>
 
-				{/* -------------------------- Place Order Button ---------------------------- */}
+				{/* ----------------------- Price + Place Order Button ----------------------- */}
 				{hasItems && (
-					<PlaceOrderButton
-						detailedCart={detailedCart}
-						loadDetailedCart={loadDetailedCart}
-						clearCart={clearCart}
-						onOrderSuccess={() => setShowSuccessMessage(true)}
-					/>
+					<div className='flex flex-col items-end bp480:flex-row bp480:justify-between bp480:items-center gap-8'>
+						<div className='text-xl font-bold text-accent'>
+							Total: {detailedCart.reduce((acc, curr) => acc + curr.price, 0)} kr
+						</div>
+						<PlaceOrderButton
+							detailedCart={detailedCart}
+							loadDetailedCart={loadDetailedCart}
+							clearCart={clearCart}
+							onOrderSuccess={() => setShowSuccessMessage(true)}
+						/>
+					</div>
 				)}
 			</section>
 		)
