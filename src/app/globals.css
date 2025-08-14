@@ -50,3 +50,9 @@ button:disabled {
 input[type="search"]:focus-visible {
   outline: none;
 }
+
+/* custom link in clerk user menu */
+.cl-button__custom-menutItem-0 {
+  color: var(--color-accentSecondary) !important;
+  font-size: large;
+}
