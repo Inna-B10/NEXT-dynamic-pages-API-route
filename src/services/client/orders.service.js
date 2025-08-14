@@ -6,14 +6,14 @@ class OrdersService {
 	_ORDERS = `${API_URL}/orders`
 
 	/* -------------------------- Get Orders By UserId -------------------------- */
-	// async getOrdersByUserId(userId) {
-	// 	if (!userId) {
-	// 		if (isDev()) console.error('Missing userId')
-	// 		throw new Error('Missing params')
-	// 	}
-	// 	const { data } = await axiosClient.get(`${this._ORDERS}`)
-	// 	return data
-	// }
+	async getOrdersByUserId(userId) {
+		if (!userId) {
+			if (isDev()) console.error('Missing userId')
+			throw new Error('Missing params')
+		}
+		const { data } = await axiosClient.get(this._ORDERS)
+		return data
+	}
 
 	/* ---------------------------- Create New Order ---------------------------- */
 	async createNewOrder(items, totalPrice, address) {
@@ -21,7 +21,7 @@ class OrdersService {
 			if (isDev()) console.error('Missing params')
 			throw new Error('Missing order data')
 		}
-		const { data } = await axiosClient.post(`${this._ORDERS}/create`, {
+		const { data } = await axiosClient.post(this._ORDERS, {
 			items,
 			totalPrice,
 			address

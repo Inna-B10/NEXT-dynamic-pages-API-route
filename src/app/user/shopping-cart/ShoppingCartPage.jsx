@@ -28,7 +28,7 @@ export function ShoppingCartPage() {
 
 	return (
 		!detailedCartLoading && (
-			<section className='w-full max-w-[980px] mb-20'>
+			<div className='w-full max-w-[980px] mb-20'>
 				<div className='flex flex-col sm:flex-row sm:items-center mb-4'>
 					<h1>Shopping Cart</h1>
 
@@ -99,7 +99,7 @@ export function ShoppingCartPage() {
 						/>
 					</div>
 				)}
-			</section>
+			</div>
 		)
 	)
 }

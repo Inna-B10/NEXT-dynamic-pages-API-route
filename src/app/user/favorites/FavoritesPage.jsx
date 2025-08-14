@@ -26,7 +26,7 @@ export function FavoritesPage() {
 
 	return (
 		!detailedFavLoading && (
-			<section className='w-full max-w-[980px]'>
+			<div className='w-full max-w-[980px]'>
 				<div className='flex flex-col sm:flex-row sm:items-center mb-4'>
 					<h1>Favorites</h1>
 
@@ -75,7 +75,7 @@ export function FavoritesPage() {
 						</div>
 					)
 				})}
-			</section>
+			</div>
 		)
 	)
 }
