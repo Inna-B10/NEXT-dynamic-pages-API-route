@@ -27,7 +27,7 @@ export function OrdersPage() {
 		<div className='w-full max-w-[980px] '>
 			<h1>My Orders</h1>
 			{!isLoading &&
-				(!orders.length ? (
+				(!orders?.length ? (
 					<div>No orders</div>
 				) : (
 					orders.map(order => {
@@ -40,15 +40,27 @@ export function OrdersPage() {
 								aria-label='View order details'
 								key={order._id}
 								className={twMerge(
-									'flex flex-col gap-y-4 p-4 mb-4 border border-border rounded-md transition-all bg-bgSecondary text-sm md:text-base lg:text-lg hover:translate-x-2 hover:[will-change:transform]',
+									'flex flex-col sm:flex-row sm:justify-between gap-y-4 p-4 mb-8 border border-border rounded-md transition-all bg-bgSecondary text-sm md:text-base lg:text-lg hover:translate-x-2 hover:[will-change:transform] overflow-y-auto',
 									!isActive && 'opacity-70 hover:opacity-90'
 								)}
 							>
-								<div className='flex flex-col justify-between gap-4 bp480:items-center bp480:flex-row'>
+								<div className='flex flex-col gap-3'>
 									<OrderRow
 										isActive={isActive}
 										label='Order ID: '
 										value={order._id}
+									/>
+									<OrderRow
+										isActive={isActive}
+										label='Order Date: '
+										value={date}
+									/>
+								</div>
+								<div className='flex flex-col gap-3 sm:items-end sm:flex-col-reverse'>
+									<OrderRow
+										isActive={isActive}
+										label='Total sum: '
+										value={FormatPrice(order.totalPrice)}
 									/>
 									<OrderRow
 										isActive={isActive}
@@ -58,23 +70,6 @@ export function OrdersPage() {
 											{order.status || 'Unknown'}
 										</span>
 									</OrderRow>
-								</div>
-								<div className='flex flex-col justify-between gap-4 bp480:items-center bp480:flex-row'>
-									<OrderRow
-										isActive={isActive}
-										label='Order Date: '
-										value={date}
-									/>
-									<OrderRow
-										isActive={isActive}
-										label='Total products:'
-										value={order.items.length}
-									/>
-									<OrderRow
-										isActive={isActive}
-										label='Total sum: '
-										value={FormatPrice(order.totalPrice)}
-									/>
 								</div>
 							</Link>
 						)

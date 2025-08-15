@@ -9,7 +9,18 @@ export async function getOrdersByUserIdData(userId) {
 	const db = await connectToDatabase()
 	const data = await db
 		.collection(COLLECTION_NAME)
-		.find({ userId }, { sort: { createdAt: -1 } })
+		.find(
+			{ userId },
+			{ sort: { createdAt: -1 } },
+			{
+				projection: {
+					_id: 1,
+					totalPrice: 1,
+					status: 1,
+					createdAt: 1
+				}
+			}
+		)
 		.toArray()
 	return data
 }

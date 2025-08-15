@@ -41,6 +41,7 @@ class OrdersService {
 			if (isDev()) console.error('Missing orderId')
 			throw new Error('Missing params')
 		}
+
 		const { data } = await axiosClient.get(`${this._ORDERS}/${orderId}`)
 		return data
 	}

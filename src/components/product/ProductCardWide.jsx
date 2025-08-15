@@ -11,7 +11,7 @@ export function ProductCardWide({ href, title, imageSrc, brand, price }) {
 			className='inline-block w-full'
 		>
 			<div className='flex w-full text-sm font-semibold border rounded-md group border-border bg-bgSecondary md:text-base lg:text-lg'>
-				<div className='relative min-w-1/3 sm:min-w-[150px]  bg-white rounded-l-md'>
+				<div className='relative min-w-1/3 sm:min-w-[150px] bg-white rounded-l-md'>
 					<Image
 						src={imageSrc}
 						alt={`Image of product: ${title}`}
