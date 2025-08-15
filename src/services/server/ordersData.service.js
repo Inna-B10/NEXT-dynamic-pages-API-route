@@ -19,7 +19,7 @@ export async function createNewOrderData(userId, items, totalPrice, address) {
 		userId,
 		items,
 		totalPrice,
-		status: 'pending',
+		status: 'processing',
 		createdAt: new Date(),
 		deliveryAddress: address
 	})

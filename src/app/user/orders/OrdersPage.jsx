@@ -1,17 +1,17 @@
+import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
+import { twMerge } from 'tailwind-merge'
+import { OrderRow } from './OrderRow'
+import { FormatPrice } from '@/lib/utils/formatPrice'
 import { isDev } from '@/lib/utils/isDev'
 import { ordersService } from '@/services/client/orders.service'
 
 export function OrdersPage() {
 	const { isLoaded, user } = useUser()
 
-	const {
-		data: orders = [],
-		isLoading
-		// refetch
-	} = useQuery({
+	const { data: orders = [], isLoading } = useQuery({
 		queryKey: ['orders', user?.id],
 		queryFn: () => (user?.id ? ordersService.getOrdersByUserId(user.id).then(res => res.data) : []),
 		enabled: isLoaded && !!user?.id,
@@ -19,36 +19,67 @@ export function OrdersPage() {
 			toast.error('Error loading orders')
 			if (isDev()) console.error('Error fetching orders:', error)
 		},
+		staleTime: 1000 * 60 * 2, //2 minutes cache
 		refetchOnWindowFocus: true //auto-refresh on returning to tab
 	})
-	console.log(orders)
+
 	return (
-		<>
+		<div className='w-full max-w-[980px] '>
 			<h1>My Orders</h1>
 			{!isLoading &&
 				(!orders.length ? (
 					<div>No orders</div>
 				) : (
 					orders.map(order => {
-						const date = new Date(order.createdAt)
+						const date = new Date(order.createdAt).toLocaleDateString('no-NO')
+						const isActive = order.status === 'processing'
 						return (
-							<div
+							<Link
+								href={`/user/orders/${order._id}`}
+								title='View order details'
+								aria-label='View order details'
 								key={order._id}
-								className='w-full flex flex-col border rounded mb-4 p-4 gap-y-4'
+								className={twMerge(
+									'flex flex-col gap-y-4 p-4 mb-4 border border-border rounded-md transition-all bg-bgSecondary text-sm md:text-base lg:text-lg hover:translate-x-2 hover:[will-change:transform]',
+									!isActive && 'opacity-70 hover:opacity-90'
+								)}
 							>
-								<div className='flex justify-between items-center gap-4'>
-									<span>Order ID: {order._id}</span>
-									<span>Status: {order.status || 'Unknown'}</span>
+								<div className='flex flex-col justify-between gap-4 bp480:items-center bp480:flex-row'>
+									<OrderRow
+										isActive={isActive}
+										label='Order ID: '
+										value={order._id}
+									/>
+									<OrderRow
+										isActive={isActive}
+										label='Status: '
+									>
+										<span className={isActive ? 'text-green-500' : 'text-muted'}>
+											{order.status || 'Unknown'}
+										</span>
+									</OrderRow>
 								</div>
-								<div className='flex justify-between items-center gap-4'>
-									<span>Order Date: {date.toLocaleDateString()}</span>
-									<span>Items count: {order.items.length}</span>
-									<span>Total Price: {order.totalPrice}</span>
+								<div className='flex flex-col justify-between gap-4 bp480:items-center bp480:flex-row'>
+									<OrderRow
+										isActive={isActive}
+										label='Order Date: '
+										value={date}
+									/>
+									<OrderRow
+										isActive={isActive}
+										label='Total products:'
+										value={order.items.length}
+									/>
+									<OrderRow
+										isActive={isActive}
+										label='Total sum: '
+										value={FormatPrice(order.totalPrice)}
+									/>
 								</div>
-							</div>
+							</Link>
 						)
 					})
 				))}
-		</>
+		</div>
 	)
 }
