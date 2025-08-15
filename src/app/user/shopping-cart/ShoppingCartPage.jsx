@@ -7,6 +7,7 @@ import { ProductCardWide } from '@/components/product/ProductCardWide'
 import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import { useCart } from '@/providers/CartProvider'
+import { FormatPrice } from '@/lib/utils/formatPrice'
 
 export function ShoppingCartPage() {
 	const { isLoaded, user } = useUser()
@@ -29,7 +30,7 @@ export function ShoppingCartPage() {
 	return (
 		!detailedCartLoading && (
 			<div className='w-full max-w-[980px] mb-20'>
-				<div className='flex flex-col sm:flex-row sm:items-center mb-4'>
+				<div className='flex flex-col mb-4 sm:flex-row sm:items-center'>
 					<h1>Shopping Cart</h1>
 
 					{/* --------------------------- Button - Remove All -------------------------- */}
@@ -87,9 +88,12 @@ export function ShoppingCartPage() {
 
 				{/* ----------------------- Price + Place Order Button ----------------------- */}
 				{hasItems && (
-					<div className='flex flex-col items-end bp480:flex-row bp480:justify-between bp480:items-center gap-8'>
-						<div className='text-xl font-bold text-accent'>
-							Total: {detailedCart.reduce((acc, curr) => acc + curr.price, 0)} kr
+					<div className='flex flex-col items-end gap-8 bp480:flex-row bp480:justify-between bp480:items-center'>
+						<div className='text-lg font-bold bp520:text-xl md:text-2xl text-accent'>
+							Total:{' '}
+							<span className='font-nanum'>
+								{FormatPrice(detailedCart.reduce((acc, curr) => acc + curr.price, 0))}
+							</span>
 						</div>
 						<PlaceOrderButton
 							detailedCart={detailedCart}

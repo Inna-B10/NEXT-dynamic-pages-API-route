@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { FormatPrice } from '@/lib/utils/formatPrice'
 
 export function ProductCard({ href, title, imageSrc, brand, price }) {
 	return (
@@ -17,17 +18,17 @@ export function ProductCard({ href, title, imageSrc, brand, price }) {
 							alt={`Image of product: ${title}`}
 							fill
 							sizes='(max-width: 768px) 100vw, 268px'
-							className='object-contain rounded-t-lg transition'
+							className='object-contain transition rounded-t-lg'
 							priority
 						/>
 						<div className='absolute inset-0 pointer-events-none rounded-t-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-none'></div>
 					</div>
-					<p className='text-accentSecondary p-4 bg-bgSecondary'>{title}</p>
+					<p className='p-4 text-accentSecondary bg-bgSecondary'>{title}</p>
 				</div>
 				<div className='flex flex-col p-4 pt-0 bg-bgSecondary rounded-b-md'>
 					{brand && <p className='text-dark-gray group-hover:text-foreground'>Brand: {brand}</p>}
 					<p className='text-dark-gray group-hover:text-foreground'>
-						Price: <span className='font-nanum font-bold'>{price},-</span>
+						Price: <span className='font-bold font-nanum'>{FormatPrice(price, 'display')}</span>
 					</p>
 				</div>
 			</div>

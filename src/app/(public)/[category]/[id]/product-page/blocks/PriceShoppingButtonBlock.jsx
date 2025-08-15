@@ -1,9 +1,12 @@
 import { DynamicButton } from '@/components/buttons/DynamicButton'
+import { FormatPrice } from '@/lib/utils/formatPrice'
 
 export function PriceShoppingButtonBlock({ price, itemId, category }) {
 	return (
-		<div className='w-full flex flex-col gap-4 items-center pb-2 lg:w-1/2 lg:h-full lg:gap-6 lg:pb-0 lg:border-r lg:pr-4 border-dashed border-border'>
-			<h3 className='text-3xl lg:text-4xl font-bold text-accent font-nanum'>{price},-</h3>
+		<div className='flex flex-col items-center w-full gap-4 pb-2 border-dashed lg:w-1/2 lg:h-full lg:gap-6 lg:pb-0 lg:border-r lg:pr-4 border-border'>
+			<h3 className='text-3xl font-bold lg:text-4xl text-accent font-nanum'>
+				{FormatPrice(price, 'display')}
+			</h3>
 
 			<DynamicButton
 				itemId={itemId}
