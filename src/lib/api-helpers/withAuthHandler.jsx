@@ -3,7 +3,7 @@ import { getAuth } from '@clerk/nextjs/server'
 import { isDev } from '@/lib/utils/isDev'
 
 export function withAuthHandler(handler) {
-	return async function (req) {
+	return async function (req, context) {
 		const { userId } = getAuth(req)
 
 		if (!userId) {
@@ -12,7 +12,7 @@ export function withAuthHandler(handler) {
 		}
 
 		try {
-			return await handler(userId, req)
+			return await handler(userId, req, context)
 		} catch (error) {
 			if (isDev()) console.error('API ERROR:', error)
 			return NextResponse.json({ error: error.message }, { status: 500 })
