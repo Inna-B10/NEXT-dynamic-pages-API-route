@@ -17,7 +17,8 @@ const componentImports = {
 	'search-input': () => import('@/components/layout/header/SearchInput'),
 	onboarding: () => import('@/components/Onboarding/Onboarding'),
 	auth: () => import('@/app/auth/[[...auth]]/AuthPage'),
-	orders: () => import('@/app/user/orders/OrdersPage')
+	orders: () => import('@/app/user/orders/OrdersPage'),
+	'order-details': () => import('@/app/user/orders/[orderId]/OrderDetailsPage')
 }
 
 /**

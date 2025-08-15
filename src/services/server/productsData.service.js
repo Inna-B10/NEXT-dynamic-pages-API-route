@@ -57,7 +57,7 @@ export async function getPreviewProductsData(category) {
 			 */
 			price: Number.isFinite(product.Price) && product.Price > 0 ? product.Price : 4995,
 			imageUrl: product['Picture URL'],
-			productName: formatProductTitle(product) //prepears product title
+			productName: formatProductTitle(product) //prepares product title
 		}))
 
 		return formatted

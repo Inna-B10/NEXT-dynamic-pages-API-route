@@ -34,5 +34,15 @@ class OrdersService {
 		const { data } = await axiosClient.get(`${this._ORDERS}/last-address`)
 		return data
 	}
+
+	/* ------------------------- Get Order By Id ------------------------- */
+	async getOrderById(orderId) {
+		if (!orderId) {
+			if (isDev()) console.error('Missing orderId')
+			throw new Error('Missing params')
+		}
+		const { data } = await axiosClient.get(`${this._ORDERS}/${orderId}`)
+		return data
+	}
 }
 export const ordersService = new OrdersService()
