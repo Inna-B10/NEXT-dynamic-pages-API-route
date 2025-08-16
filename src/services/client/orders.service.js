@@ -38,12 +38,20 @@ class OrdersService {
 	/* ------------------------- Get Order By Id ------------------------- */
 	async getOrderById(orderId) {
 		if (!orderId) {
-			if (isDev()) console.error('Missing orderId')
-			throw new Error('Missing params')
+			if (isDev()) {
+				console.error('Missing orderId')
+				throw new Error('Missing params')
+			}
+			return null
 		}
 
-		const { data } = await axiosClient.get(`${this._ORDERS}/${orderId}`)
-		return data
+		try {
+			const { data } = await axiosClient.get(`${this._ORDERS}/${orderId}`)
+			return data
+		} catch (error) {
+			if (isDev()) console.error('GET order ERROR:', error)
+			return null
+		}
 	}
 }
 export const ordersService = new OrdersService()

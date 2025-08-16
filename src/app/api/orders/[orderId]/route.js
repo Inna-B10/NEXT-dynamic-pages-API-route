@@ -8,9 +8,11 @@ export const GET = withAuthHandler(async (userId, req, context) => {
 		const { orderId } = await context.params
 		const data = await getOrderByIdData(orderId)
 
+		if (!data) return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+
 		return NextResponse.json({ data })
 	} catch (error) {
-		if (isDev()) console.error('GET order ERROR:', error)
+		if (isDev()) console.error('API DB or server error:', error)
 
 		return NextResponse.json({ error: error.message }, { status: 500 })
 	}
