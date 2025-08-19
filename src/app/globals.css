@@ -23,7 +23,7 @@
   }
 
   h1 {
-    @apply w-full text-xl bp520:text-2xl md:text-3xl font-bold text-accent text-center mt-2 sm:mt-4 lg:mt-8 mb-6 sm:mb-8 lg:mb-12
+    @apply w-full text-2xl md:text-3xl font-bold text-accent text-center mt-2 sm:mt-4 lg:mt-8 mb-6 sm:mb-8 lg:mb-12
   }
 }
 
@@ -49,4 +49,10 @@ button:disabled {
 
 input[type="search"]:focus-visible {
   outline: none;
+}
+
+/* custom link in clerk user menu */
+.cl-button__custom-menutItem-0 {
+  color: var(--color-accentSecondary) !important;
+  font-size: large;
 }

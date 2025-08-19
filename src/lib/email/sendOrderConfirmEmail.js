@@ -1,5 +1,6 @@
 import formData from 'form-data'
 import Mailgun from 'mailgun.js'
+import { FormatPrice } from '../utils/formatPrice'
 
 const mailgun = new Mailgun(formData)
 const mg = mailgun.client({
@@ -16,7 +17,7 @@ export async function sendOrderConfirmEmail({ toEmail, orderId, items, totalPric
 		  <h2>Here's your order summary:</h2>
 			<p><strong>Order ID:</strong> ${orderId}</p>
 		  <ul>${itemsList}</ul>
-			<p><strong>Total:</strong> ${totalPrice} kr</p>
+			<p><strong>Total:</strong> ${FormatPrice(totalPrice)}</p>
 			<p><strong>Shipping to:</strong> ${address.first_name} ${address.last_name}, ${address.street}, ${address.city}, ${address.zip}, ${address.country}</p>
 		`
 	try {

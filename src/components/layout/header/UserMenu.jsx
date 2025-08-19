@@ -8,6 +8,19 @@ import { UserMenuButton } from '@/components/buttons/header/UserMenuButton'
 import { useCart } from '@/providers/CartProvider'
 import { useFavorites } from '@/providers/FavoritesProvider'
 
+//[TODO] change icon and move to ui component
+const DotIcon = () => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			viewBox='0 0 512 512'
+			fill='currentColor'
+		>
+			<path d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z' />
+		</svg>
+	)
+}
+
 export function UserMenu() {
 	const pathname = usePathname()
 	const isProtected = pathname.startsWith('/user')
@@ -75,7 +88,23 @@ export function UserMenu() {
 									avatarImage: 'p-[2px] sm:p-0 rounded-full bg-bg'
 								}
 							}}
-						/>
+						>
+							<UserButton.MenuItems>
+								{/* --------------------- Custom Link In Clerk User Menu --------------------- */}
+								<UserButton.Link
+									appearance={{
+										elements: {
+											'cl-button__custom-menutItem-0':
+												'text-accentSecondary hover:text-accentSecondary'
+										}
+									}}
+									label='My orders'
+									labelIcon={<DotIcon />}
+									href='/user/orders'
+								/>
+								<UserButton.Action label='manageAccount' />
+							</UserButton.MenuItems>
+						</UserButton>
 					}
 				/>
 			) : (

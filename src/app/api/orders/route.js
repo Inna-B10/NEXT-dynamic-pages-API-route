@@ -3,7 +3,13 @@ import { getUserEmail } from '@/lib/api-helpers/clerk/getUserEmail'
 import { withAuthHandler } from '@/lib/api-helpers/withAuthHandler'
 import { sendOrderConfirmEmail } from '@/lib/email/sendOrderConfirmEmail'
 import { isDev } from '@/lib/utils/isDev'
-import { createNewOrderData } from '@/services/server/ordersData.service'
+import { createNewOrderData, getOrdersByUserIdData } from '@/services/server/ordersData.service'
+
+/* ---------------------------- Get Orders By User Id ---------------------------- */
+export const GET = withAuthHandler(async (userId, req) => {
+	const data = await getOrdersByUserIdData(userId)
+	return NextResponse.json({ data })
+})
 
 /* ---------------------------- Create New Order ---------------------------- */
 export const POST = withAuthHandler(async (userId, req) => {
