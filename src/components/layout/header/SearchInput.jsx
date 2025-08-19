@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 export function SearchInput() {
 	const [value, setValue] = useState('')
@@ -7,8 +8,11 @@ export function SearchInput() {
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		if (value.trim()) {
+		if (value.trim().length >= 2) {
 			router.push(`/search?query=${encodeURIComponent(value.trim())}`)
+			setValue('')
+		} else {
+			toast.error('Missing or too short query\n Minimum length: 2 symbols')
 			setValue('')
 		}
 	}
@@ -22,6 +26,7 @@ export function SearchInput() {
 					type='search'
 					id='search'
 					placeholder='Search'
+					required
 					value={value}
 					onChange={e => setValue(e.target.value)}
 					className='w-full min-w-40 border border-accentSecondary text-xs italic p-1.5 sm:p-2 rounded md:ml-4'

@@ -130,6 +130,8 @@ npm install @clerk/backend #to get user data on the server
 - [x] imitation paying process
 - [x] Skeleton/Loader
 - [x] get user's last order address and autofill form
+- [x] user orders page(status,history?)
+- [x] FIX BUG: no search result message before result
 
 
 ## TODOs:
@@ -141,7 +143,6 @@ npm install @clerk/backend #to get user data on the server
 - [ ] contact page + check options:
    - [ ] [Send emails with Next.js - Resend](https://resend.com/docs/send-with-nextjs)
    - [ ] [Easy Contact Form to Email Service](https://web3forms.com/)
-- [ ] FIX BUG: no search result message before result
 
 admin:
 - [ ] dashboard page:
@@ -152,7 +153,6 @@ admin:
 user:
 - [ ] shopping card page:
    - [ ] ? quantity
-- [ ] orders page(status,history?)
 
 #### *design:*
 - [ ] metadata
