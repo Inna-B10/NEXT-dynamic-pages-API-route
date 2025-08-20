@@ -33,7 +33,7 @@ export function UserMenu() {
 
 	const isActiveIcon = href => !!match(href, { end: false })(pathname)
 	return (
-		<div className='flex items-center gap-4 md:pr-4 max-w-[250px]'>
+		<div className='flex items-center gap-2 bp520:gap-4 max-w-[250px] ml-auto'>
 			{role === 'admin' && (
 				<UserMenuButton
 					href='/admin'

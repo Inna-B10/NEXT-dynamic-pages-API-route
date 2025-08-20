@@ -21,8 +21,8 @@ const nanum = Nanum_Myeongjo({
 
 export const metadata = {
 	icons: {
-		icon: '/images/logo.svg',
-		shortcut: '/images/logo.svg',
+		icon: '/images/nextron-fav.png',
+		shortcut: '/images/nextron-fav.png',
 		apple: '/images/256.png',
 		other: {
 			rel: 'touch-icons',
@@ -44,8 +44,8 @@ export const metadata = {
 		images: [
 			{
 				url: '/images/og.jpg',
-				width: 925,
-				height: 500,
+				width: 900,
+				height: 440,
 				alt: `${SITE_NAME}`,
 				type: 'image/jpg'
 			}
