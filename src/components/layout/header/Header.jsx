@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { DynamicWrapperNoChildren } from '@/components/DynamicWrapperNoChildren'
 import { Logo } from '@/components/ui/Logo'
 import { SITE_NAME } from '@/constants/seo.constants'
-import { UserMenu } from './UserMenu'
 import { PUB_PAGES } from '@/lib/routes-helpers/public-pages'
 
 export function Header() {
@@ -27,7 +26,11 @@ export function Header() {
 					page='false'
 				/>
 			</div>
-			<UserMenu />
+			<DynamicWrapperNoChildren
+				componentKey='user-menu'
+				exportName='UserMenu'
+				page='false'
+			/>
 		</section>
 	)
 }

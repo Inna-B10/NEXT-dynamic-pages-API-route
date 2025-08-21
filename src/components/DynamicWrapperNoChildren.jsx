@@ -18,7 +18,8 @@ const componentImports = {
 	onboarding: () => import('@/components/Onboarding/Onboarding'),
 	auth: () => import('@/app/auth/[[...auth]]/AuthPage'),
 	orders: () => import('@/app/user/orders/OrdersPage'),
-	'order-details': () => import('@/app/user/orders/[orderId]/OrderDetailsPage')
+	'order-details': () => import('@/app/user/orders/[orderId]/OrderDetailsPage'),
+	'user-menu': () => import('@/components/layout/header/UserMenu')
 }
 
 /**
