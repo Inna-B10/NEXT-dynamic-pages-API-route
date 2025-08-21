@@ -8,16 +8,16 @@ export function MenuItem({ item, isActive, isCollapsed }) {
 				href={item.link}
 				title={`Open ${item.label} page`}
 				aria-label={`Open ${item.label} page`}
-				className={clsx('group flex gap-4 py-2', {
-					'transition-all duration-200 hover:text-accentSecondary': !isActive
-				})}
+				className='group flex gap-4 py-2 transition-colors duration-300 hover:text-accentSecondary'
 			>
 				<item.icon
 					className={clsx('min-w-6 pb-[5px]', {
-						'text-accentSecondary': isCollapsed && isActive
+						'text-accentSecondary': isActive
 					})}
 				/>
-				<span className={isActive ? 'underline underline-offset-3' : ''}>{item.label}</span>
+				<span className={isActive ? 'underline underline-offset-4 text-accentSecondary' : ''}>
+					{item.label}
+				</span>
 			</Link>
 		</li>
 	)

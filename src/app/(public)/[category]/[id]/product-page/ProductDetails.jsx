@@ -32,7 +32,7 @@ export function ProductDetails({
 							className='object-contain rounded-lg transition'
 							priority
 						/>
-						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-none'></div>
+						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_100px_#2C343B] transition-all duration-500 group-hover:shadow-[#2C343B]/50'></div>
 					</div>
 
 					<div className='flex flex-col w-full md:max-w-1/2 gap-8 md:gap-4 justify-between'>
@@ -78,9 +78,9 @@ export function ProductDetails({
 				<div className='w-full flex gap-4 lg:gap-10'>
 					{/*//# ----------------------------- Specifications */}
 					<div className=' w-full lg:w-3/4 flex flex-col justify-between p-4 lg:p-8 bg-bgSecondary rounded-md'>
-						<h2 className='text-2xl font-bold text-accent mb-4 text-center lg:text-left'>
+						<h3 className='text-2xl font-bold text-khaki mb-4 text-center lg:text-left'>
 							Product specifications:
-						</h2>
+						</h3>
 						{filteredData.map(([key, value]) => (
 							<InfoRow
 								key={key}

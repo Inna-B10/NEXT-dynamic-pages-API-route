@@ -34,27 +34,27 @@ export function OrderDetailsPage({ orderId }) {
 				<div className='flex flex-col gap-6 overflow-y-auto sm:flex-row sm:justify-between'>
 					<div className='flex flex-col justify-between w-fit'>
 						<p>
-							<span className='font-semibold text-white'>Order ID:</span>
+							<span className='font-semibold text-khaki'>Order ID:</span>
 							<br />
 							{data._id}
 						</p>
 						<p className='text-nowrap'>
-							<span className='font-semibold text-white'>Status: </span>
+							<span className='font-semibold text-khaki'>Status: </span>
 							{data.status}
 						</p>
 						<p className='text-nowrap'>
-							<span className='font-semibold text-white'>Data: </span>
+							<span className='font-semibold text-khaki'>Data: </span>
 							{new Date(data.createdAt).toLocaleDateString('no-NO')}
 						</p>
 						<p className='text-nowrap'>
-							<span className='font-semibold text-white'>Total sum: </span>
+							<span className='font-semibold text-khaki'>Total sum: </span>
 							{FormatPrice(data.totalPrice)}
 						</p>
 					</div>
 
 					{/* --------------------------------- Address -------------------------------- */}
 					<div className='flex flex-col justify-between pr-2 text-nowrap'>
-						<span className='font-semibold text-white'>Delivery address:</span>
+						<span className='font-semibold text-khaki'>Delivery address:</span>
 
 						{Object.entries(data.deliveryAddress)
 							.filter(([key]) => key !== 'phone')

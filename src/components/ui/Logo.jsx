@@ -9,7 +9,7 @@ export function Logo({ isInHeader = true, className }) {
 		<Link
 			href={PUB_PAGES.HOME}
 			title={`${SITE_NAME} - homepage`}
-			aria-label={`${SITE_NAME} - homepage`}
+			aria-label={`Go to ${SITE_NAME} homepage`}
 			className={clsx(
 				'relative flex items-center justify-center sm:justify-start',
 				className,
@@ -30,6 +30,7 @@ export function Logo({ isInHeader = true, className }) {
 				}}
 				className='content-center'
 				sizes='(max-width: 300px) 100vw, 300px'
+				priority
 			/>
 		</Link>
 	)

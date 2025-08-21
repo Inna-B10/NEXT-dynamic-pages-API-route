@@ -20,7 +20,7 @@ export function ProductCardWide({ href, title, imageSrc, brand, price }) {
 						className='object-contain transition rounded-l-lg'
 						priority
 					/>
-					<div className='absolute inset-0 pointer-events-none rounded-l-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-none'></div>
+					<div className='absolute inset-0 pointer-events-none rounded-l-md shadow-[inset_0_0_30px_#2C343B] group-hover:shadow-[#2C343B]/20 transition-shadow duration-800'></div>
 				</div>
 				<div className='flex flex-col w-full gap-4 p-4 justify-evenly'>
 					<div className='flex justify-between sm:text-base'>

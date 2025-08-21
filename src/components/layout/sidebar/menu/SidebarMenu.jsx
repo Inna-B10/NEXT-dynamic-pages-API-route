@@ -14,8 +14,8 @@ export function SidebarMenu({ menu, isCollapsed, toggleSidebar }) {
 					<button
 						onClick={toggleSidebar}
 						className='cursor-pointer hover:text-accentSecondary w-full'
-						title={isCollapsed ? 'Open Menu' : 'Collapse sidebar'}
-						aria-label={isCollapsed ? 'Open Menu' : 'Collapse sidebar'}
+						title={isCollapsed ? 'Open sidebar' : 'Collapse sidebar'}
+						aria-label={isCollapsed ? 'Open sidebar' : 'Collapse sidebar'}
 					>
 						{isCollapsed ? <Menu /> : <X className='float-right -mr-1' />}
 					</button>
