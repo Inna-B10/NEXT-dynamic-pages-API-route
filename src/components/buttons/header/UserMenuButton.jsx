@@ -17,7 +17,7 @@ export function UserMenuButton({
 				'relative flex items-center justify-center rounded-full bp520:border-2 transition-all',
 				isActiveIcon
 					? 'border-accent text-accent'
-					: 'border-accentSecondary text-accentSecondary hover:border-accent  hover:text-accent'
+					: 'border-turquoise text-turquoise hover:border-accent  hover:text-accent'
 			)}
 			style={{
 				width: 'clamp(28px, 6vw, 40px)',

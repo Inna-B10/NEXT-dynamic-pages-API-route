@@ -26,7 +26,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, message }) {
 				</TransitionChild>
 
 				<div className='fixed inset-0 flex items-center justify-center'>
-					<DialogPanel className='bg-[#3f3f46] border border-white/20 p-4 rounded w-64'>
+					<DialogPanel className='bg-dialogPanel border border-white/20 p-4 rounded w-64'>
 						<DialogTitle className='text-center text-sm lg:text-base lg:tracking-wider'>
 							{message}
 						</DialogTitle>

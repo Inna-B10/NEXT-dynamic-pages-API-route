@@ -19,10 +19,10 @@ export function OrderDetailsRow({ item }) {
 					className='object-contain transition rounded-l-lg'
 					priority
 				/>
-				<div className='absolute inset-0 pointer-events-none rounded-l-md shadow-[inset_0_0_40px_#2C343B] group-hover:shadow-[#2C343B]/20 transition-shadow duration-500'></div>
+				<div className='absolute inset-0 pointer-events-none rounded-l-md shadow-[inset_0_0_40px_#2C343B] group-hover:shadow-shadowCard/20 transition-shadow duration-500'></div>
 			</div>
 			<div className='flex flex-col w-full gap-2 p-4 justify-evenly'>
-				<p className='text-lg font-semibold text-accentSecondary'>{item.productName}</p>
+				<p className='text-lg font-semibold text-turquoise'>{item.productName}</p>
 				<div className='flex justify-between'>
 					<p>{FormatPrice(item.price, 'display')}</p>
 					<p>x {item.quantity}</p>

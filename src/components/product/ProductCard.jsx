@@ -21,9 +21,9 @@ export function ProductCard({ href, title, imageSrc, brand, price }) {
 							className='object-contain transition rounded-t-lg'
 							priority
 						/>
-						<div className='absolute inset-0 pointer-events-none rounded-t-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-[#2c343b]/20 transition-all duration-500 ease-in-out'></div>
+						<div className='absolute inset-0 pointer-events-none rounded-t-md shadow-[inset_0_0_60px_#2C343B] group-hover:shadow-shadowCard/20 transition-all duration-500 ease-in-out'></div>
 					</div>
-					<p className='p-4 text-accentSecondary bg-bgSecondary'>{title}</p>
+					<p className='p-4 text-turquoise bg-bgSecondary'>{title}</p>
 				</>
 				<div className='flex flex-col p-4 pt-0 bg-bgSecondary rounded-b-md'>
 					{brand && <p className=' group-hover:text-khaki'>Brand: {brand}</p>}

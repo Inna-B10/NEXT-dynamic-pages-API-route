@@ -32,7 +32,7 @@ export function ProductDetails({
 							className='object-contain rounded-lg transition'
 							priority
 						/>
-						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_100px_#2C343B] transition-all duration-500 group-hover:shadow-[#2C343B]/50'></div>
+						<div className='absolute inset-0 pointer-events-none rounded-md shadow-[inset_0_0_100px_#2C343B] transition-all duration-500 group-hover:shadow-shadowCard/50'></div>
 					</div>
 
 					<div className='flex flex-col w-full md:max-w-1/2 gap-8 md:gap-4 justify-between'>

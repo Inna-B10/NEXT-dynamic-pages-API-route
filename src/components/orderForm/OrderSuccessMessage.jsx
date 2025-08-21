@@ -16,7 +16,7 @@ export function OrderSuccessMessage({ isMessageOpen, onClose }) {
 					initial={{ opacity: 0, scale: 0.9 }}
 					animate={{ opacity: 1, scale: 1 }}
 					exit={{ opacity: 0, scale: 0.9 }}
-					className='w-4/5 max-w-lg bg-[#3f3f46] border border-white/20 p-6 rounded shadow-lg flex flex-col items-center gap-4'
+					className='w-4/5 max-w-lg bg-dialogPanel border border-white/20 p-6 rounded shadow-lg flex flex-col items-center gap-4'
 				>
 					<div className='text-green-500 text-center'>
 						<CheckCircle className='inline mb-2' />

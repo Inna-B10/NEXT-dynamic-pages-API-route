@@ -48,7 +48,7 @@ export default function ScrollToTopButton() {
 					animate={{ opacity: 1, y: 0, scale: 1 }}
 					exit={{ opacity: 0, y: 50, scale: 0.8 }}
 					transition={{ duration: 0.4, ease: 'easeOut' }}
-					className='bg-bgSecondary  fixed bottom-6 right-6 z-50 p-2 text-accentSecondary hover:text-accent font-bold border-2 rounded-full border-accentSecondary hover:border-accent transition-all duration-300 ease-in-out'
+					className='bg-bgSecondary  fixed bottom-6 right-6 z-50 p-2 text-turquoise hover:text-accent font-bold border-2 rounded-full border-turquoise hover:border-accent transition-all duration-300 ease-in-out'
 					title='To top'
 					aria-label='Scroll to top'
 				>

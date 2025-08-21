@@ -40,7 +40,7 @@ export function OrdersPage() {
 								aria-label='View order details'
 								key={order._id}
 								className={twMerge(
-									'flex flex-col sm:flex-row sm:justify-between gap-y-4 p-4 mb-8 border border-border rounded-md transition-all bg-bgSecondary text-sm md:text-base lg:text-lg hover:translate-x-2 duration-500 ease-in-out overflow-y-auto',
+									'flex flex-col sm:flex-row sm:justify-between gap-y-4 p-4 mb-8 border border-border rounded-md transition-all bg-bgSecondary text-sm md:text-base lg:text-lg hover:translate-x-1 duration-500 ease-in-out overflow-y-auto',
 									!isActive && 'opacity-70 hover:opacity-90'
 								)}
 							>

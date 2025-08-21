@@ -7,10 +7,12 @@
   --color-bgSecondary: #252836;
   --color-border: #383C40;
   --color-accent: #FFDF20;
-  --color-accentSecondary: #00CADB;
+  --color-turquoise: #00E2F4;
+  --color-turquoiseDark: #004a58;
   --color-khaki: #F0E68C;
-  --color-accentSecondary-dark: #00ABBA;
-  --color-dark-gray: #65646B;
+  --color-grayDark: #65646B;
+  --color-dialogPanel: #3f3f46;
+  --color-shadowCard: #2C343B;
   --breakpoint-bp520: 520px;
   --breakpoint-bp480: 480px;
   --breakpoint-bp896: 896px;
@@ -25,7 +27,7 @@
   }
 
   h1 {
-    @apply w-full text-2xl md:text-3xl font-bold text-accentSecondary text-center mt-2 sm:mt-4 lg:mt-8 mb-6 sm:mb-8 lg:mb-12
+    @apply w-full text-2xl md:text-3xl font-bold text-turquoise text-center mt-2 sm:mt-4 lg:mt-8 mb-6 sm:mb-8 lg:mb-12
   }
 }
 
@@ -55,5 +57,5 @@ input[type="search"]:focus-visible {
 
 /* custom link in clerk user menu */
 .cl-button__custom-menutItem-0 {
-  color: var(--color-accentSecondary) !important;
+  color: var(--color-turquoise) !important;
 }

@@ -29,7 +29,7 @@ export function SearchInput() {
 					required
 					value={value}
 					onChange={e => setValue(e.target.value)}
-					className='w-full min-w-40 border border-accentSecondary text-xs italic p-1.5 sm:p-2 bp896:text-sm rounded'
+					className='w-full min-w-40 border border-turquoise text-xs italic p-1.5 sm:p-2 bp896:text-sm rounded'
 				/>
 			</label>
 		</form>

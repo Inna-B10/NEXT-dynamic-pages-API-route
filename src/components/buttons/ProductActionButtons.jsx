@@ -6,7 +6,7 @@ export function ProductActionButtons({ itemId, category, trashFor }) {
 	const trashIcon = (
 		<Trash2
 			fillOpacity={0.5}
-			className='min-w-4 w-5 sm:min-w-6 hover:fill-red-500 stroke-red-500 opacity-70 hover:opacity-100 transition-all duration-500 ease-in-out'
+			className='min-w-4 w-5 sm:min-w-6 hover:fill-red-500 stroke-red-500 opacity-70 hover:opacity-100 transition-all duration-400 ease-in-out'
 		/>
 	)
 

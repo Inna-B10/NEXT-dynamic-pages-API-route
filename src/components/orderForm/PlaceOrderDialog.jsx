@@ -21,7 +21,7 @@ export function PlaceOrderDialog({
 				aria-hidden='true'
 			/>
 			<div className='fixed inset-0 flex items-center justify-center p-4'>
-				<DialogPanel className='w-full max-w-xl bg-[#3f3f46] border border-white/20 p-6 rounded shadow-lg'>
+				<DialogPanel className='w-full max-w-xl bg-dialogPanel border border-white/20 p-6 rounded shadow-lg'>
 					<DialogTitle className='text-xl text-accent text-center font-bold mb-4'>
 						{step === 'address' ? 'Delivery Address' : 'Mock Payment'}
 					</DialogTitle>

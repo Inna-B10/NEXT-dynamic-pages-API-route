@@ -44,7 +44,7 @@ export function ShareButtons({ title }) {
 					rel='noopener noreferrer'
 					title={`Share on ${label}`}
 					aria-label={`Share on ${label}`}
-					className='hover:text-accentSecondary hover:scale-110 transition'
+					className='hover:text-turquoise hover:scale-110 transition'
 				>
 					<Icon className='w-6 h-6 bp520:w-5 bp520:h-5 md:w-6 md:h-6' />
 				</Link>
@@ -54,7 +54,7 @@ export function ShareButtons({ title }) {
 					onClick={handleNativeShare}
 					title='Native Share'
 					aria-label='Open Native Share Menu'
-					className='hover:text-accentSecondary hover:scale-110 transition'
+					className='hover:text-turquoise hover:scale-110 transition'
 				>
 					<Share2 className='w-6 h-6 bp520:w-5 bp520:h-5 md:w-6 md:h-6' />
 				</button>

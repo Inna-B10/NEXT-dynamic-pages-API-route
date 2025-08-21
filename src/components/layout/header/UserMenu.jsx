@@ -92,8 +92,7 @@ export function UserMenu() {
 								<UserButton.Link
 									appearance={{
 										elements: {
-											'cl-button__custom-menutItem-0':
-												'text-accentSecondary hover:text-accentSecondary'
+											'cl-button__custom-menutItem-0': 'text-turquoise hover:text-turquoise'
 										}
 									}}
 									label='My orders'

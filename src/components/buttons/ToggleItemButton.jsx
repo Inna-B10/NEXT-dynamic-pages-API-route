@@ -69,7 +69,7 @@ export function ToggleItemButton({
 				<DefaultIcon
 					fillOpacity='0.5'
 					className={clsx(
-						'min-w-4 w-5 sm:min-w-6  hover:opacity-100 transition-all duration-500 ease-in-out',
+						'min-w-4 w-5 sm:min-w-6  hover:opacity-100 transition-all duration-400 ease-in-out',
 						{
 							'fill-current': isAdded,
 							'opacity-70': !isAdded && variant === 'icon'
